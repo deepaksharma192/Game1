@@ -19,7 +19,7 @@ var config = {
         create: create
     }
 };
-
+   
 var game = new Phaser.Game(config);
 
 function preload ()
