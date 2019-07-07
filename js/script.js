@@ -21,7 +21,7 @@ var config = {
 };
    
 var game = new Phaser.Game(config);
-
+//fgfgfg
 function preload ()
 {
     this.load.image('blue', 'img/blue.png');
@@ -281,9 +281,9 @@ function DrawGamePoints(){
         this[v.HName].HName=v.HName;
         this[v.HName].dr=v.dr;
             if(v.HName == "hotspot25"){
-                moveGuti(this[v.HName],eval(v.CurrentPath),false,-1,0);
+                SetGuti(this[v.HName],eval(v.CurrentPath),false,-1,0);
             }else{
-                moveGuti(this[v.HName],eval(v.CurrentPath),false,0,0);    
+                SetGuti(this[v.HName],eval(v.CurrentPath),false,0,0);    
             }
     })
   }
@@ -298,45 +298,96 @@ function updateHotspotData(){
         this[v.HName].dr=v.dr;
     })
 }
-    moveGuti(Guti1_1,path1_1,false,0);
-    moveGuti(Guti1_2,path1_2,false,0);
-    moveGuti(Guti1_3,path1_3,false,0);
-    moveGuti(Guti1_4,path2_1,false,0);
-    moveGuti(Guti1_5,path2_2,false,0);
-    moveGuti(Guti1_6,path2_3,false,0);
-    moveGuti(Guti1_7,path3_1,false,0);
-    moveGuti(Guti1_8,path3_2,false,0);
-    moveGuti(Guti1_9,path3_3,false,0);
-    moveGuti(Guti1_10,path4_1,false,0);
-    moveGuti(Guti1_11,path4_2,false,0);
-    moveGuti(Guti1_12,path4_3,false,0);
+    SetGuti(Guti1_1,path1_1,false,0);
+    SetGuti(Guti1_2,path1_2,false,0);
+    SetGuti(Guti1_3,path1_3,false,0);
+    SetGuti(Guti1_4,path2_1,false,0);
+    SetGuti(Guti1_5,path2_2,false,0);
+    SetGuti(Guti1_6,path2_3,false,0);
+    SetGuti(Guti1_7,path3_1,false,0);
+    SetGuti(Guti1_8,path3_2,false,0);
+    SetGuti(Guti1_9,path3_3,false,0);
+    SetGuti(Guti1_10,path4_1,false,0);
+    SetGuti(Guti1_11,path4_2,false,0);
+    SetGuti(Guti1_12,path4_3,false,0);
 
-    moveGuti(Guti2_1,path5_1,false,0);
-    moveGuti(Guti2_2,path5_2,false,0);
-    moveGuti(Guti2_3,path5_3,false,0);
-    moveGuti(Guti2_4,path6_1,false,0);
-    moveGuti(Guti2_5,path6_2,false,0);
-    moveGuti(Guti2_6,path6_3,false,0);
-    moveGuti(Guti2_7,path7_1,false,0);
-    moveGuti(Guti2_8,path7_2,false,0);
-    moveGuti(Guti2_9,path7_3,false,0);
-    moveGuti(Guti2_10,path8_1,false,0);
-    moveGuti(Guti2_11,path8_2,false,0);
-    moveGuti(Guti2_12,path8_3,false,0);
+    SetGuti(Guti2_1,path5_1,false,0);
+    SetGuti(Guti2_2,path5_2,false,0);
+    SetGuti(Guti2_3,path5_3,false,0);
+    SetGuti(Guti2_4,path6_1,false,0);
+    SetGuti(Guti2_5,path6_2,false,0);
+    SetGuti(Guti2_6,path6_3,false,0);
+    SetGuti(Guti2_7,path7_1,false,0);
+    SetGuti(Guti2_8,path7_2,false,0);
+    SetGuti(Guti2_9,path7_3,false,0);
+    SetGuti(Guti2_10,path8_1,false,0);
+    SetGuti(Guti2_11,path8_2,false,0);
+    SetGuti(Guti2_12,path8_3,false,0);
+function SetGuti(gutiName,moveingLine,lineCurve,step){
+    var from=(step==-1)?1:0;
+    step = (step == -1)?0:step; 
+    gutiName.setPath((moveingLine));
+    gutiName.startFollow({
+        positionOnPath: true,
+        duration: 0,
+        yoyo: false,
+        repeat:0,
+        from: 0,
+        to:1,
+    });
+}
+
 function moveGuti(gutiName,moveingLine,lineCurve,step,duration){
     var from=(step==-1)?1:0;
-    step = (step == -1)?0:step;       
-    gutiName.setPath(moveingLine);
+    //duration =(step == -1)?5000:duration;  
+
+
+    step = (step == -1)?0:step; 
+    if(moveingLine == gutiName.CurrentPath){
+        gutiName.setPath(eval(moveingLine));
+   }else{
+        gutiName.setPath(eval(moveingLine));
+    }
+     var path = eval(moveingLine);
+    if(path.type != 'EllipseCurve'){
+             if(step==1 ){
+                  gutiName.path.startPoint.x=gutiName.x;
+                  gutiName.path.startPoint.y=gutiName.y;
+        
+                }
+            }
+   
+    console.log(path);
     gutiName.startFollow({
         positionOnPath: true,
         duration: duration,
         yoyo: false,
         repeat:0,
+        // startAt:from,
         from: from,
         to:step,
-        rotateToPath: true,
-        verticalAdjust: true,
-        onComplete: function(tween, target){},
+        onComplete: function(tween, target){
+            if(path.type != 'EllipseCurve'){
+             if(step==1 ){
+                  gutiName.path.startPoint.x=path._tmpVec2B.x;
+                  gutiName.path.startPoint.y=path._tmpVec2B.y;
+        
+                }else{
+                    gutiName.path.startPoint.x=path._tmpVec2A.x;
+                     gutiName.path.startPoint.y=path._tmpVec2A.y;
+                }
+            }else{
+                // if(step==1 ){
+                //   gutiName.path.startPoint.x=path._tmpVec2B.x;
+                //   gutiName.path.startPoint.y=path._tmpVec2B.y;
+        
+                // }else{
+                //     gutiName.path.startPoint.x=path._tmpVec2A.x;
+                //      gutiName.path.startPoint.y=path._tmpVec2A.y;
+                // }
+             console.log((gutiName))
+            }
+        },
         onUpdate: function(tween, target){}
     });
 }
@@ -372,7 +423,8 @@ function moveGuti(gutiName,moveingLine,lineCurve,step,duration){
              }else if(Object.keys(getUA).length == 2 && (CH.Guti==null)){
                 var movePath = getUA[Object.keys(getUA)[0]].path.filter(function(obj) { return getUA[Object.keys(getUA)[1]].path.indexOf(obj)   != -1; });
                 var drMove=(getUA[Object.keys(getUA)[0]].dr[movePath[0]])? -1: 1;
-                moveGuti(getUA[Object.keys(getUA)[0]].startGuiti,eval(movePath[0]),false,drMove,1000);
+                
+                moveGuti(getUA[Object.keys(getUA)[0]].startGuiti,movePath[0],false,drMove,1000);
                 $.each(hotspot,function(k,v){
                     if(v.HName==getUA[Object.keys(getUA)[0]].hotspotTarget){
                         v.Guti=null;
