@@ -340,30 +340,29 @@ function SetGuti(gutiName,moveingLine,lineCurve,step){
 function moveGuti(gutiName,moveingLine,lineCurve,step,duration){
     var from=(step==-1)?1:0;
     step = (step == -1)?0:step; 
-    if(moveingLine == gutiName.CurrentPath){
-        gutiName.path=null;
-        gutiName.pathConfig=null;
-        gutiName.pathTween=null;
-        gutiName.pathOffset=null;
-        gutiName.pathVector=null;
-        gutiName.pathOffset=null;
+    if(moveingLine == gutiName.CurrentPath){ 
+  
         gutiName.setPath(eval(moveingLine));
+
+        console.log(1)
     }else{
         gutiName.setPath(eval(moveingLine));
+        console.log(2)
     }
+
     var path = eval(moveingLine);
 
-    if(path.type != 'EllipseCurve'){
-        if(step==1 ){
-            gutiName.path.startPoint.x=gutiName.x;
-            gutiName.path.startPoint.y=gutiName.y;
-        }
-    }else{
-        gutiName.x==500;
-        gutiName.y==300;
-    }
+        // if(path.type != 'EllipseCurve'){
+        //     if(step==1 ){
+        //         gutiName.path.startPoint.x=gutiName.x;
+        //         gutiName.path.startPoint.y=gutiName.y;
+        //     }
+        // }else{
+        //     gutiName.pathTween.data[0].start=1;
+        //     gutiName.pathTween.data[0].end=0    ;
+        // }
    
-  //  console.log(path);
+    console.log(path);
     gutiName.startFollow({
         positionOnPath: true,
         duration: duration,
@@ -372,9 +371,11 @@ function moveGuti(gutiName,moveingLine,lineCurve,step,duration){
         // startAt:from,
         from: from,
         to:step,
+        delay:2000,
         onStart:function(tween, target){
-
-            console.log(tween)
+        gutiName.x=gutiName.xx;
+        gutiName.y=gutiName.yy;
+            //  console.log(tween)
         },
         onComplete: function(tween, target){
             if(path.type != 'EllipseCurve'){
@@ -395,7 +396,7 @@ function moveGuti(gutiName,moveingLine,lineCurve,step,duration){
                 //     gutiName.path._endAngle=path._endAngle;
                 //   gutiName.path._startAngle=path._startAngle;
                 // }
-           //  console.log((gutiName))
+             console.log((gutiName))
             }
         },
         onUpdate: function(tween, target){
@@ -416,14 +417,15 @@ function moveGuti(gutiName,moveingLine,lineCurve,step,duration){
             getUA[CH.HName].changeGutiStatus=CH.Guti;
             getUA[CH.HName].hotspotTarget=CH.HName; 
             getUA[CH.HName].dr=CH.dr;
-           // console.log(CH.Guti)
+            getUA[CH.HName].xx=CH.x;
+            getUA[CH.HName].yy=CH.y;
              if(Object.keys(getUA).length==1){
                 DrawGamePoints();
                 $.each(paths,function(k,v){
                     $.each(hotspot,function(k1,v1){
                         if(CH.HName  != v1.HName){
                             var y =v1.Path.split(',').indexOf(v);
-                            if(y!=-1){
+                               if(y!=-1){
                                 if(!v1.Guti){
                                     var p = eval(v);
                                     graphics.lineStyle(2, 0xff0000,2);
@@ -433,9 +435,19 @@ function moveGuti(gutiName,moveingLine,lineCurve,step,duration){
                         }
                     })
                 })
+
              }else if(Object.keys(getUA).length == 2 && (CH.Guti==null)){
                 var movePath = getUA[Object.keys(getUA)[0]].path.filter(function(obj) { return getUA[Object.keys(getUA)[1]].path.indexOf(obj)   != -1; });
-                var drMove=(getUA[Object.keys(getUA)[0]].dr[movePath[0]])? -1: 1;           
+                var drMove=(getUA[Object.keys(getUA)[0]].dr[movePath[0]])? -1: 1;    
+
+                getUA[Object.keys(getUA)[0]].startGuiti.CurrentPath=movePath[0]; 
+                 ////getUA[Object.keys(getUA)[0]].startGuiti.xx=CH.x;
+                 // getUA[Object.keys(getUA)[0]].startGuiti.yy=CH.y;
+                
+              
+              
+                 console.log( getUA[Object.keys(getUA)[0]].startGuiti.x)
+
                 moveGuti(getUA[Object.keys(getUA)[0]].startGuiti,movePath[0],false,drMove,1000);
                 $.each(hotspot,function(k,v){
                     if(v.HName==getUA[Object.keys(getUA)[0]].hotspotTarget){
