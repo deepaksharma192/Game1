@@ -373,6 +373,7 @@ function moveGuti(gutiName,moveingLine,lineCurve,step,duration){
         to:step,
         delay:2000,
         onStart:function(tween, target){
+            console.log(target)
         gutiName.x=gutiName.xx;
         gutiName.y=gutiName.yy;
             //  console.log(tween)
