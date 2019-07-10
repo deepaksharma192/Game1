@@ -341,42 +341,23 @@ function moveGuti(gutiName,moveingLine,lineCurve,step,duration){
     var from=(step==-1)?1:0;
     step = (step == -1)?0:step; 
     if(moveingLine == gutiName.CurrentPath){ 
-  
         gutiName.setPath(eval(moveingLine));
-
-        console.log(1)
     }else{
         gutiName.setPath(eval(moveingLine));
-        console.log(2)
     }
 
     var path = eval(moveingLine);
-
-        // if(path.type != 'EllipseCurve'){
-        //     if(step==1 ){
-        //         gutiName.path.startPoint.x=gutiName.x;
-        //         gutiName.path.startPoint.y=gutiName.y;
-        //     }
-        // }else{
-        //     gutiName.pathTween.data[0].start=1;
-        //     gutiName.pathTween.data[0].end=0    ;
-        // }
-   
-    console.log(path);
     gutiName.startFollow({
         positionOnPath: true,
         duration: duration,
         yoyo: false,
         repeat:0,
-        // startAt:from,
         from: from,
         to:step,
-        delay:2000,
+        delay:0,
         onStart:function(tween, target){
-            console.log(target)
-        gutiName.x=gutiName.xx;
-        gutiName.y=gutiName.yy;
-            //  console.log(tween)
+            gutiName.x=gutiName.xx;
+            gutiName.y=gutiName.yy;
         },
         onComplete: function(tween, target){
             if(path.type != 'EllipseCurve'){
@@ -388,16 +369,6 @@ function moveGuti(gutiName,moveingLine,lineCurve,step,duration){
                     gutiName.path.startPoint.x=path._tmpVec2A.x;
                      gutiName.path.startPoint.y=path._tmpVec2A.y;
                 }
-            }else{
-                // if(step==1 ){
-                //   gutiName.path._endAngle=path._startAngle;
-                //   gutiName.path._startAngle=path._endAngle;
-        
-                // }else{
-                //     gutiName.path._endAngle=path._endAngle;
-                //   gutiName.path._startAngle=path._startAngle;
-                // }
-             console.log((gutiName))
             }
         },
         onUpdate: function(tween, target){
@@ -442,13 +413,8 @@ function moveGuti(gutiName,moveingLine,lineCurve,step,duration){
                 var drMove=(getUA[Object.keys(getUA)[0]].dr[movePath[0]])? -1: 1;    
 
                 getUA[Object.keys(getUA)[0]].startGuiti.CurrentPath=movePath[0]; 
-                 ////getUA[Object.keys(getUA)[0]].startGuiti.xx=CH.x;
-                 // getUA[Object.keys(getUA)[0]].startGuiti.yy=CH.y;
-                
-              
-              
-                 console.log( getUA[Object.keys(getUA)[0]].startGuiti.x)
-
+                getUA[Object.keys(getUA)[0]].startGuiti.xx=getUA[Object.keys(getUA)[0]].xx;
+                getUA[Object.keys(getUA)[0]].startGuiti.yy=getUA[Object.keys(getUA)[0]].yy;
                 moveGuti(getUA[Object.keys(getUA)[0]].startGuiti,movePath[0],false,drMove,1000);
                 $.each(hotspot,function(k,v){
                     if(v.HName==getUA[Object.keys(getUA)[0]].hotspotTarget){
@@ -469,13 +435,7 @@ function moveGuti(gutiName,moveingLine,lineCurve,step,duration){
     });
 
   
-    this.input.on('pointerDOWN', function (pointer) {
-
-     
-           //console.log(pointer)
-
+    this.input.on('pointerdown', function (pointer) {
       console.log(pointer.upX+":X -- Y:"+pointer.upY)
     }, this);
-
-
 }
