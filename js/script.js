@@ -253,19 +253,19 @@ function DrawGamePoints(){
         {HName:"hotspot10",catagory:"A",Path:"path4_1,Curve1_4,Curve1_5",pos:"R1_L4",Guti:"Guti1_10",CurrentPath:"path4_1",dr:{'Curve1_5':-1}},
         {HName:"hotspot11",catagory:"A",Path:"path4_2,Curve2_4,Curve2_5,path4_1",pos:"R2_L4",Guti:"Guti1_11",CurrentPath:"path4_2",dr:{'Curve2_5':-1,'path4_1':-1}},
         {HName:"hotspot12",catagory:"A",Path:"path4_3,Curve3_4,Curve3_5,path4_2",pos:"R3_L4",Guti:"Guti1_12",CurrentPath:"path4_3",dr:{'Curve3_5':-1,'path4_2':-1}},
-        {HName:"hotspot13",catagory:"B",Path:"path5_1,Curve1_5,Curve1_6",pos:"R1_L5",Guti:"Guti2_1",CurrentPath:"path5_1",dr:{'Curve1_6':-1}},
-        {HName:"hotspot14",catagory:"B",Path:"path5_2,Curve2_5,Curve2_6,path5_1",pos:"R2_L5",Guti:"Guti2_2",CurrentPath:"path5_2",dr:{'Curve2_6':-1,'path5_1':-1}},
-        {HName:"hotspot15",catagory:"B",Path:"path5_3,Curve3_5,Curve3_6,path5_2",pos:"R3_L5",Guti:"Guti2_3",CurrentPath:"path5_3",dr:{'Curve3_6':-1,'path5_2':-1}},
-        {HName:"hotspot16",catagory:"B",Path:"path6_1,Curve1_6,Curve1_7",pos:"R1_L6",Guti:"Guti2_4",CurrentPath:"path6_1",dr:{'Curve1_7':-1}},
-        {HName:"hotspot17",catagory:"B",Path:"path6_2,Curve2_6,Curve2_7,path6_1",pos:"R2_L6",Guti:"Guti2_5",CurrentPath:"path6_2",dr:{'Curve2_7':-1,'path6_1':-1}},
-        {HName:"hotspot18",catagory:"B",Path:"path6_3,Curve3_6,Curve3_7,path6_2",pos:"R3_L6",Guti:"Guti2_6",CurrentPath:"path6_3",dr:{'Curve3_7':-1,'path6_2':-1}},
-        {HName:"hotspot19",catagory:"B",Path:"path7_1,Curve1_7,Curve1_8",pos:"R1_L7",Guti:"Guti2_7",CurrentPath:"path7_1",dr:{'Curve1_8':-1}},
-        {HName:"hotspot20",catagory:"B",Path:"path7_2,Curve2_7,Curve2_8,path7_1",pos:"R2_L7",Guti:"Guti2_8",CurrentPath:"path7_2",dr:{'Curve2_8':-1,'path7_1':-1}},
-        {HName:"hotspot21",catagory:"B",Path:"path7_3,Curve3_7,Curve3_8,path7_2",pos:"R3_L7",Guti:"Guti2_9",CurrentPath:"path7_3",dr:{'Curve3_8':-1,'path7_2':-1}},
-        {HName:"hotspot22",catagory:"B",Path:"path8_1,Curve1_8,Curve1_1",pos:"R1_L8",Guti:"Guti2_10",CurrentPath:"path8_1",dr:{'Curve1_1':-1}},
-        {HName:"hotspot23",catagory:"B",Path:"path8_2,Curve2_8,Curve2_1,path8_1",pos:"R2_L8",Guti:"Guti2_11",CurrentPath:"path8_2",dr:{'Curve2_1':-1,'path8_1':-1}},
-        {HName:"hotspot24",catagory:"B",Path:"path8_3,Curve3_8,Curve3_1,path8_2",pos:"R3_L8",Guti:"Guti2_12",CurrentPath:"path8_3",dr:{'Curve3_1':-1,'path8_2':-1}},
-        {HName:"hotspot25",catagory:"B",Path:"path1_3,path2_3,path3_3,path4_3,path5_3,path6_3,path7_3,path8_3",pos:"R0_L8",Guti:null,CurrentPath:"path8_3",dr:{'path1_3':-1,'path2_3':-1,'path3_3':-1,'path4_3':-1,'path5_3':-1,'path6_3':-1,'path7_3':-1,'path8_3':-1}},
+        {HName:"hotspot13",catagory:"B",Path:"path5_1,Curve1_5,Curve1_6",pos:"R1_L1",Guti:"Guti2_1",CurrentPath:"path5_1",dr:{'Curve1_6':-1}},
+        {HName:"hotspot14",catagory:"B",Path:"path5_2,Curve2_5,Curve2_6,path5_1",pos:"R2_L1",Guti:"Guti2_2",CurrentPath:"path5_2",dr:{'Curve2_6':-1,'path5_1':-1}},
+        {HName:"hotspot15",catagory:"B",Path:"path5_3,Curve3_5,Curve3_6,path5_2",pos:"R3_L1",Guti:"Guti2_3",CurrentPath:"path5_3",dr:{'Curve3_6':-1,'path5_2':-1}},
+        {HName:"hotspot16",catagory:"B",Path:"path6_1,Curve1_6,Curve1_7",pos:"R1_L2",Guti:"Guti2_4",CurrentPath:"path6_1",dr:{'Curve1_7':-1}},
+        {HName:"hotspot17",catagory:"B",Path:"path6_2,Curve2_6,Curve2_7,path6_1",pos:"R2_L2",Guti:"Guti2_5",CurrentPath:"path6_2",dr:{'Curve2_7':-1,'path6_1':-1}},
+        {HName:"hotspot18",catagory:"B",Path:"path6_3,Curve3_6,Curve3_7,path6_2",pos:"R3_L2",Guti:"Guti2_6",CurrentPath:"path6_3",dr:{'Curve3_7':-1,'path6_2':-1}},
+        {HName:"hotspot19",catagory:"B",Path:"path7_1,Curve1_7,Curve1_8",pos:"R1_L3",Guti:"Guti2_7",CurrentPath:"path7_1",dr:{'Curve1_8':-1}},
+        {HName:"hotspot20",catagory:"B",Path:"path7_2,Curve2_7,Curve2_8,path7_1",pos:"R2_L3",Guti:"Guti2_8",CurrentPath:"path7_2",dr:{'Curve2_8':-1,'path7_1':-1}},
+        {HName:"hotspot21",catagory:"B",Path:"path7_3,Curve3_7,Curve3_8,path7_2",pos:"R3_L3",Guti:"Guti2_9",CurrentPath:"path7_3",dr:{'Curve3_8':-1,'path7_2':-1}},
+        {HName:"hotspot22",catagory:"B",Path:"path8_1,Curve1_8,Curve1_1",pos:"R1_L4",Guti:"Guti2_10",CurrentPath:"path8_1",dr:{'Curve1_1':-1}},
+        {HName:"hotspot23",catagory:"B",Path:"path8_2,Curve2_8,Curve2_1,path8_1",pos:"R2_L4",Guti:"Guti2_11",CurrentPath:"path8_2",dr:{'Curve2_1':-1,'path8_1':-1}},
+        {HName:"hotspot24",catagory:"B",Path:"path8_3,Curve3_8,Curve3_1,path8_2",pos:"R3_L4",Guti:"Guti2_12",CurrentPath:"path8_3",dr:{'Curve3_1':-1,'path8_2':-1}},
+        {HName:"hotspot25",catagory:"B",Path:"path1_3,path2_3,path3_3,path4_3,path5_3,path6_3,path7_3,path8_3",pos:"R0_L0",Guti:null,CurrentPath:"path8_3",dr:{'path1_3':-1,'path2_3':-1,'path3_3':-1,'path4_3':-1,'path5_3':-1,'path6_3':-1,'path7_3':-1,'path8_3':-1}},
     ]
   //  vat h=[];
   var t =this;
@@ -391,6 +391,7 @@ function moveGuti(gutiName,moveingLine,lineCurve,step,duration){
             getUA[CH.HName].dr=CH.dr;
             getUA[CH.HName].xx=CH.x;
             getUA[CH.HName].yy=CH.y;
+            console.log(CH.pos)
              if(Object.keys(getUA).length==1){
                 DrawGamePoints();
                 $.each(paths,function(k,v){
@@ -399,16 +400,57 @@ function moveGuti(gutiName,moveingLine,lineCurve,step,duration){
                             var y =v1.Path.split(',').indexOf(v);
                                if(y!=-1){
                                 if(!v1.Guti){
+                                    //select first step path.
+                                    console.log(v1.HName+" - "+v1.pos)
                                     var p = eval(v);
                                     graphics.lineStyle(2, 0xff0000,2);
                                     p.draw(graphics, 150);
+                                }else{
+                                    //select second step path.
+                                    var C_CurveCheck =CH.pos.split('_')[0];
+                                    var C_lineCheck =CH.pos.split('_')[1];
+                                    var T_CurveCheck =v1.pos.split('_')[0];
+                                    var T_lineCheck =v1.pos.split('_')[1];
+
+                                    if(C_lineCheck == T_lineCheck){
+                                        var path_2  = v1.Path.split(',');
+                                         var movePath = path_2.filter(function(obj) { return obj.indexOf('path')   != -1; });
+                                         $.each(movePath,function(k3,v3){
+                                             var p = eval(v3);
+                                            graphics.lineStyle(2, 0xff0000,2);
+                                            p.draw(graphics, 150);
+                                         })
+                                    console.log(v1.HName+"-"+movePath +" - "+path_2)
+                                    }
+                                    if(C_CurveCheck == T_CurveCheck){
+                                        var path_2  = v1.Path.split(',');
+                                        var movePath = path_2.filter(function(obj) { return obj.indexOf('Curve')   != -1; });
+                                         $.each(movePath,function(k3,v3){
+                                             var p = eval(v3);
+                                            graphics.lineStyle(2, 0xff0000,2);
+                                            p.draw(graphics, 150);
+                                         })
+                                    console.log(v1.HName+" - "+movePath+" - "+path_2)
+                                    }
+                                    if(CH.pos =="R0_L0"){
+                                        var path_2  = v1.Path.split(',');
+                                         var movePath = path_2.filter(function(obj) { return obj.indexOf('path')   != -1; });
+                                          $.each(movePath,function(k3,v3){
+                                             var p = eval(v3);
+                                            graphics.lineStyle(2, 0xff0000,2);
+                                            p.draw(graphics, 150);
+                                         })
+                                    console.log(v1.HName+"-"+movePath +" - "+path_2)
+                                    }
+
+                                    
                                 }
                             }
                         }
                     })
                 })
 
-             }else if(Object.keys(getUA).length == 2 && (CH.Guti==null)){
+             }else if(Object.keys   (getUA).length == 2 && (CH.Guti==null)){
                 var movePath = getUA[Object.keys(getUA)[0]].path.filter(function(obj) { return getUA[Object.keys(getUA)[1]].path.indexOf(obj)   != -1; });
                 var drMove=(getUA[Object.keys(getUA)[0]].dr[movePath[0]])? -1: 1;    
 
