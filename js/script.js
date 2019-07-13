@@ -19,9 +19,10 @@ var config = {
         create: create
     }
 };
-   
+   console.log(0)
+   console.log(0)
 var game = new Phaser.Game(config);
-//fgfgfg
+
 function preload ()
 {
     this.load.image('blue', 'img/blue.png');
