@@ -19,8 +19,7 @@ var config = {
         create: create
     }
 };
-   console.log(0)
-   console.log(0)
+
 var game = new Phaser.Game(config);
 
 function preload ()
@@ -418,7 +417,7 @@ function moveGuti(gutiName,moveingLine,lineCurve,step,duration){
                                          var movePath = path_2.filter(function(obj) { return obj.indexOf('path')   != -1; });
                                          $.each(movePath,function(k3,v3){
                                              var p = eval(v3);
-                                            graphics.lineStyle(2, 0xff0000,2);
+                                            graphics.lineStyle(2, 0x0CD70B,2);
                                             p.draw(graphics, 150);
                                          })
                                     console.log(v1.HName+"-"+movePath +" - "+path_2)
@@ -428,7 +427,7 @@ function moveGuti(gutiName,moveingLine,lineCurve,step,duration){
                                         var movePath = path_2.filter(function(obj) { return obj.indexOf('Curve')   != -1; });
                                          $.each(movePath,function(k3,v3){
                                              var p = eval(v3);
-                                            graphics.lineStyle(2, 0xff0000,2);
+                                            graphics.lineStyle(2, 0x0CD70B,2);
                                             p.draw(graphics, 150);
                                          })
                                     console.log(v1.HName+" - "+movePath+" - "+path_2)
@@ -438,7 +437,7 @@ function moveGuti(gutiName,moveingLine,lineCurve,step,duration){
                                          var movePath = path_2.filter(function(obj) { return obj.indexOf('path')   != -1; });
                                           $.each(movePath,function(k3,v3){
                                              var p = eval(v3);
-                                            graphics.lineStyle(2, 0xff0000,2);
+                                            graphics.lineStyle(2, 0x0CD70B,2);
                                             p.draw(graphics, 150);
                                          })
                                     console.log(v1.HName+"-"+movePath +" - "+path_2)
