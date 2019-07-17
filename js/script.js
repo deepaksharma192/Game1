@@ -400,33 +400,39 @@ function moveGuti(gutiName,moveingLine,lineCurve,step,duration){
                        // console.log(v1.Path.split(','))
                          console.log(CH1.HName+" = "+CH.HName +" = "+v1.HName)
                           console.log(C_CurveCheck +" = "+T_CurveCheck+" - "+C_lineCheck +" = "+T_lineCheck)
-                          if(C_lineCheck == T_lineCheck){
-                             var path_2  = v1.Path.split(',');
-                              var movePath = path_2.filter(function(obj) { return obj.indexOf('path')   != -1; });
-                                var mo = movePath.filter(function(obj) { return v   == obj; });
-                           
-                              var p = eval(mo[0]);
-                                            graphics.lineStyle(2, 0xff0000,2);
-                                            p.draw(graphics, 150);
+                          if((C_lineCheck == T_lineCheck )){
+                            var path_2  = v1.Path.split(',');
+                            var movePath = path_2.filter(function(obj) { return obj.indexOf('path')   != -1; });
+                            var mo = movePath.filter(function(obj) { return v   == obj; });
+                            var p = eval(mo[0]);
+                            graphics.lineStyle(2, 0xff0000,2);
+                            p.draw(graphics, 150);
                           }
                           if(C_CurveCheck == T_CurveCheck){
                                 var path_2  = v1.Path.split(',');
-                                 var movePath = path_2.filter(function(obj) { return obj.indexOf('Curve')   != -1; });
-                                var mo = movePath.filter(function(obj) { return v   == obj; });
-                             
-                              var p = eval(mo[0]);
-                                            graphics.lineStyle(2, 0xff0000,2);
-                                            p.draw(graphics, 150);
+                                var movePath = path_2.filter(function(obj) { return obj.indexOf('Curve')   != -1; });
+                                var mo = movePath.filter(function(obj) { return CH.Path.split(',').indexOf(obj)   != -1; });
+                                if(mo.length){
+                                    var C = parseInt(C_CurveCheck.match(/\d+/g)[0])
+                                    var T =parseInt(mo[0].split('_')[0].match(/\d+/g));
+                                    if((mo[0].match(/Curve/g)=="Curve")&&(C==T)){
+                                        var p = eval(mo[0]);
+                                        graphics.lineStyle(2, 0xff0000,2);
+                                        p.draw(graphics, 150);
+                                }
+                            }
                           }
-                             if(CH.pos =="R0_L0"){
+                            if(v1.pos =="R0_L0"){
                                 var path_2  = v1.Path.split(',');
-                                 var movePath = path_2.filter(function(obj) { return obj.indexOf('path')   != -1; });
-                                  var mo = movePath.filter(function(obj) { return v   == obj; });
-                                     var p = eval(mo[0]);
+                                var movePath = path_2.filter(function(obj) { return obj.indexOf('path')   != -1; });
+                                var mo = movePath.filter(function(obj) { return CH.Path.split(',').indexOf(obj)   != -1; });
+                                var C = parseInt(C_lineCheck.match(/\d+/g)[0])
+                                var T =parseInt(mo[0].split('_')[0].match(/\d+/g));
+                                if((mo[0].match(/path/g)=="path")&&(C==T)){
+                                    var p = eval(mo[0]);
                                     graphics.lineStyle(2, 0xff0000,2);
                                     p.draw(graphics, 150);
-                                // })
-                           // console.log(v1.HName+"-"+movePath +" - "+path_2)
+                                }
                             }
                         var firstPath1 = CH.Path.split(',').filter(function(obj) { return v1.Path.split(',').indexOf(obj)   != -1; });
                      //   console.log(firstPath1)
