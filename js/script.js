@@ -21,7 +21,35 @@ var config = {
 };
 
 var game = new Phaser.Game(config);
-
+var hotspot  = [
+        {HName:"hotspot1",catagory:"A",Path:"path1_1,Curve1_1,Curve1_2",pos:"R1_L1",Guti:"Guti1_1",CurrentPath:"path1_1",dr:{'Curve1_2':-1}},
+        {HName:"hotspot2",catagory:"A",Path:"path1_2,Curve2_1,Curve2_2,path1_1",pos:"R2_L1",Guti:"Guti1_2",CurrentPath:"path1_2",dr:{'Curve2_2':-1,'path1_1':-1}},
+        {HName:"hotspot3",catagory:"A",Path:"path1_3,Curve3_1,Curve3_2,path1_2",pos:"R3_L1",Guti:"Guti1_3",CurrentPath:"path1_3",dr:{'Curve3_2':-1,'path1_2':-1}},
+        {HName:"hotspot4",catagory:"A",Path:"path2_1,Curve1_2,Curve1_3",pos:"R1_L2",Guti:"Guti1_4",CurrentPath:"path2_1",dr:{'Curve1_3':-1}},
+        {HName:"hotspot5",catagory:"A",Path:"path2_2,Curve2_2,Curve2_3,path2_1",pos:"R2_L2",Guti:"Guti1_5",CurrentPath:"path2_2",dr:{'Curve2_3':-1,'path2_1':-1}},
+        {HName:"hotspot6",catagory:"A",Path:"path2_3,Curve3_2,Curve3_3,path2_2",pos:"R3_L2",Guti:"Guti1_6",CurrentPath:"path2_3",dr:{'Curve3_3':-1,'path2_2':-1}},
+        {HName:"hotspot7",catagory:"A",Path:"path3_1,Curve1_3,Curve1_4",pos:"R1_L3",Guti:"Guti1_7",CurrentPath:"path3_1",dr:{'Curve1_4':-1}},
+        {HName:"hotspot8",catagory:"A",Path:"path3_2,Curve2_3,Curve2_4,path3_1",pos:"R2_L3",Guti:"Guti1_8",CurrentPath:"path3_2",dr:{'Curve2_4':-1,'path3_1':-1}},
+        {HName:"hotspot9",catagory:"A",Path:"path3_3,Curve3_3,Curve3_4,path3_2",pos:"R3_L3",Guti:"Guti1_9",CurrentPath:"path3_3",dr:{'Curve3_4':-1,'path3_2':-1}},
+        {HName:"hotspot10",catagory:"A",Path:"path4_1,Curve1_4,Curve1_5",pos:"R1_L4",Guti:"Guti1_10",CurrentPath:"path4_1",dr:{'Curve1_5':-1}},
+        {HName:"hotspot11",catagory:"A",Path:"path4_2,Curve2_4,Curve2_5,path4_1",pos:"R2_L4",Guti:"Guti1_11",CurrentPath:"path4_2",dr:{'Curve2_5':-1,'path4_1':-1}},
+        {HName:"hotspot12",catagory:"A",Path:"path4_3,Curve3_4,Curve3_5,path4_2",pos:"R3_L4",Guti:"Guti1_12",CurrentPath:"path4_3",dr:{'Curve3_5':-1,'path4_2':-1}},
+        {HName:"hotspot13",catagory:"B",Path:"path5_1,Curve1_5,Curve1_6",pos:"R1_L1",Guti:"Guti2_1",CurrentPath:"path5_1",dr:{'Curve1_6':-1}},
+        {HName:"hotspot14",catagory:"B",Path:"path5_2,Curve2_5,Curve2_6,path5_1",pos:"R2_L1",Guti:"Guti2_2",CurrentPath:"path5_2",dr:{'Curve2_6':-1,'path5_1':-1}},
+        {HName:"hotspot15",catagory:"B",Path:"path5_3,Curve3_5,Curve3_6,path5_2",pos:"R3_L1",Guti:"Guti2_3",CurrentPath:"path5_3",dr:{'Curve3_6':-1,'path5_2':-1}},
+        {HName:"hotspot16",catagory:"B",Path:"path6_1,Curve1_6,Curve1_7",pos:"R1_L2",Guti:"Guti2_4",CurrentPath:"path6_1",dr:{'Curve1_7':-1}},
+        {HName:"hotspot17",catagory:"B",Path:"path6_2,Curve2_6,Curve2_7,path6_1",pos:"R2_L2",Guti:"Guti2_5",CurrentPath:"path6_2",dr:{'Curve2_7':-1,'path6_1':-1}},
+        {HName:"hotspot18",catagory:"B",Path:"path6_3,Curve3_6,Curve3_7,path6_2",pos:"R3_L2",Guti:"Guti2_6",CurrentPath:"path6_3",dr:{'Curve3_7':-1,'path6_2':-1}},
+        {HName:"hotspot19",catagory:"B",Path:"path7_1,Curve1_7,Curve1_8",pos:"R1_L3",Guti:"Guti2_7",CurrentPath:"path7_1",dr:{'Curve1_8':-1}},
+        {HName:"hotspot20",catagory:"B",Path:"path7_2,Curve2_7,Curve2_8,path7_1",pos:"R2_L3",Guti:"Guti2_8",CurrentPath:"path7_2",dr:{'Curve2_8':-1,'path7_1':-1}},
+        {HName:"hotspot21",catagory:"B",Path:"path7_3,Curve3_7,Curve3_8,path7_2",pos:"R3_L3",Guti:"Guti2_9",CurrentPath:"path7_3",dr:{'Curve3_8':-1,'path7_2':-1}},
+        {HName:"hotspot22",catagory:"B",Path:"path8_1,Curve1_8,Curve1_1",pos:"R1_L4",Guti:"Guti2_10",CurrentPath:"path8_1",dr:{'Curve1_1':-1}},
+        {HName:"hotspot23",catagory:"B",Path:"path8_2,Curve2_8,Curve2_1,path8_1",pos:"R2_L4",Guti:"Guti2_11",CurrentPath:"path8_2",dr:{'Curve2_1':-1,'path8_1':-1}},
+        {HName:"hotspot24",catagory:"B",Path:"path8_3,Curve3_8,Curve3_1,path8_2",pos:"R3_L4",Guti:"Guti2_12",CurrentPath:"path8_3",dr:{'Curve3_1':-1,'path8_2':-1}},
+        {HName:"hotspot25",catagory:"B",Path:"path1_3,path2_3,path3_3,path4_3,path5_3,path6_3,path7_3,path8_3",pos:"R0_L0",Guti:null,CurrentPath:"path8_3",dr:{'path1_3':-1,'path2_3':-1,'path3_3':-1,'path4_3':-1,'path5_3':-1,'path6_3':-1,'path7_3':-1,'path8_3':-1}},
+    ]
+var CurveLine = ["Curve1_1","Curve1_2","Curve1_3","Curve1_4","Curve1_5","Curve1_6","Curve1_7","Curve1_8","Curve2_1","Curve2_2","Curve2_3","Curve2_4","Curve2_5","Curve2_6","Curve2_7","Curve2_8","Curve3_1","Curve3_2","Curve3_3","Curve3_4","Curve3_5","Curve3_6","Curve3_7","Curve3_8"];
+var StraightLine = ["path1_1","path1_2","path1_3","path2_1","path2_2","path2_3","path3_1","path3_2","path3_3","path4_1","path4_2","path4_3","path5_1","path5_2","path5_3","path6_1","path6_2","path6_3","path7_1","path7_2","path7_3","path8_1","path8_2","path8_3"]
 function preload ()
 {
     this.load.image('blue', 'img/blue.png');
@@ -29,65 +57,23 @@ function preload ()
      this.load.image('hotspot', 'img/red.png');
 }
 function create ()
-{//this.game.startFullscreen();
+{
+    //this.game.startFullscreen();
     var graphics = this.add.graphics();
     // graphics.rotation=0.42;
     // graphics.x=150;
     // graphics.y=-110;
  
-function DrawGamePoints(){
-  graphics.clear();
-  graphics.lineStyle(2, 0xffffff, 1);
-    Curve1_1.draw(graphics, 150);    
-    Curve1_2.draw(graphics, 150);    
-    Curve1_3.draw(graphics, 150);    
-    Curve1_4.draw(graphics, 150);    
-    Curve1_5.draw(graphics, 150);
-    Curve1_6.draw(graphics, 150);
-    Curve1_7.draw(graphics, 150); 
-    Curve1_8.draw(graphics, 150);    
-    Curve2_1.draw(graphics, 150);    
-    Curve2_2.draw(graphics, 150);    
-    Curve2_3.draw(graphics, 150);    
-    Curve2_4.draw(graphics, 150);    
-    Curve2_5.draw(graphics, 150);    
-    Curve2_6.draw(graphics, 150);
-    Curve2_7.draw(graphics, 150); 
-    Curve2_8.draw(graphics, 150);
-    Curve3_1.draw(graphics, 150);
-    Curve3_2.draw(graphics, 150);
-    Curve3_3.draw(graphics, 150);
-    Curve3_4.draw(graphics, 150);    
-    Curve3_5.draw(graphics, 150);    
-    Curve3_6.draw(graphics, 150);    
-    Curve3_7.draw(graphics, 150);    
-    Curve3_8.draw(graphics, 150);    
-   path1_1.draw(graphics, 1)   
-   path1_2.draw(graphics, 1)   
-   path1_3.draw(graphics, 1)   
-   path2_1.draw(graphics, 1)   
-   path2_2.draw(graphics, 1)   
-   path2_3.draw(graphics, 1)   
-   path3_1.draw(graphics, 1)   
-   path3_2.draw(graphics, 1)   
-   path3_3.draw(graphics, 1)   
-   path4_1.draw(graphics, 1)   
-   path4_2.draw(graphics, 1)   
-   path4_3.draw(graphics, 1)   
-   path5_1.draw(graphics, 1)   
-   path5_2.draw(graphics, 1)   
-   path5_3.draw(graphics, 1)   
-   path6_1.draw(graphics, 1)   
-   path6_2.draw(graphics, 1)   
-   path6_3.draw(graphics, 1)   
-   path7_1.draw(graphics, 1)   
-   path7_2.draw(graphics, 1)   
-   path7_3.draw(graphics, 1)   
-   path8_1.draw(graphics, 1)   
-   path8_2.draw(graphics, 1)   
-   path8_3.draw(graphics, 1)
-}
-
+    function DrawGamePoints(){
+        graphics.clear();
+        graphics.lineStyle(2, 0xffffff, 1);
+        CurveLine.forEach(function(v,i,arr){
+         eval(v).draw(graphics, 150);  
+        })
+        StraightLine.forEach(function(v,i,arr){
+         eval(v).draw(graphics, 1);  
+        })
+    }
     var Curve1_1 = new Phaser.Curves.Ellipse(400, 300, 300, 300,315,360);
     var Curve1_2 = new Phaser.Curves.Ellipse(400, 300, 300, 300,270,315);
     var Curve1_3 = new Phaser.Curves.Ellipse(400, 300, 300, 300,225,270);
@@ -112,40 +98,36 @@ function DrawGamePoints(){
     var Curve3_6 = new Phaser.Curves.Ellipse(400, 300, 100, 100,90,135);
     var Curve3_7 = new Phaser.Curves.Ellipse(400, 300, 100, 100,45,90);
     var Curve3_8 = new Phaser.Curves.Ellipse(400, 300, 100, 100,0,45);
-   var path1_1 = new Phaser.Curves.Path(611, 88).lineTo(542, 158);
-   var path1_2 = new Phaser.Curves.Path(542, 158).lineTo(470, 228);
-   var path1_3 = new Phaser.Curves.Path(470, 228).lineTo(400, 300);
-   var path2_1 = new Phaser.Curves.Path(400, 2).lineTo(400, 100);
-   var path2_2 = new Phaser.Curves.Path(400, 100).lineTo(400, 200);
-   var path2_3 = new Phaser.Curves.Path(400, 200).lineTo(400, 300);
-   var path3_1 = new Phaser.Curves.Path(185, 87).lineTo(257, 158);
-   var path3_2 = new Phaser.Curves.Path(257, 158).lineTo(330, 230);
-   var path3_3 = new Phaser.Curves.Path(330, 230).lineTo(400, 300);
-   var path4_1 = new Phaser.Curves.Path(100, 300).lineTo(200, 300);
-   var path4_2 = new Phaser.Curves.Path(200, 300).lineTo(300, 300);
-   var path4_3 = new Phaser.Curves.Path(300, 300).lineTo(400, 300);
+
+    var path1_1 = new Phaser.Curves.Path(611, 88).lineTo(542, 158);
+    var path1_2 = new Phaser.Curves.Path(542, 158).lineTo(470, 228);
+    var path1_3 = new Phaser.Curves.Path(470, 228).lineTo(400, 300);
+    var path2_1 = new Phaser.Curves.Path(400, 2).lineTo(400, 100);
+    var path2_2 = new Phaser.Curves.Path(400, 100).lineTo(400, 200);
+    var path2_3 = new Phaser.Curves.Path(400, 200).lineTo(400, 300);
+    var path3_1 = new Phaser.Curves.Path(185, 87).lineTo(257, 158);
+    var path3_2 = new Phaser.Curves.Path(257, 158).lineTo(330, 230);
+    var path3_3 = new Phaser.Curves.Path(330, 230).lineTo(400, 300);
+    var path4_1 = new Phaser.Curves.Path(100, 300).lineTo(200, 300);
+    var path4_2 = new Phaser.Curves.Path(200, 300).lineTo(300, 300);
+    var path4_3 = new Phaser.Curves.Path(300, 300).lineTo(400, 300);
     var path5_1 = new Phaser.Curves.Path(187, 514).lineTo(257, 440);
-   var path5_2 = new Phaser.Curves.Path(257, 440).lineTo(330, 370);
-   var path5_3 = new Phaser.Curves.Path(330, 370).lineTo(400, 300);
-   var path6_1 = new Phaser.Curves.Path(400, 600).lineTo(400, 500);
-   var path6_2 = new Phaser.Curves.Path(400, 500).lineTo(400, 400);
-   var path6_3 = new Phaser.Curves.Path(400, 400).lineTo(400, 300);
-   var path7_1 = new Phaser.Curves.Path(611, 513).lineTo(539, 440);
-   var path7_2 = new Phaser.Curves.Path(539, 440).lineTo(469, 369);
-   var path7_3 = new Phaser.Curves.Path(469, 369).lineTo(400, 300);
+    var path5_2 = new Phaser.Curves.Path(257, 440).lineTo(330, 370);
+    var path5_3 = new Phaser.Curves.Path(330, 370).lineTo(400, 300);
+    var path6_1 = new Phaser.Curves.Path(400, 600).lineTo(400, 500);
+    var path6_2 = new Phaser.Curves.Path(400, 500).lineTo(400, 400);
+    var path6_3 = new Phaser.Curves.Path(400, 400).lineTo(400, 300);
+    var path7_1 = new Phaser.Curves.Path(611, 513).lineTo(539, 440);
+    var path7_2 = new Phaser.Curves.Path(539, 440).lineTo(469, 369);
+    var path7_3 = new Phaser.Curves.Path(469, 369).lineTo(400, 300);
     var path8_1 = new Phaser.Curves.Path(700, 300).lineTo(600, 300);
-   var path8_2 = new Phaser.Curves.Path(600, 300).lineTo(500, 300);
-   var path8_3 = new Phaser.Curves.Path(500, 300).lineTo(400, 300);
-   
+    var path8_2 = new Phaser.Curves.Path(600, 300).lineTo(500, 300);
+    var path8_3 = new Phaser.Curves.Path(500, 300).lineTo(400, 300);
+
     DrawGamePoints();
-
-
-    
     var Guti1_1 = this.add.follower(path1_1, 1, 1, 'green');
     Guti1_1.Name="Guti1_1";
     Guti1_1.CurrentPath="path1_1";
-
-
 
     var Guti1_2 = this.add.follower(path1_2, 1, 1, 'green');
     Guti1_2.Name="Guti1_2";
@@ -240,33 +222,7 @@ function DrawGamePoints(){
     var Guti2_12 = this.add.follower(path8_3, 1, 1, 'blue');
     Guti2_12.Name="Guti2_12";
     Guti2_12.CurrentPath="path8_3";
-    var hotspot  = [
-        {HName:"hotspot1",catagory:"A",Path:"path1_1,Curve1_1,Curve1_2",pos:"R1_L1",Guti:"Guti1_1",CurrentPath:"path1_1",dr:{'Curve1_2':-1}},
-        {HName:"hotspot2",catagory:"A",Path:"path1_2,Curve2_1,Curve2_2,path1_1",pos:"R2_L1",Guti:"Guti1_2",CurrentPath:"path1_2",dr:{'Curve2_2':-1,'path1_1':-1}},
-        {HName:"hotspot3",catagory:"A",Path:"path1_3,Curve3_1,Curve3_2,path1_2",pos:"R3_L1",Guti:"Guti1_3",CurrentPath:"path1_3",dr:{'Curve3_2':-1,'path1_2':-1}},
-        {HName:"hotspot4",catagory:"A",Path:"path2_1,Curve1_2,Curve1_3",pos:"R1_L2",Guti:"Guti1_4",CurrentPath:"path2_1",dr:{'Curve1_3':-1}},
-        {HName:"hotspot5",catagory:"A",Path:"path2_2,Curve2_2,Curve2_3,path2_1",pos:"R2_L2",Guti:"Guti1_5",CurrentPath:"path2_2",dr:{'Curve2_3':-1,'path2_1':-1}},
-        {HName:"hotspot6",catagory:"A",Path:"path2_3,Curve3_2,Curve3_3,path2_2",pos:"R3_L2",Guti:"Guti1_6",CurrentPath:"path2_3",dr:{'Curve3_3':-1,'path2_2':-1}},
-        {HName:"hotspot7",catagory:"A",Path:"path3_1,Curve1_3,Curve1_4",pos:"R1_L3",Guti:"Guti1_7",CurrentPath:"path3_1",dr:{'Curve1_4':-1}},
-        {HName:"hotspot8",catagory:"A",Path:"path3_2,Curve2_3,Curve2_4,path3_1",pos:"R2_L3",Guti:"Guti1_8",CurrentPath:"path3_2",dr:{'Curve2_4':-1,'path3_1':-1}},
-        {HName:"hotspot9",catagory:"A",Path:"path3_3,Curve3_3,Curve3_4,path3_2",pos:"R3_L3",Guti:"Guti1_9",CurrentPath:"path3_3",dr:{'Curve3_4':-1,'path3_2':-1}},
-        {HName:"hotspot10",catagory:"A",Path:"path4_1,Curve1_4,Curve1_5",pos:"R1_L4",Guti:"Guti1_10",CurrentPath:"path4_1",dr:{'Curve1_5':-1}},
-        {HName:"hotspot11",catagory:"A",Path:"path4_2,Curve2_4,Curve2_5,path4_1",pos:"R2_L4",Guti:"Guti1_11",CurrentPath:"path4_2",dr:{'Curve2_5':-1,'path4_1':-1}},
-        {HName:"hotspot12",catagory:"A",Path:"path4_3,Curve3_4,Curve3_5,path4_2",pos:"R3_L4",Guti:"Guti1_12",CurrentPath:"path4_3",dr:{'Curve3_5':-1,'path4_2':-1}},
-        {HName:"hotspot13",catagory:"B",Path:"path5_1,Curve1_5,Curve1_6",pos:"R1_L1",Guti:"Guti2_1",CurrentPath:"path5_1",dr:{'Curve1_6':-1}},
-        {HName:"hotspot14",catagory:"B",Path:"path5_2,Curve2_5,Curve2_6,path5_1",pos:"R2_L1",Guti:"Guti2_2",CurrentPath:"path5_2",dr:{'Curve2_6':-1,'path5_1':-1}},
-        {HName:"hotspot15",catagory:"B",Path:"path5_3,Curve3_5,Curve3_6,path5_2",pos:"R3_L1",Guti:"Guti2_3",CurrentPath:"path5_3",dr:{'Curve3_6':-1,'path5_2':-1}},
-        {HName:"hotspot16",catagory:"B",Path:"path6_1,Curve1_6,Curve1_7",pos:"R1_L2",Guti:"Guti2_4",CurrentPath:"path6_1",dr:{'Curve1_7':-1}},
-        {HName:"hotspot17",catagory:"B",Path:"path6_2,Curve2_6,Curve2_7,path6_1",pos:"R2_L2",Guti:"Guti2_5",CurrentPath:"path6_2",dr:{'Curve2_7':-1,'path6_1':-1}},
-        {HName:"hotspot18",catagory:"B",Path:"path6_3,Curve3_6,Curve3_7,path6_2",pos:"R3_L2",Guti:"Guti2_6",CurrentPath:"path6_3",dr:{'Curve3_7':-1,'path6_2':-1}},
-        {HName:"hotspot19",catagory:"B",Path:"path7_1,Curve1_7,Curve1_8",pos:"R1_L3",Guti:"Guti2_7",CurrentPath:"path7_1",dr:{'Curve1_8':-1}},
-        {HName:"hotspot20",catagory:"B",Path:"path7_2,Curve2_7,Curve2_8,path7_1",pos:"R2_L3",Guti:"Guti2_8",CurrentPath:"path7_2",dr:{'Curve2_8':-1,'path7_1':-1}},
-        {HName:"hotspot21",catagory:"B",Path:"path7_3,Curve3_7,Curve3_8,path7_2",pos:"R3_L3",Guti:"Guti2_9",CurrentPath:"path7_3",dr:{'Curve3_8':-1,'path7_2':-1}},
-        {HName:"hotspot22",catagory:"B",Path:"path8_1,Curve1_8,Curve1_1",pos:"R1_L4",Guti:"Guti2_10",CurrentPath:"path8_1",dr:{'Curve1_1':-1}},
-        {HName:"hotspot23",catagory:"B",Path:"path8_2,Curve2_8,Curve2_1,path8_1",pos:"R2_L4",Guti:"Guti2_11",CurrentPath:"path8_2",dr:{'Curve2_1':-1,'path8_1':-1}},
-        {HName:"hotspot24",catagory:"B",Path:"path8_3,Curve3_8,Curve3_1,path8_2",pos:"R3_L4",Guti:"Guti2_12",CurrentPath:"path8_3",dr:{'Curve3_1':-1,'path8_2':-1}},
-        {HName:"hotspot25",catagory:"B",Path:"path1_3,path2_3,path3_3,path4_3,path5_3,path6_3,path7_3,path8_3",pos:"R0_L0",Guti:null,CurrentPath:"path8_3",dr:{'path1_3':-1,'path2_3':-1,'path3_3':-1,'path4_3':-1,'path5_3':-1,'path6_3':-1,'path7_3':-1,'path8_3':-1}},
-    ]
+    
   //  vat h=[];
   var t =this;
   drowHotspot();
@@ -382,8 +338,8 @@ function getSecond(CH,CH1){
     var paths = CH.Path.split(','); 
     var paths1 = CH1.Path.split(','); 
     var firstPath = paths1.filter(function(obj) { return paths.indexOf(obj)   != -1; });
-    console.log(CH1.HName +" = "+CH.HName)
-    console.log(firstPath)
+   // console.log(CH1.HName +" = "+CH.HName)
+   // console.log(firstPath)
     $.each(paths,function(k,v){
         $.each(hotspot,function(k1,v1){
             if(CH.HName  != v1.HName && CH1.HName  != v1.HName){
@@ -394,8 +350,8 @@ function getSecond(CH,CH1){
                     var C_lineCheck =CH1.pos.split('_')[1];
                     var T_CurveCheck =v1.pos.split('_')[0];
                     var T_lineCheck =v1.pos.split('_')[1];
-                    console.log(CH1.HName+" = "+CH.HName +" = "+v1.HName)
-                    console.log(C_CurveCheck +" = "+T_CurveCheck+" - "+C_lineCheck +" = "+T_lineCheck)
+                   // console.log(CH1.HName+" = "+CH.HName +" = "+v1.HName)
+                  //  console.log(C_CurveCheck +" = "+T_CurveCheck+" - "+C_lineCheck +" = "+T_lineCheck)
                     if((C_lineCheck == T_lineCheck )){
                         var path_2  = v1.Path.split(',');
                         var movePath = path_2.filter(function(obj) { return obj.indexOf('path')   != -1; });
@@ -436,8 +392,8 @@ function getSecond(CH,CH1){
                     }
                     if(firstPath){
                         var p = eval(firstPath[0]);
-                            graphics.lineStyle(2, 0xff0000,2);
-                            p.draw(graphics, 150);
+                        graphics.lineStyle(2, 0xff0000,2);
+                        p.draw(graphics, 150);
                     }
                 }
             }
@@ -457,7 +413,6 @@ function getSecond(CH,CH1){
             getUA[CH.HName].dr=CH.dr;
             getUA[CH.HName].xx=CH.x;
             getUA[CH.HName].yy=CH.y;
-         //   console.log(CH.pos)
              if(Object.keys(getUA).length==1){
                 DrawGamePoints();
                 $.each(paths,function(k,v){
@@ -467,50 +422,12 @@ function getSecond(CH,CH1){
                                if(y!=-1){
                                 if(!v1.Guti){
                                     //select first step path.
-           //                         console.log(v1.HName+" - "+v1.pos)
                                     var p = eval(v);
                                     graphics.lineStyle(2, 0xff0000,2);
                                     p.draw(graphics, 150);
                                 }else{
-                                    //select second step path.
-                                    // var C_CurveCheck =CH.pos.split('_')[0];
-                                    // var C_lineCheck =CH.pos.split('_')[1];
-                                    // var T_CurveCheck =v1.pos.split('_')[0];
-                                    // var T_lineCheck =v1.pos.split('_')[1];
-             //                           console.log(v1.HName)
-                                        getSecond(this[v1.HName],CH)
-                                  //   if(C_lineCheck == T_lineCheck){
-                                  //       var path_2  = v1.Path.split(',');
-                                  //        var movePath = path_2.filter(function(obj) { return obj.indexOf('path')   != -1; });
-                                  //        $.each(movePath,function(k3,v3){
-                                  //            var p = eval(v3);
-                                  //           graphics.lineStyle(2, 0x0CD70B,2);
-                                  //           p.draw(graphics, 150);
-                                  //        })
-                                  //  // console.log(v1.HName+"-"+movePath +" - "+path_2)
-                                  //   }
-                                  //   if(C_CurveCheck == T_CurveCheck){
-                                  //       var path_2  = v1.Path.split(',');
-                                  //       var movePath = path_2.filter(function(obj) { return obj.indexOf('Curve')   != -1; });
-                                  //        $.each(movePath,function(k3,v3){
-                                  //            var p = eval(v3);
-                                  //           graphics.lineStyle(2, 0x0CD70B,2);
-                                  //           p.draw(graphics, 150);
-                                  //        })
-                                  // //  console.log(v1.HName+" - "+movePath+" - "+path_2)
-                                  //   }
-                                  //   if(CH.pos =="R0_L0"){
-                                  //       var path_2  = v1.Path.split(',');
-                                  //        var movePath = path_2.filter(function(obj) { return obj.indexOf('path')   != -1; });
-                                  //         $.each(movePath,function(k3,v3){
-                                  //            var p = eval(v3);
-                                  //           graphics.lineStyle(2, 0x0CD70B,2);
-                                  //           p.draw(graphics, 150);
-                                  //        })
-                                  //  // console.log(v1.HName+"-"+movePath +" - "+path_2)
-                                  //   }
-
-                                    
+                                     //select second step path.
+                                    getSecond(this[v1.HName],CH);  
                                 }
                             }
                         }
