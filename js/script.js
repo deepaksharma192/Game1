@@ -47,7 +47,8 @@ var hotspot  = [
         {HName:"hotspot23",catagory:"B",Path:"path8_2,Curve2_8,Curve2_1,path8_1",pos:"R2_L4",Guti:"Guti2_11",CurrentPath:"path8_2",dr:{'Curve2_1':-1,'path8_1':-1}},
         {HName:"hotspot24",catagory:"B",Path:"path8_3,Curve3_8,Curve3_1,path8_2",pos:"R3_L4",Guti:"Guti2_12",CurrentPath:"path8_3",dr:{'Curve3_1':-1,'path8_2':-1}},
         {HName:"hotspot25",catagory:"B",Path:"path1_3,path2_3,path3_3,path4_3,path5_3,path6_3,path7_3,path8_3",pos:"R0_L0",Guti:null,CurrentPath:"path8_3",dr:{'path1_3':-1,'path2_3':-1,'path3_3':-1,'path4_3':-1,'path5_3':-1,'path6_3':-1,'path7_3':-1,'path8_3':-1}},
-    ]
+    ];
+var GutiData = [{"name":"Guti1_1","path":"path1_1"},{"name":"Guti1_2","path":"path1_2"},{"name":"Guti1_3","path":"path1_3"},{"name":"Guti1_4","path":"path2_1"},{"name":"Guti1_5","path":"path2_2"},{"name":"Guti1_6","path":"path2_3"},{"name":"Guti1_7","path":"path3_1"},{"name":"Guti1_8","path":"path3_2"},{"name":"Guti1_9","path":"path3_3"},{"name":"Guti1_10","path":"path4_1"},{"name":"Guti1_11","path":"path4_2"},{"name":"Guti1_12","path":"path4_3"},{"name":"Guti2_1","path":"path5_1"},{"name":"Guti2_2","path":"path5_2"},{"name":"Guti2_3","path":"path5_3"},{"name":"Guti2_4","path":"path6_1"},{"name":"Guti2_5","path":"path6_2"},{"name":"Guti2_6","path":"path6_3"},{"name":"Guti2_7","path":"path7_1"},{"name":"Guti2_8","path":"path7_2"},{"name":"Guti2_9","path":"path7_3"},{"name":"Guti2_10","path":"path8_1"},{"name":"Guti2_11","path":"path8_2"},{"name":"Guti2_12","path":"path8_3"}];
 var CurveLine = ["Curve1_1","Curve1_2","Curve1_3","Curve1_4","Curve1_5","Curve1_6","Curve1_7","Curve1_8","Curve2_1","Curve2_2","Curve2_3","Curve2_4","Curve2_5","Curve2_6","Curve2_7","Curve2_8","Curve3_1","Curve3_2","Curve3_3","Curve3_4","Curve3_5","Curve3_6","Curve3_7","Curve3_8"];
 var StraightLine = ["path1_1","path1_2","path1_3","path2_1","path2_2","path2_3","path3_1","path3_2","path3_3","path4_1","path4_2","path4_3","path5_1","path5_2","path5_3","path6_1","path6_2","path6_3","path7_1","path7_2","path7_3","path8_1","path8_2","path8_3"]
 function preload ()
@@ -58,6 +59,7 @@ function preload ()
 }
 function create ()
 {
+    var t =this;
     //this.game.startFullscreen();
     var graphics = this.add.graphics();
     // graphics.rotation=0.42;
@@ -124,108 +126,15 @@ function create ()
     var path8_2 = new Phaser.Curves.Path(600, 300).lineTo(500, 300);
     var path8_3 = new Phaser.Curves.Path(500, 300).lineTo(400, 300);
 
+    GutiData.forEach(function(v,i,arr){ 
+        var check = (v.name.match(/Guti1/g)=="Guti1")?'green':'blue';
+        t[(v.name)] = t.add.follower(eval(v.path), 1, 1, check);
+        t[(v.name)].Name=v.name;
+        t[(v.name)].CurrentPath=v.path;
+        SetGuti(t[(v.name)],eval(v.path),false,0);
+    })
     DrawGamePoints();
-    var Guti1_1 = this.add.follower(path1_1, 1, 1, 'green');
-    Guti1_1.Name="Guti1_1";
-    Guti1_1.CurrentPath="path1_1";
-
-    var Guti1_2 = this.add.follower(path1_2, 1, 1, 'green');
-    Guti1_2.Name="Guti1_2";
-    Guti1_2.CurrentPath="path1_2";
-
-    var Guti1_3 = this.add.follower(path1_3, 1, 1, 'green');
-    Guti1_3.Name="Guti1_3";
-    Guti1_3.CurrentPath="path1_3";
-
-    var Guti1_4 = this.add.follower(path2_1, 1, 1, 'green');
-    Guti1_4.Name="Guti1_4";
-    Guti1_4.CurrentPath="path2_1";
-
-    var Guti1_5 = this.add.follower(path2_2, 1, 1, 'green');
-    Guti1_5.Name="Guti1_5";
-    Guti1_5.CurrentPath="path2_2";
-
-    var Guti1_6 = this.add.follower(path2_3, 1, 1, 'green');
-    Guti1_6.Name="Guti1_6";
-    Guti1_6.CurrentPath="path2_3";
-
-    var Guti1_7 = this.add.follower(path3_1, 1, 1, 'green');
-    Guti1_7.Name="Guti1_7";
-    Guti1_7.CurrentPath="path3_1";
-
-
-    var Guti1_8 = this.add.follower(path3_2, 1, 1, 'green');
-    Guti1_8.Name="Guti1_8";
-    Guti1_8.CurrentPath="path3_2";
-
-    var Guti1_9 = this.add.follower(path3_3, 1, 1, 'green');
-    Guti1_9.Name="Guti1_9";
-    Guti1_9.CurrentPath="path3_3";
-
-    var Guti1_10 = this.add.follower(path4_1, 1, 1, 'green');
-    Guti1_10.Name="Guti1_10";
-    Guti1_10.CurrentPath="path4_1";
-
-    var Guti1_11 = this.add.follower(path4_2, 1, 1, 'green');
-    Guti1_11.Name="Guti1_11";
-    Guti1_11.CurrentPath="path4_2";
-
-    var Guti1_12 = this.add.follower(path4_3, 1, 1, 'green');
-    Guti1_12.Name="Guti1_12";
-    Guti1_12.CurrentPath="path4_3";
-
-
-    var Guti2_1 = this.add.follower(path5_1, 1, 1, 'blue');
-    Guti2_1.Name="Guti2_1";
-    Guti2_1.CurrentPath="path5_1";
-
-    var Guti2_2 = this.add.follower(path5_2, 1, 1, 'blue');
-    Guti2_2.Name="Guti2_2";
-    Guti2_2.CurrentPath="path5_2";
-
-    var Guti2_3 = this.add.follower(path5_3, 1, 1, 'blue');
-    Guti2_3.Name="Guti2_3";
-    Guti2_3.CurrentPath="path5_3";
-
-    var Guti2_4 = this.add.follower(path6_1, 1, 1, 'blue');
-    Guti2_4.Name="Guti2_4";
-    Guti2_4.CurrentPath="path6_1";
-
-    var Guti2_5 = this.add.follower(path6_2, 1, 1, 'blue');
-    Guti2_5.Name="Guti2_5";
-    Guti2_5.CurrentPath="path6_2";
-
-    var Guti2_6 = this.add.follower(path6_3, 1, 1, 'blue');
-    Guti2_6.Name="Guti2_6";
-    Guti2_6.CurrentPath="path6_3";
-
-    var Guti2_7 = this.add.follower(path7_1, 1, 1, 'blue');
-    Guti2_7.Name="Guti2_7";
-    Guti2_7.CurrentPath="path7_1";
-
-    var Guti2_8 = this.add.follower(path7_2, 1, 1, 'blue');
-    Guti2_8.Name="Guti2_8";
-    Guti2_8.CurrentPath="path7_2";
-
-    var Guti2_9 = this.add.follower(path7_3, 1, 1, 'blue');
-    Guti2_9.Name="Guti2_9";
-    Guti2_9.CurrentPath="path7_3";
-
-    var Guti2_10 = this.add.follower(path8_1, 1, 1, 'blue');
-    Guti2_10.Name="Guti2_10";
-    Guti2_10.CurrentPath="path8_1";
-
-    var Guti2_11 = this.add.follower(path8_2, 1, 1, 'blue');
-    Guti2_11.Name="Guti2_11";
-    Guti2_11.CurrentPath="path8_2";
-
-    var Guti2_12 = this.add.follower(path8_3, 1, 1, 'blue');
-    Guti2_12.Name="Guti2_12";
-    Guti2_12.CurrentPath="path8_3";
-    
-  //  vat h=[];
-  var t =this;
-  drowHotspot();
+    drowHotspot();
   function drowHotspot(){
      $.each(hotspot,function(k,v){
         this[v.HName]  =t.add.follower(eval(v.CurrentPath), 1, 1, 'hotspot').setInteractive();
@@ -254,31 +163,8 @@ function updateHotspotData(){
         this[v.HName].dr=v.dr;
     })
 }
-    SetGuti(Guti1_1,path1_1,false,0);
-    SetGuti(Guti1_2,path1_2,false,0);
-    SetGuti(Guti1_3,path1_3,false,0);
-    SetGuti(Guti1_4,path2_1,false,0);
-    SetGuti(Guti1_5,path2_2,false,0);
-    SetGuti(Guti1_6,path2_3,false,0);
-    SetGuti(Guti1_7,path3_1,false,0);
-    SetGuti(Guti1_8,path3_2,false,0);
-    SetGuti(Guti1_9,path3_3,false,0);
-    SetGuti(Guti1_10,path4_1,false,0);
-    SetGuti(Guti1_11,path4_2,false,0);
-    SetGuti(Guti1_12,path4_3,false,0);
 
-    SetGuti(Guti2_1,path5_1,false,0);
-    SetGuti(Guti2_2,path5_2,false,0);
-    SetGuti(Guti2_3,path5_3,false,0);
-    SetGuti(Guti2_4,path6_1,false,0);
-    SetGuti(Guti2_5,path6_2,false,0);
-    SetGuti(Guti2_6,path6_3,false,0);
-    SetGuti(Guti2_7,path7_1,false,0);
-    SetGuti(Guti2_8,path7_2,false,0);
-    SetGuti(Guti2_9,path7_3,false,0);
-    SetGuti(Guti2_10,path8_1,false,0);
-    SetGuti(Guti2_11,path8_2,false,0);
-    SetGuti(Guti2_12,path8_3,false,0);
+
 function SetGuti(gutiName,moveingLine,lineCurve,step){
     var from=(step==-1)?1:0;
     step = (step == -1)?0:step; 
@@ -401,13 +287,13 @@ function getSecond(CH,CH1){
     })
 }
     var getUA={};
-   this.input.on('pointerup', function (event, gameObjects) {
+   this.input.on('pointerdown', function (event, gameObjects) {
         var CH =gameObjects[0];
         if(CH){
             var paths = CH.Path.split(','); 
             getUA[CH.HName]={};
             getUA[CH.HName].path = paths;
-            getUA[CH.HName].startGuiti=eval(CH.Guti);
+            getUA[CH.HName].startGuiti=t[CH.Guti];
             getUA[CH.HName].changeGutiStatus=CH.Guti;
             getUA[CH.HName].hotspotTarget=CH.HName; 
             getUA[CH.HName].dr=CH.dr;
