@@ -378,110 +378,72 @@ function moveGuti(gutiName,moveingLine,lineCurve,step,duration){
     });
 }
 
-    function getSecond(CH,CH1){
-        var paths = CH.Path.split(','); 
-        var paths1 = CH1.Path.split(','); 
-        var firstPath = paths1.filter(function(obj) { return paths.indexOf(obj)   != -1; });
-      console.log(CH.HName +" = "+CH1.HName)
-         console.log(firstPath)
-        $.each(paths,function(k,v){
-            $.each(hotspot,function(k1,v1){
-                if(CH.HName  != v1.HName && CH1.HName  != v1.HName){
+function getSecond(CH,CH1){
+    var paths = CH.Path.split(','); 
+    var paths1 = CH1.Path.split(','); 
+    var firstPath = paths1.filter(function(obj) { return paths.indexOf(obj)   != -1; });
+    console.log(CH1.HName +" = "+CH.HName)
+    console.log(firstPath)
+    $.each(paths,function(k,v){
+        $.each(hotspot,function(k1,v1){
+            if(CH.HName  != v1.HName && CH1.HName  != v1.HName){
 
-                    var y =v1.Path.split(',').indexOf(v);
-                       if(y!=-1){
-                             var C_CurveCheck =CH1.pos.split('_')[0];
-                            var C_lineCheck =CH1.pos.split('_')[1];
-                            var T_CurveCheck =v1.pos.split('_')[0];
-                            var T_lineCheck =v1.pos.split('_')[1];
-                       
-                           //console.log(v1.Guti)
-                      //  console.log(v1.Guti)
-                       // console.log(v1.Path.split(','))
-                         console.log(CH1.HName+" = "+CH.HName +" = "+v1.HName)
-                          console.log(C_CurveCheck +" = "+T_CurveCheck+" - "+C_lineCheck +" = "+T_lineCheck)
-                          if((C_lineCheck == T_lineCheck )){
-                            var path_2  = v1.Path.split(',');
-                            var movePath = path_2.filter(function(obj) { return obj.indexOf('path')   != -1; });
-                            var mo = movePath.filter(function(obj) { return v   == obj; });
+                var y =v1.Path.split(',').indexOf(v);
+                if(y!=-1){
+                    var C_CurveCheck =CH1.pos.split('_')[0];
+                    var C_lineCheck =CH1.pos.split('_')[1];
+                    var T_CurveCheck =v1.pos.split('_')[0];
+                    var T_lineCheck =v1.pos.split('_')[1];
+                    console.log(CH1.HName+" = "+CH.HName +" = "+v1.HName)
+                    console.log(C_CurveCheck +" = "+T_CurveCheck+" - "+C_lineCheck +" = "+T_lineCheck)
+                    if((C_lineCheck == T_lineCheck )){
+                        var path_2  = v1.Path.split(',');
+                        var movePath = path_2.filter(function(obj) { return obj.indexOf('path')   != -1; });
+                        var mo = movePath.filter(function(obj) { return v   == obj; });
+                        var p = eval(mo[0]);
+                        graphics.lineStyle(2, 0xff0000,2);
+                        p.draw(graphics, 150);
+                    }
+                    if(C_CurveCheck == T_CurveCheck){
+                        var path_2  = v1.Path.split(',');
+                        var movePath = path_2.filter(function(obj) { return obj.indexOf('Curve')   != -1; });
+                        var mo = movePath.filter(function(obj) { return CH.Path.split(',').indexOf(obj)   != -1; });
+                        if(mo.length){
+                            var C = parseInt(C_CurveCheck.match(/\d+/g)[0])
+                            var T =parseInt(mo[0].split('_')[0].match(/\d+/g));
+                            if((mo[0].match(/Curve/g)=="Curve")&&(C==T)){
+                                var p = eval(mo[0]);
+                                graphics.lineStyle(2, 0xff0000,2);
+                                p.draw(graphics, 150);
+                            }
+                        }
+                    }
+                    if(v1.pos =="R0_L0"){
+                        var path_2  = v1.Path.split(',');
+                        var movePath = path_2.filter(function(obj) { return obj.indexOf('path')   != -1; });
+                        var mo = movePath.filter(function(obj) { return CH.Path.split(',').indexOf(obj)   != -1; });
+                        var C = parseInt(C_lineCheck.match(/\d+/g)[0])
+                        var T =parseInt(mo[0].split('_')[0].match(/\d+/g));
+                        T = (T == 8)? 4:T;
+                        T = (T == 7)? 3:T;
+                        T = (T == 6)? 2:T;
+                        T = (T == 5)? 1:T;
+                        if((mo[0].match(/path/g)=="path")&&(C==T)){
                             var p = eval(mo[0]);
                             graphics.lineStyle(2, 0xff0000,2);
                             p.draw(graphics, 150);
-                          }
-                          if(C_CurveCheck == T_CurveCheck){
-                                var path_2  = v1.Path.split(',');
-                                var movePath = path_2.filter(function(obj) { return obj.indexOf('Curve')   != -1; });
-                                var mo = movePath.filter(function(obj) { return CH.Path.split(',').indexOf(obj)   != -1; });
-                                if(mo.length){
-                                    var C = parseInt(C_CurveCheck.match(/\d+/g)[0])
-                                    var T =parseInt(mo[0].split('_')[0].match(/\d+/g));
-                                    if((mo[0].match(/Curve/g)=="Curve")&&(C==T)){
-                                        var p = eval(mo[0]);
-                                        graphics.lineStyle(2, 0xff0000,2);
-                                        p.draw(graphics, 150);
-                                }
-                            }
-                          }
-                            if(v1.pos =="R0_L0"){
-                                var path_2  = v1.Path.split(',');
-                                var movePath = path_2.filter(function(obj) { return obj.indexOf('path')   != -1; });
-                                var mo = movePath.filter(function(obj) { return CH.Path.split(',').indexOf(obj)   != -1; });
-                                var C = parseInt(C_lineCheck.match(/\d+/g)[0])
-                                var T =parseInt(mo[0].split('_')[0].match(/\d+/g));
-                                if((mo[0].match(/path/g)=="path")&&(C==T)){
-                                    var p = eval(mo[0]);
-                                    graphics.lineStyle(2, 0xff0000,2);
-                                    p.draw(graphics, 150);
-                                }
-                            }
-                        var firstPath1 = CH.Path.split(',').filter(function(obj) { return v1.Path.split(',').indexOf(obj)   != -1; });
-                     //   console.log(firstPath1)
-                        if(!v1.Guti){
-                           
-                          // console.log(v1.Guti)
-                            var C_CurveCheck =CH.pos.split('_')[0];
-                            var C_lineCheck =CH.pos.split('_')[1];
-                            var T_CurveCheck =v1.pos.split('_')[0];
-                            var T_lineCheck =v1.pos.split('_')[1];
-                            // var movePath = getUA[Object.keys(getUA)[0]].path.filter(function(obj) { return getUA[Object.keys(getUA)[1]].path.indexOf(obj)   != -1; });
-                         // console.log(C_lineCheck +"=="+ T_lineCheck)
-                            // if(C_lineCheck == T_lineCheck){
-                            //             var path_2  = v1.Path.split(',');
-                            //              var movePath = path_2.filter(function(obj) { return obj.indexOf('path')   != -1; });
-                            //           console.log(movePath)
-                            //              $.each(movePath,function(k3,v3){
-                            //                  var p = eval(v3);
-                            //                 graphics.lineStyle(2, 0xff0000,2);
-                            //                 p.draw(graphics, 150);
-                            //              })
-                            //        // console.log(v1.HName+"-"+movePath +" - "+path_2)
-                            //         }
-                            //         if(C_CurveCheck == T_CurveCheck){
-                            //             var path_2  = v1.Path.split(',');
-                            //             var movePath = path_2.filter(function(obj) { return obj.indexOf('Curve')   != -1; });
-                            //              $.each(movePath,function(k3,v3){
-                            //                  var p = eval(v3);
-                            //                 graphics.lineStyle(2, 0xff0000,2);
-                            //                 p.draw(graphics, 150);
-                            //              })
-                            //       //  console.log(v1.HName+" - "+movePath+" - "+path_2)
-                            //         }
-                            //         if(CH.pos =="R0_L0"){
-                            //             var path_2  = v1.Path.split(',');
-                            //              var movePath = path_2.filter(function(obj) { return obj.indexOf('path')   != -1; });
-                            //               $.each(movePath,function(k3,v3){
-                            //                  var p = eval(v3);
-                            //                 graphics.lineStyle(2, 0xff0000,2);
-                            //                 p.draw(graphics, 150);
-                            //              })
-                            //        // console.log(v1.HName+"-"+movePath +" - "+path_2)
-                            //         }
                         }
                     }
+                    if(firstPath){
+                        var p = eval(firstPath[0]);
+                            graphics.lineStyle(2, 0xff0000,2);
+                            p.draw(graphics, 150);
+                    }
                 }
-            })
+            }
         })
-    }
+    })
+}
     var getUA={};
    this.input.on('pointerup', function (event, gameObjects) {
         var CH =gameObjects[0];
