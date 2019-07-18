@@ -226,6 +226,7 @@ function getSecond(CH,CH1){
     var firstPath = paths1.filter(function(obj) { return paths.indexOf(obj)   != -1; });
    // console.log(CH1.HName +" = "+CH.HName)
    // console.log(firstPath)
+   if(CH1.Guti){
     $.each(paths,function(k,v){
         $.each(hotspot,function(k1,v1){
             if(CH.HName  != v1.HName && CH1.HName  != v1.HName){
@@ -276,6 +277,25 @@ function getSecond(CH,CH1){
                             p.draw(graphics, 150);
                         }
                     }
+                    if(CH1.pos =="R0_L0"){
+                        var path_2  = v1.Path.split(',');
+                        var movePath = path_2.filter(function(obj) { return obj.indexOf('path')   != -1; });
+                        var mo = movePath.filter(function(obj) { return CH1.Path.split(',').indexOf(obj)   != -1; });
+                        if(!mo.length){
+                             mo = movePath.filter(function(obj) { return obj.indexOf('path2')   != -1; });
+                        }
+                        var C = parseInt(C_lineCheck.match(/\d+/g)[0])
+                        var T =parseInt(mo[0].split('_')[0].match(/\d+/g));
+                        T = (T == 8)? 4:T;
+                        T = (T == 7)? 3:T;
+                        T = (T == 6)? 2:T;
+                        T = (T == 5)? 1:T;
+                        if((mo[0].match(/path/g)=="path")&&(C==T)){
+                            var p = eval(mo[0]);
+                            graphics.lineStyle(2, 0xff0000,2);
+                            p.draw(graphics, 150);
+                        }
+                    }
                     if(firstPath){
                         var p = eval(firstPath[0]);
                         graphics.lineStyle(2, 0xff0000,2);
@@ -285,6 +305,8 @@ function getSecond(CH,CH1){
             }
         })
     })
+}
+
 }
     var getUA={};
    this.input.on('pointerdown', function (event, gameObjects) {
@@ -299,27 +321,32 @@ function getSecond(CH,CH1){
             getUA[CH.HName].dr=CH.dr;
             getUA[CH.HName].xx=CH.x;
             getUA[CH.HName].yy=CH.y;
-             if(Object.keys(getUA).length==1){
-                DrawGamePoints();
-                $.each(paths,function(k,v){
-                    $.each(hotspot,function(k1,v1){
-                        if(CH.HName  != v1.HName){
-                            var y =v1.Path.split(',').indexOf(v);
-                               if(y!=-1){
-                                if(!v1.Guti){
-                                    //select first step path.
-                                    var p = eval(v);
-                                    graphics.lineStyle(2, 0xff0000,2);
-                                    p.draw(graphics, 150);
-                                }else{
-                                     //select second step path.
-                                    getSecond(this[v1.HName],CH);  
+             if(Object.keys(getUA).length == 1){
+                if(CH.Guti){
+                    DrawGamePoints();
+                    $.each(paths,function(k,v){
+                        $.each(hotspot,function(k1,v1){
+                            if(CH.HName  != v1.HName){
+                                var y =v1.Path.split(',').indexOf(v);
+                                   if(y!=-1){
+                                    if(!v1.Guti){
+                                        //select first step path.
+                                        var p = eval(v);
+                                        graphics.lineStyle(2, 0xff0000,2);
+                                        p.draw(graphics, 150);
+                                    }else{
+                                         //select second step path.
+                                        getSecond(this[v1.HName],CH);  
+                                    }
                                 }
                             }
-                        }
+                        })
                     })
-                })
-
+                }else{
+                    updateHotspotData();
+                    DrawGamePoints();
+                    getUA={};  
+                }
              }else if(Object.keys   (getUA).length == 2 && (CH.Guti==null)){
                 var movePath = getUA[Object.keys(getUA)[0]].path.filter(function(obj) { return getUA[Object.keys(getUA)[1]].path.indexOf(obj)   != -1; });
                 var drMove=(getUA[Object.keys(getUA)[0]].dr[movePath[0]])? -1: 1;    
