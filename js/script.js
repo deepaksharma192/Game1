@@ -202,20 +202,9 @@ function moveGuti(gutiName,moveingLine,lineCurve,step,duration){
             gutiName.y=gutiName.yy;
         },
         onComplete: function(tween, target){
-            if(path.type != 'EllipseCurve'){
-             if(step==1 ){
-                  gutiName.path.startPoint.x=path._tmpVec2B.x;
-                  gutiName.path.startPoint.y=path._tmpVec2B.y;
-        
-                }else{
-                    gutiName.path.startPoint.x=path._tmpVec2A.x;
-                     gutiName.path.startPoint.y=path._tmpVec2A.y;
-                }
-            }
+            
         },
         onUpdate: function(tween, target){
-
-           // console.log(target)
         }
     });
 }
@@ -279,22 +268,22 @@ function getSecond(CH,CH1){
                     }
                     if(CH1.pos =="R0_L0"){
                         var path_2  = v1.Path.split(',');
-                        var movePath = path_2.filter(function(obj) { return obj.indexOf('path')   != -1; });
-                        var mo = movePath.filter(function(obj) { return CH1.Path.split(',').indexOf(obj)   != -1; });
-                        if(!mo.length){
-                             mo = movePath.filter(function(obj) { return obj.indexOf('path2')   != -1; });
-                        }
-                        var C = parseInt(C_lineCheck.match(/\d+/g)[0])
-                        var T =parseInt(mo[0].split('_')[0].match(/\d+/g));
-                        T = (T == 8)? 4:T;
-                        T = (T == 7)? 3:T;
-                        T = (T == 6)? 2:T;
-                        T = (T == 5)? 1:T;
-                        if((mo[0].match(/path/g)=="path")&&(C==T)){
-                            var p = eval(mo[0]);
+                        // var movePath = path_2.filter(function(obj) { return obj.indexOf('path')   != -1; });
+                        // var mo = movePath.filter(function(obj) { return CH1.Path.split(',').indexOf(obj)   != -1; });
+                        // if(mo.length){
+                        //     var C = parseInt(C_lineCheck.match(/\d+/g)[0])
+                        // var T =parseInt(mo[0].split('_')[0].match(/\d+/g));
+                        // T = (T == 8)? 4:T;
+                        // T = (T == 7)? 3:T;
+                        // T = (T == 6)? 2:T;
+                        // T = (T == 5)? 1:T;
+                        // if((mo[0].match(/path/g)=="path")&&(C==T)){
+                            var p = eval(v1.CurrentPath);
                             graphics.lineStyle(2, 0xff0000,2);
                             p.draw(graphics, 150);
-                        }
+                       // }
+                       // }
+                        
                     }
                     if(firstPath){
                         var p = eval(firstPath[0]);
