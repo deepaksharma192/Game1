@@ -202,7 +202,7 @@ function moveGuti(gutiName,moveingLine,lineCurve,step,duration){
             gutiName.y=gutiName.yy;
         },
         onComplete: function(tween, target){
-            
+             // delete gutiName;
         },
         onUpdate: function(tween, target){
         }
@@ -226,12 +226,13 @@ function getSecond(CH,CH1){
                     var C_lineCheck =CH1.pos.split('_')[1];
                     var T_CurveCheck =v1.pos.split('_')[0];
                     var T_lineCheck =v1.pos.split('_')[1];
-                   // console.log(CH1.HName+" = "+CH.HName +" = "+v1.HName)
+                    
                   //  console.log(C_CurveCheck +" = "+T_CurveCheck+" - "+C_lineCheck +" = "+T_lineCheck)
                     if((C_lineCheck == T_lineCheck )){
                         var path_2  = v1.Path.split(',');
                         var movePath = path_2.filter(function(obj) { return obj.indexOf('path')   != -1; });
                         var mo = movePath.filter(function(obj) { return v   == obj; });
+                        console.log(CH1.HName+" = "+CH.HName +" = "+v1.HName)
                         var p = eval(mo[0]);
                         graphics.lineStyle(2, 0xff0000,2);
                         p.draw(graphics, 150);
@@ -241,9 +242,11 @@ function getSecond(CH,CH1){
                         var movePath = path_2.filter(function(obj) { return obj.indexOf('Curve')   != -1; });
                         var mo = movePath.filter(function(obj) { return CH.Path.split(',').indexOf(obj)   != -1; });
                         if(mo.length){
+
                             var C = parseInt(C_CurveCheck.match(/\d+/g)[0])
                             var T =parseInt(mo[0].split('_')[0].match(/\d+/g));
                             if((mo[0].match(/Curve/g)=="Curve")&&(C==T)){
+                                console.log(CH1.HName+" = "+CH.HName +" = "+v1.HName)
                                 var p = eval(mo[0]);
                                 graphics.lineStyle(2, 0xff0000,2);
                                 p.draw(graphics, 150);
@@ -261,13 +264,14 @@ function getSecond(CH,CH1){
                         T = (T == 6)? 2:T;
                         T = (T == 5)? 1:T;
                         if((mo[0].match(/path/g)=="path")&&(C==T)){
+                            console.log(CH1.HName+" = "+CH.HName +" = "+v1.HName)
                             var p = eval(mo[0]);
                             graphics.lineStyle(2, 0xff0000,2);
                             p.draw(graphics, 150);
                         }
                     }
                     if(CH1.pos =="R0_L0"){
-                        var path_2  = v1.Path.split(',');
+                        
                         // var movePath = path_2.filter(function(obj) { return obj.indexOf('path')   != -1; });
                         // var mo = movePath.filter(function(obj) { return CH1.Path.split(',').indexOf(obj)   != -1; });
                         // if(mo.length){
@@ -278,9 +282,23 @@ function getSecond(CH,CH1){
                         // T = (T == 6)? 2:T;
                         // T = (T == 5)? 1:T;
                         // if((mo[0].match(/path/g)=="path")&&(C==T)){
+                            var path_2  = v1.Path.split(',');
+                            var movePath = path_2.filter(function(obj) { return obj.indexOf('path')   != -1; });
+                            movePath =movePath[0].split('_')[0];
+
+                            var path_3  = CH.Path.split(',');
+                            var movePath1 = path_3.filter(function(obj) { return obj.indexOf('path')   != -1; });
+                            movePath1 =movePath1[0].split('_')[0];
+                            if(movePath==movePath1){
+                               console.log(CH1.HName+" = "+v1.HName +" = "+CH.HName)
+                            // console.log(v1.Path+" = "+movePath)
+                            // console.log(CH.Path+" = "+movePath1)
+                            // console.log(v1.CurrentPath)
                             var p = eval(v1.CurrentPath);
                             graphics.lineStyle(2, 0xff0000,2);
-                            p.draw(graphics, 150);
+                            p.draw(graphics, 150);  
+                            }
+                            
                        // }
                        // }
                         
