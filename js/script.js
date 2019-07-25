@@ -208,12 +208,14 @@ function moveGuti(gutiName,moveingLine,lineCurve,step,duration){
         }
     });
 }
-
+ var killStep =[];
 function getSecond(CH,CH1){
     var paths = CH.Path.split(','); 
     var paths1 = CH1.Path.split(','); 
     var firstPath = paths1.filter(function(obj) { return paths.indexOf(obj)   != -1; });
-   // console.log(CH1.HName +" = "+CH.HName)
+    console.log(CH1.HName ,CH.HName)
+    var getWay={a1:CH1.HName,a2:CH.HName,path1:firstPath[0]};
+     ///this['killStep'].push()
    // console.log(firstPath)
    if(CH1.Guti){
     $.each(paths,function(k,v){
@@ -221,7 +223,10 @@ function getSecond(CH,CH1){
             if(CH.HName  != v1.HName && CH1.HName  != v1.HName){
 
                 var y =v1.Path.split(',').indexOf(v);
+
                 if(y!=-1){
+                   
+                   //  getWay.push({HName:CH.HName,path:firstPath[0]})
                     var C_CurveCheck =CH1.pos.split('_')[0];
                     var C_lineCheck =CH1.pos.split('_')[1];
                     var T_CurveCheck =v1.pos.split('_')[0];
@@ -232,7 +237,11 @@ function getSecond(CH,CH1){
                         var path_2  = v1.Path.split(',');
                         var movePath = path_2.filter(function(obj) { return obj.indexOf('path')   != -1; });
                         var mo = movePath.filter(function(obj) { return v   == obj; });
-                        console.log(CH1.HName+" = "+CH.HName +" = "+v1.HName)
+                        //  console.log(CH1.HName+" = "+CH.HName +" = "+v1.HName)
+                         console.log("Line",v1.HName)
+                         getWay['a3']=v1.HName;
+                         getWay['path2']=mo[0];
+                        //getWay.push({HName:v1.HName,path:mo[0]})
                         var p = eval(mo[0]);
                         graphics.lineStyle(2, 0xff0000,2);
                         p.draw(graphics, 150);
@@ -242,11 +251,13 @@ function getSecond(CH,CH1){
                         var movePath = path_2.filter(function(obj) { return obj.indexOf('Curve')   != -1; });
                         var mo = movePath.filter(function(obj) { return CH.Path.split(',').indexOf(obj)   != -1; });
                         if(mo.length){
-
+                               
                             var C = parseInt(C_CurveCheck.match(/\d+/g)[0])
                             var T =parseInt(mo[0].split('_')[0].match(/\d+/g));
                             if((mo[0].match(/Curve/g)=="Curve")&&(C==T)){
-                                console.log(CH1.HName+" = "+CH.HName +" = "+v1.HName)
+                             console.log("Curve",v1.HName)
+                              getWay['a3']=v1.HName;
+                         getWay['path2']=mo[0];
                                 var p = eval(mo[0]);
                                 graphics.lineStyle(2, 0xff0000,2);
                                 p.draw(graphics, 150);
@@ -264,24 +275,15 @@ function getSecond(CH,CH1){
                         T = (T == 6)? 2:T;
                         T = (T == 5)? 1:T;
                         if((mo[0].match(/path/g)=="path")&&(C==T)){
-                            console.log(CH1.HName+" = "+CH.HName +" = "+v1.HName)
+                           console.log("25",v1.HName)
+                           getWay['a3']=v1.HName;
+                         getWay['path2']=mo[0];
                             var p = eval(mo[0]);
                             graphics.lineStyle(2, 0xff0000,2);
                             p.draw(graphics, 150);
                         }
                     }
                     if(CH1.pos =="R0_L0"){
-                        
-                        // var movePath = path_2.filter(function(obj) { return obj.indexOf('path')   != -1; });
-                        // var mo = movePath.filter(function(obj) { return CH1.Path.split(',').indexOf(obj)   != -1; });
-                        // if(mo.length){
-                        //     var C = parseInt(C_lineCheck.match(/\d+/g)[0])
-                        // var T =parseInt(mo[0].split('_')[0].match(/\d+/g));
-                        // T = (T == 8)? 4:T;
-                        // T = (T == 7)? 3:T;
-                        // T = (T == 6)? 2:T;
-                        // T = (T == 5)? 1:T;
-                        // if((mo[0].match(/path/g)=="path")&&(C==T)){
                             var path_2  = v1.Path.split(',');
                             var movePath = path_2.filter(function(obj) { return obj.indexOf('path')   != -1; });
                             movePath =movePath[0].split('_')[0];
@@ -290,17 +292,13 @@ function getSecond(CH,CH1){
                             var movePath1 = path_3.filter(function(obj) { return obj.indexOf('path')   != -1; });
                             movePath1 =movePath1[0].split('_')[0];
                             if(movePath==movePath1){
-                               console.log(CH1.HName+" = "+v1.HName +" = "+CH.HName)
-                            // console.log(v1.Path+" = "+movePath)
-                            // console.log(CH.Path+" = "+movePath1)
-                            // console.log(v1.CurrentPath)
-                            var p = eval(v1.CurrentPath);
-                            graphics.lineStyle(2, 0xff0000,2);
-                            p.draw(graphics, 150);  
+                                 console.log("1_25",v1.HName)
+                                 getWay['a3']=v1.HName;
+                         getWay['path2']=v1.CurrentPath;
+                                var p = eval(v1.CurrentPath);
+                                graphics.lineStyle(2, 0xff0000,2);
+                                p.draw(graphics, 150);  
                             }
-                            
-                       // }
-                       // }
                         
                     }
                     if(firstPath){
@@ -308,10 +306,16 @@ function getSecond(CH,CH1){
                         graphics.lineStyle(2, 0xff0000,2);
                         p.draw(graphics, 150);
                     }
+                   // if(getWay.length>0){
+                        
+                   // }
+                  
                 }
             }
         })
     })
+killStep.push(getWay); 
+console.log(killStep)
 }
 
 }
