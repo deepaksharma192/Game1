@@ -361,12 +361,14 @@ killStep.push(getWay);
              }else if(Object.keys   (getUA).length == 2 && (CH.Guti==null)){
 
                 var movePath = getUA[Object.keys(getUA)[0]].path.filter(function(obj) { return getUA[Object.keys(getUA)[1]].path.indexOf(obj)   != -1; });
-                var drMove=(getUA[Object.keys(getUA)[0]].dr[movePath[0]])? -1: 1;    
+               
 
-                getUA[Object.keys(getUA)[0]].startGuiti.xx=getUA[Object.keys(getUA)[0]].xx;
-                getUA[Object.keys(getUA)[0]].startGuiti.yy=getUA[Object.keys(getUA)[0]].yy;
-
+                
                 if(movePath[0]){
+                     var drMove=(getUA[Object.keys(getUA)[0]].dr[movePath[0]])? -1: 1;   
+                     getUA[Object.keys(getUA)[0]].startGuiti.xx=getUA[Object.keys(getUA)[0]].xx;
+                getUA[Object.keys(getUA)[0]].startGuiti.yy=getUA[Object.keys(getUA)[0]].yy;
+ 
                     getUA[Object.keys(getUA)[0]].startGuiti.CurrentPath=movePath[0]; 
                     moveGuti(getUA[Object.keys(getUA)[0]].startGuiti,movePath[0],false,drMove,1000);
                      $.each(hotspot,function(k,v){
@@ -378,12 +380,17 @@ killStep.push(getWay);
                         }
                     })
                 }else{
-                    console.log(killStep)
+                  //  console.log(killStep)
                     var C_ = killStep.filter(function(obj) { return obj.a3 == CH.HName; });
                     console.log(C_[0])
                     console.log(getUA[Object.keys(getUA)[0]])
                     console.log(CH)
-                    moveGuti1(getUA[Object.keys(getUA)[0]].startGuiti,C_[0].path1,false,drMove,1000);
+                    var drMove=(getUA[Object.keys(getUA)[0]].dr[C_[0].path1])? -1: 1; 
+                    getUA[Object.keys(getUA)[0]].startGuiti.xx=getUA[Object.keys(getUA)[0]].xx;
+                    getUA[Object.keys(getUA)[0]].startGuiti.yy=getUA[Object.keys(getUA)[0]].yy;
+
+                    console.log(drMove)
+                    moveGuti1(getUA[Object.keys(getUA)[0]].startGuiti,C_[0],false,drMove,1000,1);
                 }
 
                
@@ -397,16 +404,18 @@ killStep.push(getWay);
         }
     });
 
-  function moveGuti1(gutiName,moveingLine,lineCurve,step,duration){
+  function moveGuti1(gutiName,moveingLine,lineCurve,step,duration,turn){
     var from=(step==-1)?1:0;
-    step = (step == -1)?0:step; 
-    if(moveingLine == gutiName.CurrentPath){ 
-        gutiName.setPath(eval(moveingLine));
+    step = (step == -1)?0:step;
+     var selectPath =(turn==1)?moveingLine.path1:moveingLine.path2;
+    if(selectPath == gutiName.CurrentPath){ 
+        gutiName.setPath(eval(selectPath));
     }else{
-        gutiName.setPath(eval(moveingLine));
+        gutiName.setPath(eval(selectPath));
     }
+    var path = eval(selectPath);
 
-    var path = eval(moveingLine);
+
     gutiName.startFollow({
         positionOnPath: true,
         duration: duration,
@@ -420,9 +429,17 @@ killStep.push(getWay);
             gutiName.y=gutiName.yy;
         },
         onComplete: function(tween, target){
-             // delete gutiName;
+            if(turn == 1){
+            var C_ = hotspot.filter(function(obj) { return obj.HName == killStep[0].a2; });
+             var drMove1=(C_[0].dr[moveingLine.path2])? -1: 1; 
+     
+                   // getUA[Object.keys(getUA)[0]].startGuiti.xx=getUA[Object.keys(getUA)[0]].xx;
+                   // getUA[Object.keys(getUA)[0]].startGuiti.yy=getUA[Object.keys(getUA)[0]].yy;
+            moveGuti1(gutiName,moveingLine,false,drMove1,1000,2);
+        }
         },
         onUpdate: function(tween, target){
+            console.log(gutiName.x,gutiName.y)
         }
     });
 }
