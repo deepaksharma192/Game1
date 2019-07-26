@@ -379,8 +379,11 @@ killStep.push(getWay);
                     })
                 }else{
                     console.log(killStep)
+                    var C_ = killStep.filter(function(obj) { return obj.a3 == CH.HName; });
+                    console.log(C_[0])
                     console.log(getUA[Object.keys(getUA)[0]])
                     console.log(CH)
+                    moveGuti1(getUA[Object.keys(getUA)[0]].startGuiti,C_[0].path1,false,drMove,1000);
                 }
 
                
