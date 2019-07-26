@@ -391,6 +391,14 @@ killStep.push(getWay);
 
                     console.log(drMove)
                     moveGuti1(getUA[Object.keys(getUA)[0]].startGuiti,C_[0],false,drMove,1000,1);
+                    $.each(hotspot,function(k,v){
+                        if(v.HName==getUA[Object.keys(getUA)[0]].hotspotTarget){
+                            v.Guti=null;
+                        }
+                        if(v.HName==CH.HName){
+                            v.Guti=getUA[Object.keys(getUA)[0]].changeGutiStatus;
+                        }
+                    })
                 }
 
                
@@ -425,21 +433,24 @@ killStep.push(getWay);
         to:step,
         delay:0,
         onStart:function(tween, target){
+            console.log(gutiName.xx,gutiName.yy)
             gutiName.x=gutiName.xx;
             gutiName.y=gutiName.yy;
         },
         onComplete: function(tween, target){
             if(turn == 1){
-            var C_ = hotspot.filter(function(obj) { return obj.HName == killStep[0].a2; });
-             var drMove1=(C_[0].dr[moveingLine.path2])? -1: 1; 
-     
-                   // getUA[Object.keys(getUA)[0]].startGuiti.xx=getUA[Object.keys(getUA)[0]].xx;
-                   // getUA[Object.keys(getUA)[0]].startGuiti.yy=getUA[Object.keys(getUA)[0]].yy;
-            moveGuti1(gutiName,moveingLine,false,drMove1,1000,2);
-        }
+                var C_ = hotspot.filter(function(obj) { return obj.HName == moveingLine.a2; });
+                console.log(C_,killStep)
+                var drMove1=(C_[0].dr[moveingLine.path2])? -1: 1;
+                gutiName.xx=gutiName.x;
+                gutiName.yy=gutiName.y;
+                moveGuti1(gutiName,moveingLine,false,drMove1,1000,2);
+            }else{
+
+            }
         },
         onUpdate: function(tween, target){
-            console.log(gutiName.x,gutiName.y)
+           // console.log(gutiName.x,gutiName.y)
         }
     });
 }
