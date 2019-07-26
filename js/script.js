@@ -315,7 +315,7 @@ function getSecond(CH,CH1){
         })
     })
 killStep.push(getWay); 
-console.log(killStep)
+//console.log(killStep)
 }
 
 }
@@ -359,21 +359,31 @@ console.log(killStep)
                     getUA={};  
                 }
              }else if(Object.keys   (getUA).length == 2 && (CH.Guti==null)){
+
                 var movePath = getUA[Object.keys(getUA)[0]].path.filter(function(obj) { return getUA[Object.keys(getUA)[1]].path.indexOf(obj)   != -1; });
                 var drMove=(getUA[Object.keys(getUA)[0]].dr[movePath[0]])? -1: 1;    
 
-                getUA[Object.keys(getUA)[0]].startGuiti.CurrentPath=movePath[0]; 
                 getUA[Object.keys(getUA)[0]].startGuiti.xx=getUA[Object.keys(getUA)[0]].xx;
                 getUA[Object.keys(getUA)[0]].startGuiti.yy=getUA[Object.keys(getUA)[0]].yy;
-                moveGuti(getUA[Object.keys(getUA)[0]].startGuiti,movePath[0],false,drMove,1000);
-                $.each(hotspot,function(k,v){
-                    if(v.HName==getUA[Object.keys(getUA)[0]].hotspotTarget){
-                        v.Guti=null;
-                    }
-                    if(v.HName==CH.HName){
-                        v.Guti=getUA[Object.keys(getUA)[0]].changeGutiStatus;
-                    }
-                })
+
+                if(movePath[0]){
+                    getUA[Object.keys(getUA)[0]].startGuiti.CurrentPath=movePath[0]; 
+                    moveGuti(getUA[Object.keys(getUA)[0]].startGuiti,movePath[0],false,drMove,1000);
+                     $.each(hotspot,function(k,v){
+                        if(v.HName==getUA[Object.keys(getUA)[0]].hotspotTarget){
+                            v.Guti=null;
+                        }
+                        if(v.HName==CH.HName){
+                            v.Guti=getUA[Object.keys(getUA)[0]].changeGutiStatus;
+                        }
+                    })
+                }else{
+                    console.log(killStep)
+                    console.log(getUA[Object.keys(getUA)[0]])
+                    console.log(CH)
+                }
+
+               
                 updateHotspotData();
                 DrawGamePoints();
                 getUA={};
@@ -384,7 +394,35 @@ console.log(killStep)
         }
     });
 
-  
+  function moveGuti1(gutiName,moveingLine,lineCurve,step,duration){
+    var from=(step==-1)?1:0;
+    step = (step == -1)?0:step; 
+    if(moveingLine == gutiName.CurrentPath){ 
+        gutiName.setPath(eval(moveingLine));
+    }else{
+        gutiName.setPath(eval(moveingLine));
+    }
+
+    var path = eval(moveingLine);
+    gutiName.startFollow({
+        positionOnPath: true,
+        duration: duration,
+        yoyo: false,
+        repeat:0,
+        from: from,
+        to:step,
+        delay:0,
+        onStart:function(tween, target){
+            gutiName.x=gutiName.xx;
+            gutiName.y=gutiName.yy;
+        },
+        onComplete: function(tween, target){
+             // delete gutiName;
+        },
+        onUpdate: function(tween, target){
+        }
+    });
+}
     // this.input.on('pointerdown', function (pointer) {
     //   console.log(pointer.upX+":X -- Y:"+pointer.upY)
     // }, this);
