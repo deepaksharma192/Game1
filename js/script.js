@@ -440,7 +440,14 @@ killStep.push(getWay);
         onComplete: function(tween, target){
             if(turn == 1){
                 var C_ = hotspot.filter(function(obj) { return obj.HName == moveingLine.a2; });
-                console.log(C_,killStep)
+
+                 console.log(C_[0],killStep)
+               // C_[0].Guti=null;
+               if(C_[0].Guti){
+                t[C_[0].Guti].x=0;;
+                t[C_[0].Guti].y=0;;
+            }
+C_[0].Guti=null;
                 var drMove1=(C_[0].dr[moveingLine.path2])? -1: 1;
                 gutiName.xx=gutiName.x;
                 gutiName.yy=gutiName.y;
