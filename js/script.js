@@ -200,6 +200,7 @@ function moveGuti(gutiName,moveingLine,lineCurve,step,duration){
         onStart:function(tween, target){
             gutiName.x=gutiName.xx;
             gutiName.y=gutiName.yy;
+           // C_[0].Guti=null;
         },
         onComplete: function(tween, target){
              // delete gutiName;
@@ -213,7 +214,6 @@ function getSecond(CH,CH1){
     var paths = CH.Path.split(','); 
     var paths1 = CH1.Path.split(','); 
     var firstPath = paths1.filter(function(obj) { return paths.indexOf(obj)   != -1; });
-    console.log(CH1.HName ,CH.HName)
     var getWay={a1:CH1.HName,a2:CH.HName,path1:firstPath[0]};
      ///this['killStep'].push()
    // console.log(firstPath)
@@ -358,12 +358,9 @@ killStep.push(getWay);
                     DrawGamePoints();
                     getUA={};  
                 }
-             }else if(Object.keys   (getUA).length == 2 && (CH.Guti==null)){
+             }else if(Object.keys(getUA).length == 2 && (CH.Guti==null)){
 
                 var movePath = getUA[Object.keys(getUA)[0]].path.filter(function(obj) { return getUA[Object.keys(getUA)[1]].path.indexOf(obj)   != -1; });
-               
-
-                
                 if(movePath[0]){
                      var drMove=(getUA[Object.keys(getUA)[0]].dr[movePath[0]])? -1: 1;   
                      getUA[Object.keys(getUA)[0]].startGuiti.xx=getUA[Object.keys(getUA)[0]].xx;
@@ -382,14 +379,14 @@ killStep.push(getWay);
                 }else{
                   //  console.log(killStep)
                     var C_ = killStep.filter(function(obj) { return obj.a3 == CH.HName; });
-                    console.log(C_[0])
-                    console.log(getUA[Object.keys(getUA)[0]])
-                    console.log(CH)
+                    //console.log(C_[0])
+                   // console.log(getUA[Object.keys(getUA)[0]])
+                  //  console.log(CH)
                     var drMove=(getUA[Object.keys(getUA)[0]].dr[C_[0].path1])? -1: 1; 
                     getUA[Object.keys(getUA)[0]].startGuiti.xx=getUA[Object.keys(getUA)[0]].xx;
                     getUA[Object.keys(getUA)[0]].startGuiti.yy=getUA[Object.keys(getUA)[0]].yy;
 
-                    console.log(drMove)
+                  //  console.log(drMove)
                     moveGuti1(getUA[Object.keys(getUA)[0]].startGuiti,C_[0],false,drMove,1000,1);
                     $.each(hotspot,function(k,v){
                         if(v.HName==getUA[Object.keys(getUA)[0]].hotspotTarget){
@@ -440,20 +437,21 @@ killStep.push(getWay);
         onComplete: function(tween, target){
             if(turn == 1){
                 var C_ = hotspot.filter(function(obj) { return obj.HName == moveingLine.a2; });
-
-                 console.log(C_[0],killStep)
-               // C_[0].Guti=null;
                if(C_[0].Guti){
-                t[C_[0].Guti].x=0;;
-                t[C_[0].Guti].y=0;;
-            }
-C_[0].Guti=null;
+                    t[C_[0].Guti].x=0;;
+                    t[C_[0].Guti].y=0;;
+                }
+                console.log(C_[0])
+                 console.log(hotspot)
+                C_[0].Guti=null;
                 var drMove1=(C_[0].dr[moveingLine.path2])? -1: 1;
                 gutiName.xx=gutiName.x;
                 gutiName.yy=gutiName.y;
                 moveGuti1(gutiName,moveingLine,false,drMove1,1000,2);
             }else{
-
+                updateHotspotData();
+                DrawGamePoints();
+                getUA={};
             }
         },
         onUpdate: function(tween, target){
