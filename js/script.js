@@ -436,8 +436,13 @@ var turns=0;
         to:step,
         delay:0,
         onStart:function(tween, target){
-            gutiName.x=gutiName.xx;
+             console.log(gutiName.xx,gutiName.yy)
+              console.log(gutiName.xx,gutiName.yy)
+          
+                 gutiName.x=gutiName.xx;
             gutiName.y=gutiName.yy;
+      
+           
         },
         onComplete: function(tween, target){
             if(turn == 1 && turns ==0){
@@ -448,13 +453,15 @@ var turns=0;
                 }
                 C_[0].Guti=null;
                 var drMove1=(C_[0].dr[moveingLine.path2])? -1: 1;
-                console.log(gutiName.x,gutiName.y)
+              //  console.log(gutiName.x,gutiName.y)
                 gutiName.xx=gutiName.x;
                 gutiName.yy=gutiName.y;
+                // console.log(gutiName.xx,gutiName.yy)
                 moveGuti1(gutiName,moveingLine,false,drMove1,1000,2);
                 turns=2;
                 killStep =[];
             }else{
+                 
                 updateHotspotData();
                 DrawGamePoints();
                 getUA={};
@@ -465,7 +472,7 @@ var turns=0;
         }
     });
 }
-    // this.input.on('pointerdown', function (pointer) {
-    //   console.log(pointer.upX+":X -- Y:"+pointer.upY)
-    // }, this);
+    this.input.on('pointerdown', function (pointer) {
+      console.log(pointer.upX+":X -- Y:"+pointer.upY)
+    }, this);
 }
