@@ -238,7 +238,7 @@ function getSecond(CH,CH1){
                         var movePath = path_2.filter(function(obj) { return obj.indexOf('path')   != -1; });
                         var mo = movePath.filter(function(obj) { return v   == obj; });
                         //  console.log(CH1.HName+" = "+CH.HName +" = "+v1.HName)
-                         console.log("Line",v1.HName)
+                        // console.log("Line",v1.HName)
                          getWay['a3']=v1.HName;
                          getWay['path2']=mo[0];
                         //getWay.push({HName:v1.HName,path:mo[0]})
@@ -255,7 +255,7 @@ function getSecond(CH,CH1){
                             var C = parseInt(C_CurveCheck.match(/\d+/g)[0])
                             var T =parseInt(mo[0].split('_')[0].match(/\d+/g));
                             if((mo[0].match(/Curve/g)=="Curve")&&(C==T)){
-                             console.log("Curve",v1.HName)
+                           //  console.log("Curve",v1.HName)
                               getWay['a3']=v1.HName;
                          getWay['path2']=mo[0];
                                 var p = eval(mo[0]);
@@ -275,7 +275,7 @@ function getSecond(CH,CH1){
                         T = (T == 6)? 2:T;
                         T = (T == 5)? 1:T;
                         if((mo[0].match(/path/g)=="path")&&(C==T)){
-                           console.log("25",v1.HName)
+                         //  console.log("25",v1.HName)
                            getWay['a3']=v1.HName;
                          getWay['path2']=mo[0];
                             var p = eval(mo[0]);
@@ -292,7 +292,7 @@ function getSecond(CH,CH1){
                             var movePath1 = path_3.filter(function(obj) { return obj.indexOf('path')   != -1; });
                             movePath1 =movePath1[0].split('_')[0];
                             if(movePath==movePath1){
-                                 console.log("1_25",v1.HName)
+                                // console.log("1_25",v1.HName)
                                  getWay['a3']=v1.HName;
                          getWay['path2']=v1.CurrentPath;
                                 var p = eval(v1.CurrentPath);
@@ -368,6 +368,7 @@ killStep.push(getWay);
  
                     getUA[Object.keys(getUA)[0]].startGuiti.CurrentPath=movePath[0]; 
                     moveGuti(getUA[Object.keys(getUA)[0]].startGuiti,movePath[0],false,drMove,1000);
+                    //console.log(getUA[Object.keys(getUA)[0]].startGuiti)
                      $.each(hotspot,function(k,v){
                         if(v.HName==getUA[Object.keys(getUA)[0]].hotspotTarget){
                             v.Guti=null;
@@ -377,17 +378,20 @@ killStep.push(getWay);
                         }
                     })
                 }else{
-                  //  console.log(killStep)
+                    console.log(killStep)
                     var C_ = killStep.filter(function(obj) { return obj.a3 == CH.HName; });
                     //console.log(C_[0])
                    // console.log(getUA[Object.keys(getUA)[0]])
                   //  console.log(CH)
-                    var drMove=(getUA[Object.keys(getUA)[0]].dr[C_[0].path1])? -1: 1; 
+                  var tyu  =(C_.length==2)?C_[1]:C_[0];
+                  tyu =(C_.length==3)?C_[2]:tyu;
+                    var drMove=(getUA[Object.keys(getUA)[0]].dr[tyu.path1])? -1: 1; 
                     getUA[Object.keys(getUA)[0]].startGuiti.xx=getUA[Object.keys(getUA)[0]].xx;
                     getUA[Object.keys(getUA)[0]].startGuiti.yy=getUA[Object.keys(getUA)[0]].yy;
-
-                  //  console.log(drMove)
-                    moveGuti1(getUA[Object.keys(getUA)[0]].startGuiti,C_[0],false,drMove,1000,1);
+console.log(C_)
+                    console.log(tyu)
+                  turns=0;
+                    moveGuti1(getUA[Object.keys(getUA)[0]].startGuiti,tyu,false,drMove,1000,1);
                     $.each(hotspot,function(k,v){
                         if(v.HName==getUA[Object.keys(getUA)[0]].hotspotTarget){
                             v.Guti=null;
@@ -408,11 +412,13 @@ killStep.push(getWay);
             }
         }
     });
-
+var turns=0;
   function moveGuti1(gutiName,moveingLine,lineCurve,step,duration,turn){
+    console.log(turn)
     var from=(step==-1)?1:0;
     step = (step == -1)?0:step;
      var selectPath =(turn==1)?moveingLine.path1:moveingLine.path2;
+
     if(selectPath == gutiName.CurrentPath){ 
         gutiName.setPath(eval(selectPath));
     }else{
@@ -430,24 +436,24 @@ killStep.push(getWay);
         to:step,
         delay:0,
         onStart:function(tween, target){
-            console.log(gutiName.xx,gutiName.yy)
             gutiName.x=gutiName.xx;
             gutiName.y=gutiName.yy;
         },
         onComplete: function(tween, target){
-            if(turn == 1){
+            if(turn == 1 && turns ==0){
                 var C_ = hotspot.filter(function(obj) { return obj.HName == moveingLine.a2; });
                if(C_[0].Guti){
                     t[C_[0].Guti].x=0;;
                     t[C_[0].Guti].y=0;;
                 }
-                console.log(C_[0])
-                 console.log(hotspot)
                 C_[0].Guti=null;
                 var drMove1=(C_[0].dr[moveingLine.path2])? -1: 1;
+                console.log(gutiName.x,gutiName.y)
                 gutiName.xx=gutiName.x;
                 gutiName.yy=gutiName.y;
                 moveGuti1(gutiName,moveingLine,false,drMove1,1000,2);
+                turns=2;
+                killStep =[];
             }else{
                 updateHotspotData();
                 DrawGamePoints();
