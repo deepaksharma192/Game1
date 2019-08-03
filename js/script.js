@@ -1,13 +1,13 @@
 var config = {
     type: Phaser.CANVAS,
-    width: 800,
-    height: 650,
+    width: 1080,
+    height: 1920,
     backgroundColor: '#2d2d2d',
     parent: 'phaser-example',
     physics: {
         default: 'impact',
         impact: {
-            gravity: 800,
+            gravity: 1080,
             debug: true
         }
     },scale: {
@@ -57,9 +57,10 @@ function preload ()
      this.load.image('green', 'img/green.png');
      this.load.image('hotspot', 'img/red.png');
 }
+var t 
 function create ()
 {
-    var t =this;
+     t =this;
     //this.game.startFullscreen();
     var graphics = this.add.graphics();
     // graphics.rotation=0.42;
@@ -76,30 +77,30 @@ function create ()
          eval(v).draw(graphics, 1);  
         })
     }
-    var Curve1_1 = new Phaser.Curves.Ellipse(400, 300, 300, 300,315,360);
-    var Curve1_2 = new Phaser.Curves.Ellipse(400, 300, 300, 300,270,315);
-    var Curve1_3 = new Phaser.Curves.Ellipse(400, 300, 300, 300,225,270);
-    var Curve1_4 = new Phaser.Curves.Ellipse(400, 300, 300, 300,180,225);
-    var Curve1_5 = new Phaser.Curves.Ellipse(400, 300, 300, 300,135,180);
-    var Curve1_6 = new Phaser.Curves.Ellipse(400, 300, 300, 300,90,135);
-    var Curve1_7 = new Phaser.Curves.Ellipse(400, 300, 300, 300,45,90);
-    var Curve1_8 = new Phaser.Curves.Ellipse(400, 300, 300, 300,0,45);
-    var Curve2_1 = new Phaser.Curves.Ellipse(400, 300, 200, 200,315,360);
-    var Curve2_2 = new Phaser.Curves.Ellipse(400, 300, 200, 200,270,315);
-    var Curve2_3 = new Phaser.Curves.Ellipse(400, 300, 200, 200,225,270);
-    var Curve2_4 = new Phaser.Curves.Ellipse(400, 300, 200, 200,180,225);
-    var Curve2_5 = new Phaser.Curves.Ellipse(400, 300, 200, 200,135,180);
-    var Curve2_6 = new Phaser.Curves.Ellipse(400, 300, 200, 200,90,135);
-    var Curve2_7 = new Phaser.Curves.Ellipse(400, 300, 200, 200,45,90);
-    var Curve2_8 = new Phaser.Curves.Ellipse(400, 300, 200, 200,0,45);
-    var Curve3_1 = new Phaser.Curves.Ellipse(400, 300, 100, 100,315,360);
-    var Curve3_2 = new Phaser.Curves.Ellipse(400, 300, 100, 100,270,315);
-    var Curve3_3 = new Phaser.Curves.Ellipse(400, 300, 100, 100,225,270);
-    var Curve3_4 = new Phaser.Curves.Ellipse(400, 300, 100, 100,180,225);
-    var Curve3_5 = new Phaser.Curves.Ellipse(400, 300, 100, 100,135,180);
-    var Curve3_6 = new Phaser.Curves.Ellipse(400, 300, 100, 100,90,135);
-    var Curve3_7 = new Phaser.Curves.Ellipse(400, 300, 100, 100,45,90);
-    var Curve3_8 = new Phaser.Curves.Ellipse(400, 300, 100, 100,0,45);
+    var Curve1_1 = new Phaser.Curves.Ellipse(540, 950, 500, 600,315,360);
+    var Curve1_2 = new Phaser.Curves.Ellipse(540, 950, 500, 600,270,315);
+    var Curve1_3 = new Phaser.Curves.Ellipse(540, 950, 500, 600,225,270);
+    var Curve1_4 = new Phaser.Curves.Ellipse(540, 950, 500, 600,180,225);
+    var Curve1_5 = new Phaser.Curves.Ellipse(540, 950, 500, 600,135,180);
+    var Curve1_6 = new Phaser.Curves.Ellipse(540, 950, 500, 600,90,135);
+    var Curve1_7 = new Phaser.Curves.Ellipse(540, 950, 500, 600,45,90);
+    var Curve1_8 = new Phaser.Curves.Ellipse(540, 950, 500, 600,0,45);
+    var Curve2_1 = new Phaser.Curves.Ellipse(540, 950, 300, 400,315,360);
+    var Curve2_2 = new Phaser.Curves.Ellipse(540, 950, 300, 400,270,315);
+    var Curve2_3 = new Phaser.Curves.Ellipse(540, 950, 300, 400,225,270);
+    var Curve2_4 = new Phaser.Curves.Ellipse(540, 950, 300, 400,180,225);
+    var Curve2_5 = new Phaser.Curves.Ellipse(540, 950, 300, 400,135,180);
+    var Curve2_6 = new Phaser.Curves.Ellipse(540, 950, 300, 400,90,135);
+    var Curve2_7 = new Phaser.Curves.Ellipse(540, 950, 300, 400,45,90);
+    var Curve2_8 = new Phaser.Curves.Ellipse(540, 950, 300, 400,0,45);
+    var Curve3_1 = new Phaser.Curves.Ellipse(540, 950, 100, 200,315,360);
+    var Curve3_2 = new Phaser.Curves.Ellipse(540, 950, 100, 200,270,315);
+    var Curve3_3 = new Phaser.Curves.Ellipse(540, 950, 100, 200,225,270);
+    var Curve3_4 = new Phaser.Curves.Ellipse(540, 950, 100, 200,180,225);
+    var Curve3_5 = new Phaser.Curves.Ellipse(540, 950, 100, 200,135,180);
+    var Curve3_6 = new Phaser.Curves.Ellipse(540, 950, 100, 200,90,135);
+    var Curve3_7 = new Phaser.Curves.Ellipse(540, 950, 100, 200,45,90);
+    var Curve3_8 = new Phaser.Curves.Ellipse(540, 950, 100, 200,0,45);
 
     var path1_1 = new Phaser.Curves.Path(611, 88).lineTo(542, 158);
     var path1_2 = new Phaser.Curves.Path(542, 158).lineTo(470, 228);
@@ -121,10 +122,10 @@ function create ()
     var path6_3 = new Phaser.Curves.Path(400, 400).lineTo(400, 300);
     var path7_1 = new Phaser.Curves.Path(611, 513).lineTo(539, 440);
     var path7_2 = new Phaser.Curves.Path(539, 440).lineTo(469, 369);
-    var path7_3 = new Phaser.Curves.Path(469, 369).lineTo(400, 300);
-    var path8_1 = new Phaser.Curves.Path(700, 300).lineTo(600, 300);
-    var path8_2 = new Phaser.Curves.Path(600, 300).lineTo(500, 300);
-    var path8_3 = new Phaser.Curves.Path(500, 300).lineTo(400, 300);
+    var path7_3 = new Phaser.Curves.Path(469, 369).lineTo(540, 950);
+    var path8_1 = new Phaser.Curves.Path(1040, 950).lineTo(840, 950);
+    var path8_2 = new Phaser.Curves.Path(840, 950).lineTo(640, 950);
+    var path8_3 = new Phaser.Curves.Path(640, 950).lineTo(540, 950);
 
     GutiData.forEach(function(v,i,arr){ 
         var check = (v.name.match(/Guti1/g)=="Guti1")?'green':'blue';
@@ -137,30 +138,31 @@ function create ()
     drowHotspot();
   function drowHotspot(){
      $.each(hotspot,function(k,v){
-        this[v.HName]  =t.add.follower(eval(v.CurrentPath), 1, 1, 'hotspot').setInteractive();
-        this[v.HName].catagory=v.catagory;
-        this[v.HName].Path=v.Path;
-        this[v.HName].pos=v.pos;
-        this[v.HName].Guti=v.Guti;
-        this[v.HName].CurrentPath=v.CurrentPath;
-        this[v.HName].HName=v.HName;
-        this[v.HName].dr=v.dr;
+      //  console.log(v.HName)
+        t[v.HName]  =t.add.follower(eval(v.CurrentPath), 1, 1, 'hotspot').setInteractive();
+        t[v.HName].catagory=v.catagory;
+        t[v.HName].Path=v.Path;
+        t[v.HName].pos=v.pos;
+        t[v.HName].Guti=v.Guti;
+        t[v.HName].CurrentPath=v.CurrentPath;
+        t[v.HName].HName=v.HName;
+        t[v.HName].dr=v.dr;
             if(v.HName == "hotspot25"){
-                SetGuti(this[v.HName],eval(v.CurrentPath),false,-1,0);
+                SetGuti(t[v.HName],eval(v.CurrentPath),false,-1,0);
             }else{
-                SetGuti(this[v.HName],eval(v.CurrentPath),false,0,0);    
+                SetGuti(t[v.HName],eval(v.CurrentPath),false,0,0);    
             }
     })
   }
 function updateHotspotData(){
      $.each(hotspot,function(k,v){
-        this[v.HName].catagory=v.catagory;
-        this[v.HName].Path=v.Path;
-        this[v.HName].pos=v.pos;
-        this[v.HName].Guti=v.Guti;
-        this[v.HName].CurrentPath=v.CurrentPath;
-        this[v.HName].HName=v.HName;
-        this[v.HName].dr=v.dr;
+        t[v.HName].catagory=v.catagory;
+        t[v.HName].Path=v.Path;
+        t[v.HName].pos=v.pos;
+        t[v.HName].Guti=v.Guti;
+        t[v.HName].CurrentPath=v.CurrentPath;
+        t[v.HName].HName=v.HName;
+        t[v.HName].dr=v.dr;
     })
 }
 
@@ -321,6 +323,7 @@ killStep.push(getWay);
 }
     var getUA={};
    this.input.on('pointerdown', function (event, gameObjects) {
+     console.log(event.upX+":X -- Y:"+event.upY)
         var CH =gameObjects[0];
         if(CH){
             var paths = CH.Path.split(','); 
@@ -347,7 +350,7 @@ killStep.push(getWay);
                                         p.draw(graphics, 150);
                                     }else{
                                          //select second step path.
-                                        getSecond(this[v1.HName],CH);  
+                                        getSecond(t[v1.HName],CH);  
                                     }
                                 }
                             }
@@ -378,7 +381,7 @@ killStep.push(getWay);
                         }
                     })
                 }else{
-                    console.log(killStep)
+                    //console.log(killStep)
                     var C_ = killStep.filter(function(obj) { return obj.a3 == CH.HName; });
                     //console.log(C_[0])
                    // console.log(getUA[Object.keys(getUA)[0]])
@@ -388,8 +391,8 @@ killStep.push(getWay);
                     var drMove=(getUA[Object.keys(getUA)[0]].dr[tyu.path1])? -1: 1; 
                     getUA[Object.keys(getUA)[0]].startGuiti.xx=getUA[Object.keys(getUA)[0]].xx;
                     getUA[Object.keys(getUA)[0]].startGuiti.yy=getUA[Object.keys(getUA)[0]].yy;
-console.log(C_)
-                    console.log(tyu)
+//console.log(C_)
+                    //console.log(tyu)
                   turns=0;
                     moveGuti1(getUA[Object.keys(getUA)[0]].startGuiti,tyu,false,drMove,1000,1);
                     $.each(hotspot,function(k,v){
@@ -414,15 +417,21 @@ console.log(C_)
     });
 var turns=0;
   function moveGuti1(gutiName,moveingLine,lineCurve,step,duration,turn){
-    console.log(turn)
+   // console.log(turn)
     var from=(step==-1)?1:0;
     step = (step == -1)?0:step;
      var selectPath =(turn==1)?moveingLine.path1:moveingLine.path2;
 
     if(selectPath == gutiName.CurrentPath){ 
         gutiName.setPath(eval(selectPath));
+
     }else{
-        gutiName.setPath(eval(selectPath));
+        gutiName.x=t[moveingLine.a2].x;
+                 gutiName.y=t[moveingLine.a2].y;
+        gutiName.setPath(eval(selectPath),{from: from,
+        to:step});
+        gutiName.x=t[moveingLine.a2].x;
+                 gutiName.y=t[moveingLine.a2].y;
     }
     var path = eval(selectPath);
 
@@ -436,11 +445,18 @@ var turns=0;
         to:step,
         delay:0,
         onStart:function(tween, target){
-             console.log(gutiName.xx,gutiName.yy)
-              console.log(gutiName.xx,gutiName.yy)
-          
-                 gutiName.x=gutiName.xx;
-            gutiName.y=gutiName.yy;
+        
+            if(turn == 1 && turns ==0){     
+                console.log('star1')
+                gutiName.x=gutiName.xx;
+                gutiName.y=gutiName.yy;
+            }else if(turn == 2 && turns ==2){
+                console.log('star2');
+                 gutiName.x=t[moveingLine.a2].x;
+                 gutiName.y=t[moveingLine.a2].y;
+                 console.log(t[moveingLine.a2].x,t[moveingLine.a2].y);
+                // console.log(gutiName.xx,gutiName.yy);
+            }
       
            
         },
@@ -454,8 +470,8 @@ var turns=0;
                 C_[0].Guti=null;
                 var drMove1=(C_[0].dr[moveingLine.path2])? -1: 1;
               //  console.log(gutiName.x,gutiName.y)
-                gutiName.xx=gutiName.x;
-                gutiName.yy=gutiName.y;
+                gutiName.xxx=gutiName.x;
+                gutiName.yyx=gutiName.y;
                 // console.log(gutiName.xx,gutiName.yy)
                 moveGuti1(gutiName,moveingLine,false,drMove1,1000,2);
                 turns=2;
@@ -472,7 +488,7 @@ var turns=0;
         }
     });
 }
-    this.input.on('pointerdown', function (pointer) {
-      console.log(pointer.upX+":X -- Y:"+pointer.upY)
-    }, this);
+    // this.input.on('pointerdown', function (pointer) {
+     
+    // }, this);
 }
