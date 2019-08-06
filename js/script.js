@@ -19,7 +19,7 @@ var config = {
         create: create
     }
 };
-
+var cam = null;
 var game = new Phaser.Game(config);
 var hotspot  = [
         {HName:"hotspot1",catagory:"A",Path:"path1_1,Curve1_1,Curve1_2",pos:"R1_L1",Guti:"Guti1_1",CurrentPath:"path1_1",dr:{'Curve1_2':-1}},
@@ -53,76 +53,97 @@ var CurveLine = ["Curve1_1","Curve1_2","Curve1_3","Curve1_4","Curve1_5","Curve1_
 var StraightLine = ["path1_1","path1_2","path1_3","path2_1","path2_2","path2_3","path3_1","path3_2","path3_3","path4_1","path4_2","path4_3","path5_1","path5_2","path5_3","path6_1","path6_2","path6_3","path7_1","path7_2","path7_3","path8_1","path8_2","path8_3"]
 function preload ()
 {
-    this.load.image('blue', 'img/blue.png');
-     this.load.image('green', 'img/green.png');
-     this.load.image('hotspot', 'img/red.png');
+    this.load.image('blue', 'img/hotspot.png');
+     this.load.image('green', 'img/hotspot.png');
+     this.load.image('hotspot', 'img/hotspot.png');
 }
 var t 
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '0x';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
 function create ()
 {
      t =this;
+     cam  = this.cameras.add(0, 0, 900, 600);
     //this.game.startFullscreen();
     var graphics = this.add.graphics();
     // graphics.rotation=0.42;
     // graphics.x=150;
     // graphics.y=-110;
- 
+ //var colors=  [0xfffff0,0xfffff1,0xfffff2,0xfffff3,0xfffff4,0xfffff5,0xfffff6,0xfffff7,0xfffff0,0xfffff1,0xfffff2,0xfffff3,0xfffff4,0xfffff5,0xfffff6,0xfffff7,0xfffff0,0xfffff1,0xfffff2,0xfffff3,0xfffff4,0xfffff5,0xfffff6,0xfffff7];
     function DrawGamePoints(){
         graphics.clear();
-        graphics.lineStyle(2, 0xffffff, 1);
         CurveLine.forEach(function(v,i,arr){
+        graphics.lineStyle(3, getRandomColor(), 2);
          eval(v).draw(graphics, 150);  
-        })
+        }) 
+       
         StraightLine.forEach(function(v,i,arr){
+            graphics.lineStyle(2, 0xffffff, 1);
          eval(v).draw(graphics, 1);  
+
         })
     }
-    var Curve1_1 = new Phaser.Curves.Ellipse(540, 950, 500, 600,315,360);
-    var Curve1_2 = new Phaser.Curves.Ellipse(540, 950, 500, 600,270,315);
-    var Curve1_3 = new Phaser.Curves.Ellipse(540, 950, 500, 600,225,270);
-    var Curve1_4 = new Phaser.Curves.Ellipse(540, 950, 500, 600,180,225);
-    var Curve1_5 = new Phaser.Curves.Ellipse(540, 950, 500, 600,135,180);
-    var Curve1_6 = new Phaser.Curves.Ellipse(540, 950, 500, 600,90,135);
-    var Curve1_7 = new Phaser.Curves.Ellipse(540, 950, 500, 600,45,90);
-    var Curve1_8 = new Phaser.Curves.Ellipse(540, 950, 500, 600,0,45);
-    var Curve2_1 = new Phaser.Curves.Ellipse(540, 950, 300, 400,315,360);
-    var Curve2_2 = new Phaser.Curves.Ellipse(540, 950, 300, 400,270,315);
-    var Curve2_3 = new Phaser.Curves.Ellipse(540, 950, 300, 400,225,270);
-    var Curve2_4 = new Phaser.Curves.Ellipse(540, 950, 300, 400,180,225);
-    var Curve2_5 = new Phaser.Curves.Ellipse(540, 950, 300, 400,135,180);
-    var Curve2_6 = new Phaser.Curves.Ellipse(540, 950, 300, 400,90,135);
-    var Curve2_7 = new Phaser.Curves.Ellipse(540, 950, 300, 400,45,90);
-    var Curve2_8 = new Phaser.Curves.Ellipse(540, 950, 300, 400,0,45);
-    var Curve3_1 = new Phaser.Curves.Ellipse(540, 950, 100, 200,315,360);
-    var Curve3_2 = new Phaser.Curves.Ellipse(540, 950, 100, 200,270,315);
-    var Curve3_3 = new Phaser.Curves.Ellipse(540, 950, 100, 200,225,270);
-    var Curve3_4 = new Phaser.Curves.Ellipse(540, 950, 100, 200,180,225);
-    var Curve3_5 = new Phaser.Curves.Ellipse(540, 950, 100, 200,135,180);
-    var Curve3_6 = new Phaser.Curves.Ellipse(540, 950, 100, 200,90,135);
-    var Curve3_7 = new Phaser.Curves.Ellipse(540, 950, 100, 200,45,90);
-    var Curve3_8 = new Phaser.Curves.Ellipse(540, 950, 100, 200,0,45);
+    var Curve1_1 = new Phaser.Curves.Ellipse(540, 950, 500, 550,315,360);
+    var Curve1_2 = new Phaser.Curves.Ellipse(540, 950, 500, 550,270,315);
+    var Curve1_3 = new Phaser.Curves.Ellipse(540, 950, 500, 550,225,270);
+    var Curve1_4 = new Phaser.Curves.Ellipse(540, 950, 500, 550,180,225);
+    var Curve1_5 = new Phaser.Curves.Ellipse(540, 950, 500, 550,135,180);
+    var Curve1_6 = new Phaser.Curves.Ellipse(540, 950, 500, 550,90,135);
+    var Curve1_7 = new Phaser.Curves.Ellipse(540, 950, 500, 550,45,90);
+    var Curve1_8 = new Phaser.Curves.Ellipse(540, 950, 500, 550,0,45);
 
-    var path1_1 = new Phaser.Curves.Path(611, 88).lineTo(542, 158);
-    var path1_2 = new Phaser.Curves.Path(542, 158).lineTo(470, 228);
-    var path1_3 = new Phaser.Curves.Path(470, 228).lineTo(400, 300);
-    var path2_1 = new Phaser.Curves.Path(400, 2).lineTo(400, 100);
-    var path2_2 = new Phaser.Curves.Path(400, 100).lineTo(400, 200);
-    var path2_3 = new Phaser.Curves.Path(400, 200).lineTo(400, 300);
-    var path3_1 = new Phaser.Curves.Path(185, 87).lineTo(257, 158);
-    var path3_2 = new Phaser.Curves.Path(257, 158).lineTo(330, 230);
-    var path3_3 = new Phaser.Curves.Path(330, 230).lineTo(400, 300);
-    var path4_1 = new Phaser.Curves.Path(100, 300).lineTo(200, 300);
-    var path4_2 = new Phaser.Curves.Path(200, 300).lineTo(300, 300);
-    var path4_3 = new Phaser.Curves.Path(300, 300).lineTo(400, 300);
-    var path5_1 = new Phaser.Curves.Path(187, 514).lineTo(257, 440);
-    var path5_2 = new Phaser.Curves.Path(257, 440).lineTo(330, 370);
-    var path5_3 = new Phaser.Curves.Path(330, 370).lineTo(400, 300);
-    var path6_1 = new Phaser.Curves.Path(400, 600).lineTo(400, 500);
-    var path6_2 = new Phaser.Curves.Path(400, 500).lineTo(400, 400);
-    var path6_3 = new Phaser.Curves.Path(400, 400).lineTo(400, 300);
-    var path7_1 = new Phaser.Curves.Path(611, 513).lineTo(539, 440);
-    var path7_2 = new Phaser.Curves.Path(539, 440).lineTo(469, 369);
-    var path7_3 = new Phaser.Curves.Path(469, 369).lineTo(540, 950);
+    var Curve2_1 = new Phaser.Curves.Ellipse(540, 950, 300, 350,315,360);
+    var Curve2_2 = new Phaser.Curves.Ellipse(540, 950, 300, 350,270,315);
+    var Curve2_3 = new Phaser.Curves.Ellipse(540, 950, 300, 350,225,270);
+    var Curve2_4 = new Phaser.Curves.Ellipse(540, 950, 300, 350,180,225);
+    var Curve2_5 = new Phaser.Curves.Ellipse(540, 950, 300, 350,135,180);
+    var Curve2_6 = new Phaser.Curves.Ellipse(540, 950, 300, 350,90,135);
+    var Curve2_7 = new Phaser.Curves.Ellipse(540, 950, 300, 350,45,90);
+    var Curve2_8 = new Phaser.Curves.Ellipse(540, 950, 300, 350,0,45);
+
+    var Curve3_1 = new Phaser.Curves.Ellipse(540, 950, 150, 175,315,360);
+    var Curve3_2 = new Phaser.Curves.Ellipse(540, 950, 150, 175,270,315);
+    var Curve3_3 = new Phaser.Curves.Ellipse(540, 950, 150, 175,225,270);
+    var Curve3_4 = new Phaser.Curves.Ellipse(540, 950, 150, 175,180,225);
+    var Curve3_5 = new Phaser.Curves.Ellipse(540, 950, 150, 175,135,180);
+    var Curve3_6 = new Phaser.Curves.Ellipse(540, 950, 150, 175,90,135);
+    var Curve3_7 = new Phaser.Curves.Ellipse(540, 950, 150, 175,45,90);
+    var Curve3_8 = new Phaser.Curves.Ellipse(540, 950, 150, 175,0,45);
+
+    var path1_1 = new Phaser.Curves.Path(897,523).lineTo(754,666);
+    var path1_2 = new Phaser.Curves.Path(754,666).lineTo(605,853);
+    var path1_3 = new Phaser.Curves.Path(605,853).lineTo(540, 950);
+
+    var path2_1 = new Phaser.Curves.Path(540, 350).lineTo(540, 550);
+    var path2_2 = new Phaser.Curves.Path(540, 550).lineTo(540, 750);
+    var path2_3 = new Phaser.Curves.Path(540, 750).lineTo(540, 950);
+
+    var path3_1 = new Phaser.Curves.Path(210,497).lineTo(330,660);
+    var path3_2 = new Phaser.Curves.Path(330,660).lineTo(459,821);
+    var path3_3 = new Phaser.Curves.Path(459,821).lineTo(540, 950);
+
+    var path4_1 = new Phaser.Curves.Path(40, 950).lineTo(240, 950);
+    var path4_2 = new Phaser.Curves.Path(240, 950).lineTo(440, 950);
+    var path4_3 = new Phaser.Curves.Path(440, 950).lineTo(540, 950);
+
+    var path5_1 = new Phaser.Curves.Path(96,1227).lineTo(272,1128);
+    var path5_2 = new Phaser.Curves.Path(272,1128).lineTo(447,1023);
+    var path5_3 = new Phaser.Curves.Path(447,1023).lineTo(540, 950);
+
+    var path6_1 = new Phaser.Curves.Path(540, 1550).lineTo(540, 1350);
+    var path6_2 = new Phaser.Curves.Path(540, 1350).lineTo(540, 1150);
+    var path6_3 = new Phaser.Curves.Path(540, 1150).lineTo(540, 950);
+
+    var path7_1 = new Phaser.Curves.Path(877,1388).lineTo(733, 1244);
+    var path7_2 = new Phaser.Curves.Path(733, 1244).lineTo(620, 1070);
+    var path7_3 = new Phaser.Curves.Path(620, 1070).lineTo(540, 950);
+
     var path8_1 = new Phaser.Curves.Path(1040, 950).lineTo(840, 950);
     var path8_2 = new Phaser.Curves.Path(840, 950).lineTo(640, 950);
     var path8_3 = new Phaser.Curves.Path(640, 950).lineTo(540, 950);
@@ -323,7 +344,7 @@ killStep.push(getWay);
 }
     var getUA={};
    this.input.on('pointerdown', function (event, gameObjects) {
-     console.log(event.upX+":X -- Y:"+event.upY)
+     console.log(event.upX.toFixed(0)+","+event.upY.toFixed(0))
         var CH =gameObjects[0];
         if(CH){
             var paths = CH.Path.split(','); 
