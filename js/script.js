@@ -2,7 +2,7 @@ var config = {
     type: Phaser.CANVAS,
     width: 1080,
     height: 1920,
-    backgroundColor: '#2d2d2d',
+    backgroundColor: '#ffb60b',
     parent: 'phaser-example',
     physics: {
         default: 'impact',
@@ -19,7 +19,7 @@ var config = {
         create: create
     }
 };
-var cam = null;
+
 var game = new Phaser.Game(config);
 var hotspot  = [
         {HName:"hotspot1",catagory:"A",Path:"path1_1,Curve1_1,Curve1_2",pos:"R1_L1",Guti:"Guti1_1",CurrentPath:"path1_1",dr:{'Curve1_2':-1}},
@@ -53,9 +53,10 @@ var CurveLine = ["Curve1_1","Curve1_2","Curve1_3","Curve1_4","Curve1_5","Curve1_
 var StraightLine = ["path1_1","path1_2","path1_3","path2_1","path2_2","path2_3","path3_1","path3_2","path3_3","path4_1","path4_2","path4_3","path5_1","path5_2","path5_3","path6_1","path6_2","path6_3","path7_1","path7_2","path7_3","path8_1","path8_2","path8_3"]
 function preload ()
 {
+    $('.phaser-example').hide()
     this.load.image('blue', 'img/blue.png');
      this.load.image('green', 'img/green.png');
-     this.load.image('hotspot', 'img/red.png');
+     this.load.image('hotspot', 'img/hotspot.png');
 }
 var t 
 function getRandomColor() {
@@ -68,8 +69,9 @@ function getRandomColor() {
 }
 function create ()
 {
+    $('.phaser-example').show()
      t =this;
-     cam  = this.cameras.add(0, 0, 900, 600);
+    //  this.stage.backgroundColor = "#4488AA";
     //this.game.startFullscreen();
     var graphics = this.add.graphics();
     // graphics.rotation=0.42;
@@ -80,7 +82,7 @@ function create ()
         graphics.clear();
         CurveLine.forEach(function(v,i,arr){
             //console.log(i)
-        graphics.lineStyle(5,colors[i], 3);
+        graphics.lineStyle(5,0xffffff, 3);
          eval(v).draw(graphics, 150);  
         }) 
        
