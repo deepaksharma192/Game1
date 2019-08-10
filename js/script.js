@@ -82,12 +82,12 @@ function create ()
         graphics.clear();
         CurveLine.forEach(function(v,i,arr){
             //console.log(i)
-        graphics.lineStyle(5,0xffffff, 3);
+        graphics.lineStyle(9,0xffffff, 3);
          eval(v).draw(graphics, 150);  
         }) 
        
         StraightLine.forEach(function(v,i,arr){
-            graphics.lineStyle(5, 0xffffff, 3);
+            graphics.lineStyle(9, 0xffffff, 3);
          eval(v).draw(graphics, 1);  
 
         })
@@ -269,7 +269,7 @@ function getSecond(CH,CH1){
                          getWay['path2']=mo[0];
                         //getWay.push({HName:v1.HName,path:mo[0]})
                         var p = eval(mo[0]);
-                        graphics.lineStyle(5, 0xFF0000,2);
+                        graphics.lineStyle(9, 0xFF0000,2);
                         p.draw(graphics, 150);
                     }
                     if(C_CurveCheck == T_CurveCheck){
@@ -285,7 +285,7 @@ function getSecond(CH,CH1){
                               getWay['a3']=v1.HName;
                          getWay['path2']=mo[0];
                                 var p = eval(mo[0]);
-                                graphics.lineStyle(5, 0xFF0000,2);
+                                graphics.lineStyle(9, 0xFF0000,2);
                                 p.draw(graphics, 150);
                             }
                         }
@@ -305,7 +305,7 @@ function getSecond(CH,CH1){
                            getWay['a3']=v1.HName;
                          getWay['path2']=mo[0];
                             var p = eval(mo[0]);
-                            graphics.lineStyle(5, 0xFF0000,2);
+                            graphics.lineStyle(9, 0xFF0000,2);
                             p.draw(graphics, 150);
                         }
                     }
@@ -322,14 +322,14 @@ function getSecond(CH,CH1){
                                  getWay['a3']=v1.HName;
                          getWay['path2']=v1.CurrentPath;
                                 var p = eval(v1.CurrentPath);
-                                graphics.lineStyle(5, 0xFF0000,2);
+                                graphics.lineStyle(9, 0xFF0000,2);
                                 p.draw(graphics, 150);  
                             }
                         
                     }
                     if(firstPath){
                         var p = eval(firstPath[0]);
-                        graphics.lineStyle(5, 0xFF0000,2);
+                        graphics.lineStyle(9, 0xFF0000,2);
                         p.draw(graphics, 150);
                     }
                    // if(getWay.length>0){
@@ -370,7 +370,7 @@ killStep.push(getWay);
                                     if(!v1.Guti){
                                         //select first step path.
                                         var p = eval(v);
-                                        graphics.lineStyle(5, 0xff0000,2);
+                                        graphics.lineStyle(9, 0xff0000,2);
                                         p.draw(graphics, 150);
                                     }else{
                                          //select second step path.
