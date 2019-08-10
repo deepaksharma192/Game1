@@ -11,8 +11,8 @@ var config = {
             debug: true
         }
     },scale: {
-        mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_BOTH
+       mode: Phaser.Scale.FIT,
+      autoCenter: Phaser.Scale.CENTER_BOTH
     },
     scene: {
         preload: preload,
@@ -53,9 +53,9 @@ var CurveLine = ["Curve1_1","Curve1_2","Curve1_3","Curve1_4","Curve1_5","Curve1_
 var StraightLine = ["path1_1","path1_2","path1_3","path2_1","path2_2","path2_3","path3_1","path3_2","path3_3","path4_1","path4_2","path4_3","path5_1","path5_2","path5_3","path6_1","path6_2","path6_3","path7_1","path7_2","path7_3","path8_1","path8_2","path8_3"]
 function preload ()
 {
-    this.load.image('blue', 'img/hotspot.png');
-     this.load.image('green', 'img/hotspot.png');
-     this.load.image('hotspot', 'img/hotspot.png');
+    this.load.image('blue', 'img/blue.png');
+     this.load.image('green', 'img/green.png');
+     this.load.image('hotspot', 'img/red.png');
 }
 var t 
 function getRandomColor() {
@@ -75,78 +75,79 @@ function create ()
     // graphics.rotation=0.42;
     // graphics.x=150;
     // graphics.y=-110;
- //var colors=  [0xfffff0,0xfffff1,0xfffff2,0xfffff3,0xfffff4,0xfffff5,0xfffff6,0xfffff7,0xfffff0,0xfffff1,0xfffff2,0xfffff3,0xfffff4,0xfffff5,0xfffff6,0xfffff7,0xfffff0,0xfffff1,0xfffff2,0xfffff3,0xfffff4,0xfffff5,0xfffff6,0xfffff7];
+ var colors=  [0xFFFF00,0xfffff1,0xFFFF00,0xfffff3,0xFFFF00,0xfffff5,0xFFFF00,0xfffff7,0xFFFF00,0xfffff1,0xFFFF00,0xfffff3,0xFFFF00,0xfffff5,0xFFFF00,0xfffff7,0xFFFF00,0xfffff1,0xFFFF00,0xfffff3,0xFFFF00,0xfffff5,0xFFFF00,0xfffff7];
     function DrawGamePoints(){
         graphics.clear();
         CurveLine.forEach(function(v,i,arr){
-        graphics.lineStyle(3, getRandomColor(), 2);
+            //console.log(i)
+        graphics.lineStyle(5,colors[i], 3);
          eval(v).draw(graphics, 150);  
         }) 
        
         StraightLine.forEach(function(v,i,arr){
-            graphics.lineStyle(2, 0xffffff, 1);
+            graphics.lineStyle(5, 0xffffff, 3);
          eval(v).draw(graphics, 1);  
 
         })
     }
-    var Curve1_1 = new Phaser.Curves.Ellipse(540, 950, 500, 550,315,360);
-    var Curve1_2 = new Phaser.Curves.Ellipse(540, 950, 500, 550,270,315);
-    var Curve1_3 = new Phaser.Curves.Ellipse(540, 950, 500, 550,225,270);
-    var Curve1_4 = new Phaser.Curves.Ellipse(540, 950, 500, 550,180,225);
-    var Curve1_5 = new Phaser.Curves.Ellipse(540, 950, 500, 550,135,180);
-    var Curve1_6 = new Phaser.Curves.Ellipse(540, 950, 500, 550,90,135);
-    var Curve1_7 = new Phaser.Curves.Ellipse(540, 950, 500, 550,45,90);
-    var Curve1_8 = new Phaser.Curves.Ellipse(540, 950, 500, 550,0,45);
+    var Curve1_1 = new Phaser.Curves.Ellipse(540, 950, 500, 550,337.5,22.5);
+    var Curve1_2 = new Phaser.Curves.Ellipse(540, 950, 500, 550,292.5,337.5);
+    var Curve1_3 = new Phaser.Curves.Ellipse(540, 950, 500, 550,247.5,292.5);
+    var Curve1_4 = new Phaser.Curves.Ellipse(540, 950, 500, 550,202.5,247.5);
+    var Curve1_5 = new Phaser.Curves.Ellipse(540, 950, 500, 550,157.5,202.5);
+    var Curve1_6 = new Phaser.Curves.Ellipse(540, 950, 500, 550,112.5,157.5);
+    var Curve1_7 = new Phaser.Curves.Ellipse(540, 950, 500, 550,67.5,112.5);
+    var Curve1_8 = new Phaser.Curves.Ellipse(540, 950, 500, 550,22.5,67.5);
 
-    var Curve2_1 = new Phaser.Curves.Ellipse(540, 950, 300, 350,315,360);
-    var Curve2_2 = new Phaser.Curves.Ellipse(540, 950, 300, 350,270,315);
-    var Curve2_3 = new Phaser.Curves.Ellipse(540, 950, 300, 350,225,270);
-    var Curve2_4 = new Phaser.Curves.Ellipse(540, 950, 300, 350,180,225);
-    var Curve2_5 = new Phaser.Curves.Ellipse(540, 950, 300, 350,135,180);
-    var Curve2_6 = new Phaser.Curves.Ellipse(540, 950, 300, 350,90,135);
-    var Curve2_7 = new Phaser.Curves.Ellipse(540, 950, 300, 350,45,90);
-    var Curve2_8 = new Phaser.Curves.Ellipse(540, 950, 300, 350,0,45);
+    var Curve2_1 = new Phaser.Curves.Ellipse(540, 950, 300, 340,337.5,22.5);
+    var Curve2_2 = new Phaser.Curves.Ellipse(540, 950, 300, 340,292.5,337.5);
+    var Curve2_3 = new Phaser.Curves.Ellipse(540, 950, 300, 340,247.5,292.5);
+    var Curve2_4 = new Phaser.Curves.Ellipse(540, 950, 300, 340,202.5,247.5);
+    var Curve2_5 = new Phaser.Curves.Ellipse(540, 950, 300, 340,157.5,202.5);
+    var Curve2_6 = new Phaser.Curves.Ellipse(540, 950, 300, 340,112.5,157.5);
+    var Curve2_7 = new Phaser.Curves.Ellipse(540, 950, 300, 340,67.5,112.5);
+    var Curve2_8 = new Phaser.Curves.Ellipse(540, 950, 300, 340,22.5,67.5);
 
-    var Curve3_1 = new Phaser.Curves.Ellipse(540, 950, 150, 175,315,360);
-    var Curve3_2 = new Phaser.Curves.Ellipse(540, 950, 150, 175,270,315);
-    var Curve3_3 = new Phaser.Curves.Ellipse(540, 950, 150, 175,225,270);
-    var Curve3_4 = new Phaser.Curves.Ellipse(540, 950, 150, 175,180,225);
-    var Curve3_5 = new Phaser.Curves.Ellipse(540, 950, 150, 175,135,180);
-    var Curve3_6 = new Phaser.Curves.Ellipse(540, 950, 150, 175,90,135);
-    var Curve3_7 = new Phaser.Curves.Ellipse(540, 950, 150, 175,45,90);
-    var Curve3_8 = new Phaser.Curves.Ellipse(540, 950, 150, 175,0,45);
+    var Curve3_1 = new Phaser.Curves.Ellipse(540, 950, 150, 175,337.5,22.5);
+    var Curve3_2 = new Phaser.Curves.Ellipse(540, 950, 150, 175,292.5,337.5);
+    var Curve3_3 = new Phaser.Curves.Ellipse(540, 950, 150, 175,247.5,292.5);
+    var Curve3_4 = new Phaser.Curves.Ellipse(540, 950, 150, 175,202.5,247.5);
+    var Curve3_5 = new Phaser.Curves.Ellipse(540, 950, 150, 175,157.5,202.5);
+    var Curve3_6 = new Phaser.Curves.Ellipse(540, 950, 150, 175,112.5,157.5);
+    var Curve3_7 = new Phaser.Curves.Ellipse(540, 950, 150, 175,67.5,112.5);
+    var Curve3_8 = new Phaser.Curves.Ellipse(540, 950, 150, 175,22.5,67.5);
 
-    var path1_1 = new Phaser.Curves.Path(897,523).lineTo(754,666);
-    var path1_2 = new Phaser.Curves.Path(754,666).lineTo(605,853);
-    var path1_3 = new Phaser.Curves.Path(605,853).lineTo(540, 950);
+    var path1_1 = new Phaser.Curves.Path(1001,739).lineTo(816,819);
+    var path1_2 = new Phaser.Curves.Path(816,819).lineTo(679,883);
+    var path1_3 = new Phaser.Curves.Path(679,883).lineTo(540, 950);
 
-    var path2_1 = new Phaser.Curves.Path(540, 350).lineTo(540, 550);
-    var path2_2 = new Phaser.Curves.Path(540, 550).lineTo(540, 750);
-    var path2_3 = new Phaser.Curves.Path(540, 750).lineTo(540, 950);
+    var path2_1 = new Phaser.Curves.Path(731,442).lineTo(655,635);
+    var path2_2 = new Phaser.Curves.Path(655,635).lineTo(597,788);
+    var path2_3 = new Phaser.Curves.Path(597,788).lineTo(540, 950);
 
-    var path3_1 = new Phaser.Curves.Path(210,497).lineTo(330,660);
-    var path3_2 = new Phaser.Curves.Path(330,660).lineTo(459,821);
-    var path3_3 = new Phaser.Curves.Path(459,821).lineTo(540, 950);
+    var path3_1 = new Phaser.Curves.Path(347,441).lineTo(425,634);
+    var path3_2 = new Phaser.Curves.Path(425,634).lineTo(483,787);
+    var path3_3 = new Phaser.Curves.Path(483,787).lineTo(540, 950);
 
-    var path4_1 = new Phaser.Curves.Path(40, 950).lineTo(240, 950);
-    var path4_2 = new Phaser.Curves.Path(240, 950).lineTo(440, 950);
-    var path4_3 = new Phaser.Curves.Path(440, 950).lineTo(540, 950);
+    var path4_1 = new Phaser.Curves.Path(76,739).lineTo(263,819);
+    var path4_2 = new Phaser.Curves.Path(263,819).lineTo(401,882);
+    var path4_3 = new Phaser.Curves.Path(401,882).lineTo(540, 950);
 
-    var path5_1 = new Phaser.Curves.Path(96,1227).lineTo(272,1128);
-    var path5_2 = new Phaser.Curves.Path(272,1128).lineTo(447,1023);
-    var path5_3 = new Phaser.Curves.Path(447,1023).lineTo(540, 950);
+    var path5_1 = new Phaser.Curves.Path(78,1161).lineTo(262,1080);
+    var path5_2 = new Phaser.Curves.Path(262,1080).lineTo(402,1017);
+    var path5_3 = new Phaser.Curves.Path(402,1017).lineTo(540, 950);
 
-    var path6_1 = new Phaser.Curves.Path(540, 1550).lineTo(540, 1350);
-    var path6_2 = new Phaser.Curves.Path(540, 1350).lineTo(540, 1150);
-    var path6_3 = new Phaser.Curves.Path(540, 1150).lineTo(540, 950);
+    var path6_1 = new Phaser.Curves.Path(348,1458).lineTo(425,1264);
+    var path6_2 = new Phaser.Curves.Path(425,1264).lineTo(481,1110);
+    var path6_3 = new Phaser.Curves.Path(481,1110).lineTo(540, 950);
 
-    var path7_1 = new Phaser.Curves.Path(877,1388).lineTo(733, 1244);
-    var path7_2 = new Phaser.Curves.Path(733, 1244).lineTo(620, 1070);
-    var path7_3 = new Phaser.Curves.Path(620, 1070).lineTo(540, 950);
+    var path7_1 = new Phaser.Curves.Path(730,1457).lineTo(655,1263);
+    var path7_2 = new Phaser.Curves.Path(655,1263).lineTo(596,1111);
+    var path7_3 = new Phaser.Curves.Path(596,1111).lineTo(540, 950);
 
-    var path8_1 = new Phaser.Curves.Path(1040, 950).lineTo(840, 950);
-    var path8_2 = new Phaser.Curves.Path(840, 950).lineTo(640, 950);
-    var path8_3 = new Phaser.Curves.Path(640, 950).lineTo(540, 950);
+    var path8_1 = new Phaser.Curves.Path(1001,1160).lineTo(817,1081);
+    var path8_2 = new Phaser.Curves.Path(817,1081).lineTo(678,1017);
+    var path8_3 = new Phaser.Curves.Path(678,1017).lineTo(540, 950);
 
     GutiData.forEach(function(v,i,arr){ 
         var check = (v.name.match(/Guti1/g)=="Guti1")?'green':'blue';
@@ -266,7 +267,7 @@ function getSecond(CH,CH1){
                          getWay['path2']=mo[0];
                         //getWay.push({HName:v1.HName,path:mo[0]})
                         var p = eval(mo[0]);
-                        graphics.lineStyle(2, 0xff0000,2);
+                        graphics.lineStyle(5, 0xFF0000,2);
                         p.draw(graphics, 150);
                     }
                     if(C_CurveCheck == T_CurveCheck){
@@ -282,7 +283,7 @@ function getSecond(CH,CH1){
                               getWay['a3']=v1.HName;
                          getWay['path2']=mo[0];
                                 var p = eval(mo[0]);
-                                graphics.lineStyle(2, 0xff0000,2);
+                                graphics.lineStyle(5, 0xFF0000,2);
                                 p.draw(graphics, 150);
                             }
                         }
@@ -302,7 +303,7 @@ function getSecond(CH,CH1){
                            getWay['a3']=v1.HName;
                          getWay['path2']=mo[0];
                             var p = eval(mo[0]);
-                            graphics.lineStyle(2, 0xff0000,2);
+                            graphics.lineStyle(5, 0xFF0000,2);
                             p.draw(graphics, 150);
                         }
                     }
@@ -319,14 +320,14 @@ function getSecond(CH,CH1){
                                  getWay['a3']=v1.HName;
                          getWay['path2']=v1.CurrentPath;
                                 var p = eval(v1.CurrentPath);
-                                graphics.lineStyle(2, 0xff0000,2);
+                                graphics.lineStyle(5, 0xFF0000,2);
                                 p.draw(graphics, 150);  
                             }
                         
                     }
                     if(firstPath){
                         var p = eval(firstPath[0]);
-                        graphics.lineStyle(2, 0xff0000,2);
+                        graphics.lineStyle(5, 0xFF0000,2);
                         p.draw(graphics, 150);
                     }
                    // if(getWay.length>0){
@@ -367,7 +368,7 @@ killStep.push(getWay);
                                     if(!v1.Guti){
                                         //select first step path.
                                         var p = eval(v);
-                                        graphics.lineStyle(2, 0xff0000,2);
+                                        graphics.lineStyle(5, 0xff0000,2);
                                         p.draw(graphics, 150);
                                     }else{
                                          //select second step path.
