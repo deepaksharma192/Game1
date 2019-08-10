@@ -1,7 +1,7 @@
 var config = {
     type: Phaser.CANVAS,
     width: 1080,
-    height: 1920,
+    height: 1820,
     backgroundColor: '#ffb60b',
     parent: 'phaser-example',
     physics: {

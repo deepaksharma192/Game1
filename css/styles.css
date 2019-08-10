@@ -13,6 +13,13 @@ html, body {
 .demo-layout .mdl-layout__header .mdl-layout__drawer-button {
   color: rgba(0, 0, 0, 0.54);
 }
+.mdl-color-text--grey-600 {
+    color: #ffffff !important;
+}
+
+.mdl-color--grey-100 {
+    background-color: #4CAF50 !important;
+}
 .mdl-layout__drawer .avatar {
   margin-bottom: 16px;
 }
@@ -90,9 +97,15 @@ html, body {
   color: rgba(255, 255, 255, 0.56);
   margin-right: 32px;
 }
-
+.mdl-shadow--2dp {
+     box-shadow: none ;
+}
+.mdl-color--white {
+    background-color:transparent !important;
+}
 .demo-content {
   max-width: 1080px;
+  background: #ffb60b;
 }
 
 .demo-charts {
