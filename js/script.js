@@ -2,7 +2,8 @@ var config = {
     type: Phaser.CANVAS,
     width: 1080,
     height: 1820,
-    backgroundColor: '#ffb60b',
+    backgroundColor: 'rgba(255,110,110,0)',
+
     parent: 'phaser-example',
     physics: {
         default: 'impact',
@@ -19,6 +20,8 @@ var config = {
         create: create
     }
 };
+var KillGuti ={A:[],B:[]}
+
 
 var game = new Phaser.Game(config);
 var hotspot  = [
@@ -67,8 +70,12 @@ function getRandomColor() {
   }
   return color;
 }
+function setting(){
+     swal("Good job!", "You clicked the button!", "success")
+}
 function create ()
 {
+  
     $('.phaser-example').show()
      t =this;
     //  this.stage.backgroundColor = "#4488AA";
@@ -83,7 +90,70 @@ function create ()
         CurveLine.forEach(function(v,i,arr){
             //console.log(i)
         graphics.lineStyle(9,0xffffff, 3);
-         eval(v).draw(graphics, 150);  
+       // console.log(v)
+        switch(v){
+            case "Curve1_2":
+             eval(v).draw(graphics, 50);  
+            break;
+            case "Curve1_4":
+             eval(v).draw(graphics, 50);  
+            break;
+             case "Curve1_3":
+             eval(v).draw(graphics, 50);  
+            break;
+            case "Curve1_6":
+             eval(v).draw(graphics, 50);  
+            break;
+             case "Curve1_7":
+             eval(v).draw(graphics, 50);  
+            break;
+            case "Curve1_8":
+             eval(v).draw(graphics, 50);  
+            break;
+
+            case "Curve2_2":
+             eval(v).draw(graphics, 50);  
+            break;
+            case "Curve2_3":
+             eval(v).draw(graphics, 50);  
+            break;
+            case "Curve2_4":
+             eval(v).draw(graphics, 50);  
+            break;
+            case "Curve2_6":
+             eval(v).draw(graphics, 50);  
+            break;
+             case "Curve2_7":
+             eval(v).draw(graphics, 50);  
+            break;
+            case "Curve2_8":
+             eval(v).draw(graphics, 50);  
+            break;
+
+             case "Curve3_2":
+             eval(v).draw(graphics, 50);  
+            break;
+            case "Curve3_3":
+             eval(v).draw(graphics, 50);  
+            break;
+            case "Curve3_4":
+             eval(v).draw(graphics, 50);  
+            break;
+            case "Curve3_6":
+             eval(v).draw(graphics, 50);  
+            break;
+             case "Curve3_7":
+             eval(v).draw(graphics, 50);  
+            break;
+            case "Curve3_8":
+             eval(v).draw(graphics, 50);  
+            break;
+
+            default:
+             eval(v).draw(graphics, 1);  
+            break;
+        
+        }
         }) 
        
         StraightLine.forEach(function(v,i,arr){
@@ -394,7 +464,7 @@ killStep.push(getWay);
                 getUA[Object.keys(getUA)[0]].startGuiti.yy=getUA[Object.keys(getUA)[0]].yy;
  
                     getUA[Object.keys(getUA)[0]].startGuiti.CurrentPath=movePath[0]; 
-                    moveGuti(getUA[Object.keys(getUA)[0]].startGuiti,movePath[0],false,drMove,1000);
+                    moveGuti(getUA[Object.keys(getUA)[0]].startGuiti,movePath[0],false,drMove,500);
                     //console.log(getUA[Object.keys(getUA)[0]].startGuiti)
                      $.each(hotspot,function(k,v){
                         if(v.HName==getUA[Object.keys(getUA)[0]].hotspotTarget){
@@ -418,7 +488,7 @@ killStep.push(getWay);
 //console.log(C_)
                     //console.log(tyu)
                   turns=0;
-                    moveGuti1(getUA[Object.keys(getUA)[0]].startGuiti,tyu,false,drMove,1000,1);
+                    moveGuti1(getUA[Object.keys(getUA)[0]].startGuiti,tyu,false,drMove,500,1);
                     $.each(hotspot,function(k,v){
                         if(v.HName==getUA[Object.keys(getUA)[0]].hotspotTarget){
                             v.Guti=null;
@@ -471,14 +541,14 @@ var turns=0;
         onStart:function(tween, target){
         
             if(turn == 1 && turns ==0){     
-                console.log('star1')
+               // console.log('star1')
                 gutiName.x=gutiName.xx;
                 gutiName.y=gutiName.yy;
             }else if(turn == 2 && turns ==2){
-                console.log('star2');
+              //  console.log('star2');
                  gutiName.x=t[moveingLine.a2].x;
                  gutiName.y=t[moveingLine.a2].y;
-                 console.log(t[moveingLine.a2].x,t[moveingLine.a2].y);
+                // console.log(t[moveingLine.a2].x,t[moveingLine.a2].y);
                 // console.log(gutiName.xx,gutiName.yy);
             }
       
@@ -488,8 +558,17 @@ var turns=0;
             if(turn == 1 && turns ==0){
                 var C_ = hotspot.filter(function(obj) { return obj.HName == moveingLine.a2; });
                if(C_[0].Guti){
-                    t[C_[0].Guti].x=0;;
-                    t[C_[0].Guti].y=0;;
+                    t[C_[0].Guti].x=0;
+                    t[C_[0].Guti].y=0;
+                   
+                    var gutiG = C_[0].Guti.split('_')[0].match(/\d+/)[0];
+                    // console.log(gutiG)
+                     if(gutiG== 1){
+                        KillGuti['A'].push(C_[0].Guti);
+                     }else{
+                        KillGuti['B'].push(C_[0].Guti);
+                     }
+                     showKillGuti();
                 }
                 C_[0].Guti=null;
                 var drMove1=(C_[0].dr[moveingLine.path2])? -1: 1;
@@ -497,7 +576,7 @@ var turns=0;
                 gutiName.xxx=gutiName.x;
                 gutiName.yyx=gutiName.y;
                 // console.log(gutiName.xx,gutiName.yy)
-                moveGuti1(gutiName,moveingLine,false,drMove1,1000,2);
+                moveGuti1(gutiName,moveingLine,false,drMove1,500,2);
                 turns=2;
                 killStep =[];
             }else{
@@ -515,4 +594,12 @@ var turns=0;
     // this.input.on('pointerdown', function (pointer) {
      
     // }, this);
+}
+function showKillGuti(){
+    KillGuti['A'].forEach(function(v,i,arr){
+        $("#user1 li").eq(i).addClass('addGreen')
+    })
+     KillGuti['B'].forEach(function(v,i,arr){
+        $("#user2 li").eq(i).addClass('addBlue')
+    })
 }
