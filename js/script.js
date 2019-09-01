@@ -51,6 +51,8 @@ var hotspot  = [
         {HName:"hotspot24",catagory:"B",Path:"path8_3,Curve3_8,Curve3_1,path8_2",pos:"R3_L4",Guti:"Guti2_12",CurrentPath:"path8_3",dr:{'Curve3_1':-1,'path8_2':-1}},
         {HName:"hotspot25",catagory:"B",Path:"path1_3,path2_3,path3_3,path4_3,path5_3,path6_3,path7_3,path8_3",pos:"R0_L0",Guti:null,CurrentPath:"path8_3",dr:{'path1_3':-1,'path2_3':-1,'path3_3':-1,'path4_3':-1,'path5_3':-1,'path6_3':-1,'path7_3':-1,'path8_3':-1}},
     ];
+
+    var Curve_line = ["Curve1_1","Curve1_5","Curve2_1","Curve2_5","Curve3_1","Curve3_5"];
 var GutiData = [{"name":"Guti1_1","path":"path1_1"},{"name":"Guti1_2","path":"path1_2"},{"name":"Guti1_3","path":"path1_3"},{"name":"Guti1_4","path":"path2_1"},{"name":"Guti1_5","path":"path2_2"},{"name":"Guti1_6","path":"path2_3"},{"name":"Guti1_7","path":"path3_1"},{"name":"Guti1_8","path":"path3_2"},{"name":"Guti1_9","path":"path3_3"},{"name":"Guti1_10","path":"path4_1"},{"name":"Guti1_11","path":"path4_2"},{"name":"Guti1_12","path":"path4_3"},{"name":"Guti2_1","path":"path5_1"},{"name":"Guti2_2","path":"path5_2"},{"name":"Guti2_3","path":"path5_3"},{"name":"Guti2_4","path":"path6_1"},{"name":"Guti2_5","path":"path6_2"},{"name":"Guti2_6","path":"path6_3"},{"name":"Guti2_7","path":"path7_1"},{"name":"Guti2_8","path":"path7_2"},{"name":"Guti2_9","path":"path7_3"},{"name":"Guti2_10","path":"path8_1"},{"name":"Guti2_11","path":"path8_2"},{"name":"Guti2_12","path":"path8_3"}];
 var CurveLine = ["Curve1_1","Curve1_2","Curve1_3","Curve1_4","Curve1_5","Curve1_6","Curve1_7","Curve1_8","Curve2_1","Curve2_2","Curve2_3","Curve2_4","Curve2_5","Curve2_6","Curve2_7","Curve2_8","Curve3_1","Curve3_2","Curve3_3","Curve3_4","Curve3_5","Curve3_6","Curve3_7","Curve3_8"];
 var StraightLine = ["path1_1","path1_2","path1_3","path2_1","path2_2","path2_3","path3_1","path3_2","path3_3","path4_1","path4_2","path4_3","path5_1","path5_2","path5_3","path6_1","path6_2","path6_3","path7_1","path7_2","path7_3","path8_1","path8_2","path8_3"]
@@ -91,75 +93,16 @@ function create ()
             //console.log(i)
         graphics.lineStyle(9,0xffffff, 3);
        // console.log(v)
-        switch(v){
-            case "Curve1_2":
-             eval(v).draw(graphics, 50);  
-            break;
-            case "Curve1_4":
-             eval(v).draw(graphics, 50);  
-            break;
-             case "Curve1_3":
-             eval(v).draw(graphics, 50);  
-            break;
-            case "Curve1_6":
-             eval(v).draw(graphics, 50);  
-            break;
-             case "Curve1_7":
-             eval(v).draw(graphics, 50);  
-            break;
-            case "Curve1_8":
-             eval(v).draw(graphics, 50);  
-            break;
-
-            case "Curve2_2":
-             eval(v).draw(graphics, 50);  
-            break;
-            case "Curve2_3":
-             eval(v).draw(graphics, 50);  
-            break;
-            case "Curve2_4":
-             eval(v).draw(graphics, 50);  
-            break;
-            case "Curve2_6":
-             eval(v).draw(graphics, 50);  
-            break;
-             case "Curve2_7":
-             eval(v).draw(graphics, 50);  
-            break;
-            case "Curve2_8":
-             eval(v).draw(graphics, 50);  
-            break;
-
-             case "Curve3_2":
-             eval(v).draw(graphics, 50);  
-            break;
-            case "Curve3_3":
-             eval(v).draw(graphics, 50);  
-            break;
-            case "Curve3_4":
-             eval(v).draw(graphics, 50);  
-            break;
-            case "Curve3_6":
-             eval(v).draw(graphics, 50);  
-            break;
-             case "Curve3_7":
-             eval(v).draw(graphics, 50);  
-            break;
-            case "Curve3_8":
-             eval(v).draw(graphics, 50);  
-            break;
-
-            default:
-             eval(v).draw(graphics, 1);  
-            break;
-        
-        }
+       if(Curve_line.indexOf(v) != -1){
+        eval(v).draw(graphics, 1);
+       }else{
+        eval(v).draw(graphics, 50);
+       } 
         }) 
        
         StraightLine.forEach(function(v,i,arr){
             graphics.lineStyle(9, 0xffffff, 3);
-         eval(v).draw(graphics, 1);  
-
+            eval(v).draw(graphics, 1);  
         })
     }
     var Curve1_1 = new Phaser.Curves.Ellipse(540, 950, 500, 550,337.5,22.5);
@@ -340,7 +283,12 @@ function getSecond(CH,CH1){
                         //getWay.push({HName:v1.HName,path:mo[0]})
                         var p = eval(mo[0]);
                         graphics.lineStyle(9, 0xFF0000,2);
-                        p.draw(graphics, 150);
+                        if(Curve_line.indexOf(mo[0]) != -1){
+                            p.draw(graphics, 1);
+                           }else{
+                            p.draw(graphics, 50);
+                           }
+                     //   p.draw(graphics, 150);
                     }
                     if(C_CurveCheck == T_CurveCheck){
                         var path_2  = v1.Path.split(',');
@@ -352,11 +300,15 @@ function getSecond(CH,CH1){
                             var T =parseInt(mo[0].split('_')[0].match(/\d+/g));
                             if((mo[0].match(/Curve/g)=="Curve")&&(C==T)){
                            //  console.log("Curve",v1.HName)
-                              getWay['a3']=v1.HName;
-                         getWay['path2']=mo[0];
+                                getWay['a3']=v1.HName;
+                                getWay['path2']=mo[0];
                                 var p = eval(mo[0]);
                                 graphics.lineStyle(9, 0xFF0000,2);
-                                p.draw(graphics, 150);
+                                if(Curve_line.indexOf(mo[0]) != -1){
+                            p.draw(graphics, 1);
+                           }else{
+                            p.draw(graphics, 50);
+                           }
                             }
                         }
                     }
@@ -376,7 +328,11 @@ function getSecond(CH,CH1){
                          getWay['path2']=mo[0];
                             var p = eval(mo[0]);
                             graphics.lineStyle(9, 0xFF0000,2);
-                            p.draw(graphics, 150);
+                            if(Curve_line.indexOf(mo[0]) != -1){
+                            p.draw(graphics, 1);
+                           }else{
+                            p.draw(graphics, 50);
+                           }
                         }
                     }
                     if(CH1.pos =="R0_L0"){
@@ -393,14 +349,22 @@ function getSecond(CH,CH1){
                          getWay['path2']=v1.CurrentPath;
                                 var p = eval(v1.CurrentPath);
                                 graphics.lineStyle(9, 0xFF0000,2);
-                                p.draw(graphics, 150);  
+                                if(Curve_line.indexOf(v1.CurrentPath) != -1){
+                            p.draw(graphics, 1);
+                           }else{
+                            p.draw(graphics, 50);
+                           }  
                             }
                         
                     }
                     if(firstPath){
                         var p = eval(firstPath[0]);
                         graphics.lineStyle(9, 0xFF0000,2);
-                        p.draw(graphics, 150);
+                        if(Curve_line.indexOf(firstPath[0]) != -1){
+                            p.draw(graphics, 1);
+                           }else{
+                            p.draw(graphics, 50);
+                           }  
                     }
                    // if(getWay.length>0){
                         
@@ -441,7 +405,12 @@ killStep.push(getWay);
                                         //select first step path.
                                         var p = eval(v);
                                         graphics.lineStyle(9, 0xff0000,2);
-                                        p.draw(graphics, 150);
+                                       // p.draw(graphics, 150);
+                                        if(Curve_line.indexOf(v) != -1){
+                            p.draw(graphics, 1);
+                           }else{
+                            p.draw(graphics, 50);
+                           }  
                                     }else{
                                          //select second step path.
                                         getSecond(t[v1.HName],CH);  
@@ -516,13 +485,25 @@ var turns=0;
     step = (step == -1)?0:step;
      var selectPath =(turn==1)?moveingLine.path1:moveingLine.path2;
 
-    if(selectPath == gutiName.CurrentPath){ 
-        gutiName.setPath(eval(selectPath));
+    if(selectPath == gutiName.CurrentPath){
+        var p = eval(selectPath)
+        if(Curve_line.indexOf(selectPath) != -1){
+            p.draw(graphics, 1);
+        }else{
+            p.draw(graphics, 50);
+        }   
+        gutiName.setPath(p);
 
     }else{
+        var p = eval(selectPath)
+        if(Curve_line.indexOf(selectPath) != -1){
+            p.draw(graphics, 1);
+        }else{
+            p.draw(graphics, 50);
+        }  
         gutiName.x=t[moveingLine.a2].x;
                  gutiName.y=t[moveingLine.a2].y;
-        gutiName.setPath(eval(selectPath),{from: from,
+        gutiName.setPath(p,{from: from,
         to:step});
         gutiName.x=t[moveingLine.a2].x;
                  gutiName.y=t[moveingLine.a2].y;
