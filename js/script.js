@@ -77,7 +77,7 @@ function setting(){
 }
 function create ()
 {
-  
+  StartAnim.init(360,1,"activeBorder","activeBorder1");
     $('.phaser-example').show()
      t =this;
     //  this.stage.backgroundColor = "#4488AA";
@@ -584,3 +584,66 @@ function showKillGuti(){
         $("#user2 li").eq(i).addClass('addBlue')
     })
 }
+
+var StartAnim ={
+            i:0,
+            prec:null,
+            activeBorder:null,
+            degs:null,
+            el:null,
+            thi:null,
+sec:1,
+el1:null,
+            init:function(degs,sec,el,el1){
+                this.degs=degs
+thi = this;
+this.sec = sec;
+this.el1= el1;
+                this.el=el;
+                $("#"+el).append("<div id='circle' class='circle'><span class='prec 360' id='prec'>0%</span></div>");
+                this.activeBorder = $("#"+el);
+                setTimeout(function(){
+                  if($("#circle").is(":hover"))
+                     StartAnim.loopit("c");
+                  else
+                     StartAnim.loopit("nc");
+             },1);
+            },
+            loopit:function (dir){
+              if (dir == "c"){
+                  thi.i++
+              }else{
+                  thi.i--;
+              }
+
+              if (thi.i < 0){
+                  thi.i = 0;
+              }
+              if (thi.i > thi.degs){
+                  thi.i = thi.degs;
+              }
+              thi.prec = (100*thi.i)/360;   
+              $("#"+this.el+" .prec").html(Math.round(thi.prec)+"%");
+
+              if (thi.i<=180){
+                  thi.activeBorder.css('background-image','linear-gradient(' + (90+thi.i) + 'deg, transparent 50%, #A2ECFB 50%),linear-gradient(90deg, #A2ECFB 50%, transparent 50%)');
+              }
+              else{
+                  thi.activeBorder.css('background-image','linear-gradient(' + (thi.i-90) + 'deg, transparent 50%, #ff0000 50%),linear-gradient(90deg, #A2ECFB 50%, transparent 50%)');
+              }
+              var t =setTimeout(function(){
+               
+                if(thi.prec == 100){
+                    thi.i=0;
+                    thi.prec=0;
+                    this.activeBorder = $("#"+this.el1);
+                        thi.loopit("c");
+                   //  thi.activeBorder = 
+                }else{
+                    thi.loopit("c");
+                console.log(thi.prec) 
+                }
+              },this.sec);
+
+          }
+        }
