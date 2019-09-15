@@ -1,18 +1,17 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <title>HTML</title>
-      
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
-   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-            
+         <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <style type="text/css">
         body {
             margin: 0;
-               background-color: #ffb60b;
+               background:url('img/bg.png'); 
+                   background-size: 100% 100%;
+
         }
         .phaser-example{
             display: none;
@@ -22,46 +21,186 @@
     
         color: #0078f7;
         }
-        .header{
+        .header {
     width: 100%;
     background: #ffb60b;
-    height: 10%;
+    height: 76px;
     position: absolute;
-    box-shadow: 0px 0px 79px #ef6211;
-     
-        }
-        .fooder{
-                width: 100%;
+    box-shadow: 0px 0px 28px #00adff;
+}
+
+img.setting {
+        width: 50px;
+    cursor: pointer;
+    position: absolute;
+    left: 10px;
+    top: 80px;   
+
+}
+.header ul#user1 {
+        width: 256px;
+    display: block;
+    position: absolute;
+    left: 6px;
+    padding: 0px;
+    height: 63px;
+    margin: 0px;
+    top: 7px;
+    background: #4CAF50;
+    border-radius: 6px;
+}
+.header #user1 li {
+    background: #5c985e;
+    width: 20px;
+    float: left;
+    height: 20px;
+    margin: 6px 11px;
+    list-style: none;
+    border-radius: 50px;
+}
+.header .user_prof {
+       position: absolute;
+    width: 90px;
+    right: 12px;
+    top: 15px;
+}
+
+.fooder ul#user2 {
+        width: 256px;
+    display: block;
+    position: absolute;
+        right: 6px;
+    padding: 0px;
+    height: 63px;
+    margin: 0px;
+    top: 7px;
+    background: #4CAF50;
+    border-radius: 6px;
+}
+.fooder #user2 li {
+    background: #5c985e;
+    width: 20px;
+    float: left;
+    height: 20px;
+    margin: 6px 11px;
+    list-style: none;
+    border-radius: 50px;
+}
+.fooder .user_prof {
+     position: absolute;
+    width: 94px;
+    left: 10px;
+    top: -27px;
+}
+.fooder {
+    width: 100%;
     background: #ffb60b;
-    height: 10%;
-    position: absolute;
-    box-shadow: 0px 0px 79px #ef6211;
-    bottom: 0px;
-        }
+    height: 76px;
+    position: relative;
+    box-shadow: 0px 0px 28px #1174ef;
+    bottom: 76px;
+}
+.addGreen{
+    background-image: url(img/green.png) !important;
+    background-size: 20px !important;
+    box-shadow: 0px 0px 6px #1e1f1f;
+}
+.addBlue{
+  background-image: url(img/blue.png) !important;
+    background-size: 21px !important;
+    box-shadow: 0px 0px 6px #1e1f1f;
+}
+.prec{
+    top: 30px;
+    position: relative;
+    font-size: 30px;
+}
+
+.circle{
+    position: relative;
+    top: 5px;
+    left: 5px;
+    text-align: center;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    background-color: transparent;
+}
+
+.active-border{
+        position: absolute;
+    text-align: center;
+    width: 107px;
+    height: 107px;
+    border-radius: 100%;
+    background-color: #ff0000;
+    background-image: linear-gradient(91deg, transparent 50%, #A2ECFB 50%), linear-gradient(90deg, #A2ECFB 50%, transparent 50%);
+        right: 4px;
+    top: 7px;
+    
+}
+div#activeBorder1 {
+    left: 3px !important;
+    top: -33px !important;
+}
     </style>
     <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
      <script src="js/phaser.min.js"></script>
     <script src="js/script.js"></script>
 </head>
 <body>
-    <div class="header"><p>Baraha Shinga</p></div>
+    <div class="header">
+      <div id="activeBorder" class="active-border"></div>
+      <ul id="user1">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+       <img src="img/user1.svg" onclick="setting()" class="user_prof">
+     <img src="img/1040221.svg" onclick="setting()" class="setting">
+    </div>
     <div id="phaser-example"></div>
-    <div class="fooder"></div>
+    <div class="fooder">
+       <div id="activeBorder1" class="active-border"></div>
+       <ul id="user2">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+       <img src="img/user2.svg" onclick="setting()" class="user_prof">
+
+    </div>
 </body>
-</html> -->
+</html>
 
 
-<!doctype html>
+<!-- <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <title>Baraha Shinga</title>
-    <link rel="stylesheet" href="css/icon.css">
-    <link rel="stylesheet" href="css/material.cyan-light_blue.min.css">
     <script src="js/jquery-3.1.1.min.js"></script>
-     <script src="js/phaser.min.js"></script>
     <script src="js/script.js"></script>
     <link rel="stylesheet" href="css/styles.css">
     <style>
@@ -82,15 +221,7 @@
         <div class="mdl-layout__header-row">
           <span class="mdl-layout-title">Baraha Shinga</span>
           <div class="mdl-layout-spacer"></div>
-        <!--   <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-            <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
-              <i class="material-icons">search</i>
-            </label>
-            <div class="mdl-textfield__expandable-holder">
-              <input class="mdl-textfield__input" type="text" id="search">
-              <label class="mdl-textfield__label" for="search">Enter your query...</label>
-            </div>
-          </div> -->
+     
           <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
             <i class="material-icons">more_vert</i>
           </button>
@@ -122,11 +253,9 @@
          
        
         
-         <!--  <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">forum</i>Forums</a> -->
+      
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>Updates</a>
-         <!--  <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">local_offer</i>Promos</a> -->
-         <!--  <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">shopping_cart</i>Purchases</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>Social</a> -->
+       
           <div class="mdl-layout-spacer"></div>
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span></a>
         </nav>
@@ -142,7 +271,7 @@
       </main>
     </div>
 
-     <!--  <a href="https://github.com/google/material-design-lite/blob/mdl-1.x/templates/dashboard/" target="_blank" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-color-text--white">View Source</a> -->
+
     <script src="js/material.min.js"></script>
   </body>
-</html>
+</html> -->
