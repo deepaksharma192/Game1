@@ -362,11 +362,12 @@ function create() {
                                if(a3){
                                  
                                  if(tp.hasOwnProperty('path2')){
-                                    var a1_ = hotspot.filter(function (obj) { return obj.HName == tp.a1; });
-                                    var a2_ = hotspot.filter(function (obj) { return obj.HName == tp.a2; });
-                                    var a3_ = hotspot.filter(function (obj) { return obj.HName == tp.a3; });
-                                    if(!a3_[0].Guti){
-                                      
+                                    var a1_ = hotspot.filter(function (obj) { return obj.HName == tp.a1; })[0];
+                                    var a2_ = hotspot.filter(function (obj) { return obj.HName == tp.a2; })[0];
+                                    var a3_ = hotspot.filter(function (obj) { return obj.HName == tp.a3; })[0];
+                                    a1_ = a1_.Guti.split('_')[0].match(/\d+/)[0];
+                                    a2_ = a2_.Guti.split('_')[0].match(/\d+/)[0];
+                                    if(!a3_.Guti && (a1_ !=a2_)){
                                          graphics.lineStyle(9, 0xFF0000, 2);
                                          draws(tp['path1']);
                                         draws(tp['path2']);
@@ -478,16 +479,23 @@ function create() {
                     getUA[Object.keys(getUA)[0]].startGuiti.yy = getUA[Object.keys(getUA)[0]].yy;
                     //console.log(C_)
                     //console.log(tyu)
+                    var a1_ = hotspot.filter(function (obj) { return obj.HName == tyu.a1; })[0];
+                    var a2_ = hotspot.filter(function (obj) { return obj.HName == tyu.a2; })[0];
+                    a1_ = a1_.Guti.split('_')[0].match(/\d+/)[0];
+                    a2_ = a2_.Guti.split('_')[0].match(/\d+/)[0];
                     turns = 0;
-                    moveGuti1(getUA[Object.keys(getUA)[0]].startGuiti, tyu, false, drMove, 500, 1);
-                    $.each(hotspot, function (k, v) {
-                        if (v.HName == getUA[Object.keys(getUA)[0]].hotspotTarget) {
-                            v.Guti = null;
-                        }
-                        if (v.HName == CH.HName) {
-                            v.Guti = getUA[Object.keys(getUA)[0]].changeGutiStatus;
-                        }
-                    })
+                    if(a1_!=a2_){
+                        moveGuti1(getUA[Object.keys(getUA)[0]].startGuiti, tyu, false, drMove, 500, 1);
+                        $.each(hotspot, function (k, v) {
+                            if (v.HName == getUA[Object.keys(getUA)[0]].hotspotTarget) {
+                                v.Guti = null;
+                            }
+                            if (v.HName == CH.HName) {
+                                v.Guti = getUA[Object.keys(getUA)[0]].changeGutiStatus;
+                            }
+                        })
+                    }
+                   
                 }
 
 
@@ -561,22 +569,23 @@ function create() {
             },
             onComplete: function (tween, target) {
                 if (turn == 1 && turns == 0) {
-                    var C_ = hotspot.filter(function (obj) { return obj.HName == moveingLine.a2; });
-                    if (C_[0].Guti) {
-                        t[C_[0].Guti].x = 0;
-                        t[C_[0].Guti].y = 0;
+                    var a1_ = hotspot.filter(function (obj) { return obj.HName == moveingLine.a1; });
+                    var a2_ = hotspot.filter(function (obj) { return obj.HName == moveingLine.a2; });
+                    if (a2_[0].Guti) {
+                        t[a2_[0].Guti].x = 0;
+                        t[a2_[0].Guti].y = 0;
 
-                        var gutiG = C_[0].Guti.split('_')[0].match(/\d+/)[0];
+                        var gutiG = a2_[0].Guti.split('_')[0].match(/\d+/)[0];
                         // console.log(gutiG)
                         if (gutiG == 1) {
-                            KillGuti['A'].push(C_[0].Guti);
+                            KillGuti['A'].push(a2_[0].Guti);
                         } else {
-                            KillGuti['B'].push(C_[0].Guti);
+                            KillGuti['B'].push(a2_[0].Guti);
                         }
                         showKillGuti();
                     }
-                    C_[0].Guti = null;
-                    var drMove1 = (C_[0].dr[moveingLine.path2]) ? -1 : 1;
+                    a2_[0].Guti = null;
+                    var drMove1 = (a2_[0].dr[moveingLine.path2]) ? -1 : 1;
                     //  console.log(gutiName.x,gutiName.y)
                     gutiName.xxx = gutiName.x;
                     gutiName.yyx = gutiName.y;
