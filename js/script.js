@@ -280,13 +280,13 @@ function create() {
                                 getWay['a3'] = v1.HName;
                                 getWay['path2'] = mo[0];
                                 //getWay.push({HName:v1.HName,path:mo[0]})
-                                var p = eval(mo[0]);
-                               // graphics.lineStyle(9, 0xFF0000, 2);
-                                if (Curve_line.indexOf(mo[0]) != -1) {
-                                    p.draw(graphics, 1);
-                                } else {
-                                    p.draw(graphics, 50);
-                                }
+                                // var p = eval(mo[0]);
+                                // graphics.lineStyle(9, 0xFFffff, 2);
+                                // if (Curve_line.indexOf(mo[0]) != -1) {
+                                //     p.draw(graphics, 1);
+                                // } else {
+                                //     p.draw(graphics, 50);
+                                // }
                                 //   p.draw(graphics, 150);
                             }
                             if (C_CurveCheck == T_CurveCheck) {
@@ -301,13 +301,13 @@ function create() {
                                         //  console.log("Curve",v1.HName)
                                         getWay['a3'] = v1.HName;
                                         getWay['path2'] = mo[0];
-                                        var p = eval(mo[0]);
-                                       // graphics.lineStyle(9, 0xFF0000, 2);
-                                        if (Curve_line.indexOf(mo[0]) != -1) {
-                                            p.draw(graphics, 1);
-                                        } else {
-                                            p.draw(graphics, 50);
-                                        }
+                                        // var p = eval(mo[0]);
+                                        // graphics.lineStyle(9, 0x999, 2);
+                                        // if (Curve_line.indexOf(mo[0]) != -1) {
+                                        //     p.draw(graphics, 1);
+                                        // } else {
+                                        //     p.draw(graphics, 50);
+                                        // }
                                     }
                                 }
                             }
@@ -325,13 +325,13 @@ function create() {
                                     //  console.log("25",v1.HName)
                                     getWay['a3'] = v1.HName;
                                     getWay['path2'] = mo[0];
-                                    var p = eval(mo[0]);
-                                    //graphics.lineStyle(9, 0xFF0000, 2);
-                                    if (Curve_line.indexOf(mo[0]) != -1) {
-                                        p.draw(graphics, 1);
-                                    } else {
-                                        p.draw(graphics, 50);
-                                    }
+                                    // var p = eval(mo[0]);
+                                    // graphics.lineStyle(9, 0x0001FD, 2);
+                                    // if (Curve_line.indexOf(mo[0]) != -1) {
+                                    //     p.draw(graphics, 1);
+                                    // } else {
+                                    //     p.draw(graphics, 50);
+                                    // }
                                 }
                             }
                             if (CH1.pos == "R0_L0") {
@@ -346,24 +346,44 @@ function create() {
                                     // console.log("1_25",v1.HName)
                                     getWay['a3'] = v1.HName;
                                     getWay['path2'] = v1.CurrentPath;
-                                    var p = eval(v1.CurrentPath);
-                                   // graphics.lineStyle(9, 0xFF0000, 2);
-                                    if (Curve_line.indexOf(v1.CurrentPath) != -1) {
-                                        p.draw(graphics, 1);
-                                    } else {
-                                        p.draw(graphics, 50);
-                                    }
+                                    // var p = eval(v1.CurrentPath);
+                                    // graphics.lineStyle(9, 0xFC32FD, 2);
+                                    // if (Curve_line.indexOf(v1.CurrentPath) != -1) {
+                                    //     p.draw(graphics, 1);
+                                    // } else {
+                                    //     p.draw(graphics, 50);
+                                    // }
                                 }
 
                             }
                             if (firstPath) {
-                                var p = eval(firstPath[0]);
-                               // graphics.lineStyle(9, 0xFF0000, 2);
-                                if (Curve_line.indexOf(firstPath[0]) != -1) {
-                                    p.draw(graphics, 1);
-                                } else {
-                                    p.draw(graphics, 50);
+                               var tp = getWay;
+                               var a3 =tp.hasOwnProperty('a3');
+                               if(a3){
+                                 
+                                 if(tp.hasOwnProperty('path2')){
+                                    var a1_ = hotspot.filter(function (obj) { return obj.HName == tp.a1; });
+                                    var a2_ = hotspot.filter(function (obj) { return obj.HName == tp.a2; });
+                                    var a3_ = hotspot.filter(function (obj) { return obj.HName == tp.a3; });
+                                    if(!a3_[0].Guti){
+                                      
+                                         graphics.lineStyle(9, 0xFF0000, 2);
+                                         draws(tp['path1']);
+                                        draws(tp['path2']);
+                                    }
+                                 }
+                                 // else{
+                                 //    graphics.lineStyle(9, 0xFDFC00, 2);
+                                 //     draws(firstPath[0]);
+                                 // }
+                                
                                 }
+                             //  else{
+                               //    graphics.lineStyle(9, 0x0CD70B, 2);
+                               //    draws(firstPath[0]);
+                               // }
+                              
+                             
                             }
                             // if(getWay.length>0){
 
@@ -377,6 +397,14 @@ function create() {
             //console.log(killStep)
         }
 
+    }
+    function draws(val){
+         var p = eval(val);               
+        if (Curve_line.indexOf(val) != -1) {
+            p.draw(graphics, 1);
+        } else {
+            p.draw(graphics, 50);
+        }
     }
     var getUA = {};
     this.input.on('pointerdown', function (event, gameObjects) {
@@ -402,14 +430,9 @@ function create() {
                                 if (y != -1) {
                                     if (!v1.Guti) {
                                         //select first step path.
-                                        var p = eval(v);
-                                        graphics.lineStyle(9, 0x000, 2);
-                                        // p.draw(graphics, 150);
-                                        if (Curve_line.indexOf(v) != -1) {
-                                            p.draw(graphics, 1);
-                                        } else {
-                                            p.draw(graphics, 50);
-                                        }
+                                      
+                                        graphics.lineStyle(9, 0xFF0000, 2);
+                                      draws(v);
                                     } else {
                                         //select second step path.
                                         getSecond(t[v1.HName], CH);
