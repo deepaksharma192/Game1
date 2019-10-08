@@ -75,7 +75,7 @@ function setting() {
     swal("Good job!", "You clicked the button!", "success")
 }
 function create() {
-    StartAnim.init(360, 1, "anim", "activeBorder", "activeBorder1");
+    StartAnim.init(360, 60, "anim", "activeBorder", "activeBorder1");
     $('.phaser-example').show()
     t = this;
     //  this.stage.backgroundColor = "#4488AA";
@@ -473,6 +473,7 @@ function create() {
                     // console.log(getUA[Object.keys(getUA)[0]])
                     //  console.log(CH)
                     var tyu = (C_.length == 2) ? C_[1] : C_[0];
+                    if(tyu){
                     tyu = (C_.length == 3) ? C_[2] : tyu;
                     var drMove = (getUA[Object.keys(getUA)[0]].dr[tyu.path1]) ? -1 : 1;
                     getUA[Object.keys(getUA)[0]].startGuiti.xx = getUA[Object.keys(getUA)[0]].xx;
@@ -495,6 +496,7 @@ function create() {
                             }
                         })
                     }
+}
                    
                 }
 
