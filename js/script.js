@@ -606,10 +606,10 @@ function create() {
                     gutiName.xxx = gutiName.x;
                     gutiName.yyx = gutiName.y;
                     // console.log(gutiName.xx,gutiName.yy)
-                    moveGuti1(gutiName, moveingLine, false, drMove1, 500, 2);
+                    moveGuti1(gutiName, moveingLine, false, drMove1, 500, 1);
                     turns = 2;
                     killStep = [];
-                    StartAnim.init(360, 60, "anim", "activeBorder", "activeBorder1", 1);
+
                 } else {
 
                     updateHotspotData();
@@ -625,6 +625,7 @@ function create() {
     // this.input.on('pointerdown', function (pointer) {
 
     // }, this);
+    StartAnim.init(360, 7, "anim", "activeBorder", "activeBorder1", 1);
 }
 
 function showKillGuti() {
@@ -688,13 +689,14 @@ var StartAnim = {
             if (thi.prec == 100) {
                 thi.i = 0;
                 thi.prec = 0;
+                thi.turn = (thi.turn == 1) ? 2 : 1;
                 var first1 = $("#" + thi.el1).hasClass('anim');
                 var first2 = $("#" + thi.el2).hasClass('anim');
-                if (first1) {
+                if (thi.turn == 1) {
                     $("#" + thi.el1).removeClass('anim').html('').attr('style', '');
                     $("#" + thi.el2).addClass('anim');
                 }
-                if (first2) {
+                if (thi.turn == 2) {
                     $("#" + thi.el2).removeClass('anim').html('').attr('style', '');
                     $("#" + thi.el1).addClass('anim');
                 }
