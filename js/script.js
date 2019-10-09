@@ -75,7 +75,7 @@ function setting() {
     swal("Good job!", "You clicked the button!", "success")
 }
 function create() {
-    StartAnim.init(360, 60, "anim", "activeBorder", "activeBorder1");
+
     $('.phaser-example').show()
     t = this;
     //  this.stage.backgroundColor = "#4488AA";
@@ -108,25 +108,29 @@ function create() {
     var Curve1_2 = new Phaser.Curves.Ellipse(540, 950, 500, 550, 292.5, 337.5);
     var Curve1_3 = new Phaser.Curves.Ellipse(540, 950, 500, 550, 247.5, 292.5);
     var Curve1_4 = new Phaser.Curves.Ellipse(540, 950, 500, 550, 202.5, 247.5);
-    var Curve1_5 = new Phaser.Curves.Ellipse(540, 950, 500, 550, 157.5, 202.5);
+    //var Curve1_5 = new Phaser.Curves.Ellipse(540, 950, 500, 550, 157.5, 202.5);
+    var Curve1_5 = new Phaser.Curves.Path(78,1163).lineTo(80,737);
     var Curve1_6 = new Phaser.Curves.Ellipse(540, 950, 500, 550, 112.5, 157.5);
     var Curve1_7 = new Phaser.Curves.Ellipse(540, 950, 500, 550, 67.5, 112.5);
     var Curve1_8 = new Phaser.Curves.Ellipse(540, 950, 500, 550, 22.5, 67.5);
 
-    var Curve2_1 = new Phaser.Curves.Ellipse(540, 950, 300, 340, 337.5, 22.5);
+    //var Curve2_1 = new Phaser.Curves.Ellipse(540, 950, 300, 340, 337.5, 22.5);
+    var Curve2_1 = new Phaser.Curves.Path(814,817).lineTo(817,1083);
     var Curve2_2 = new Phaser.Curves.Ellipse(540, 950, 300, 340, 292.5, 337.5);
     var Curve2_3 = new Phaser.Curves.Ellipse(540, 950, 300, 340, 247.5, 292.5);
     var Curve2_4 = new Phaser.Curves.Ellipse(540, 950, 300, 340, 202.5, 247.5);
-    var Curve2_5 = new Phaser.Curves.Ellipse(540, 950, 300, 340, 157.5, 202.5);
+  //  var Curve2_5 = new Phaser.Curves.Ellipse(540, 950, 300, 340, 157.5, 202.5);
+    var Curve2_5 = new Phaser.Curves.Path(263,1078).lineTo(263,820);;
     var Curve2_6 = new Phaser.Curves.Ellipse(540, 950, 300, 340, 112.5, 157.5);
     var Curve2_7 = new Phaser.Curves.Ellipse(540, 950, 300, 340, 67.5, 112.5);
     var Curve2_8 = new Phaser.Curves.Ellipse(540, 950, 300, 340, 22.5, 67.5);
-
-    var Curve3_1 = new Phaser.Curves.Ellipse(540, 950, 150, 175, 337.5, 22.5);
+//var Curve3_1 = new Phaser.Curves.Ellipse(540, 950, 150, 175, 337.5, 22.5);
+    var Curve3_1 = new Phaser.Curves.Path(676,881).lineTo(676,1017);;
     var Curve3_2 = new Phaser.Curves.Ellipse(540, 950, 150, 175, 292.5, 337.5);
     var Curve3_3 = new Phaser.Curves.Ellipse(540, 950, 150, 175, 247.5, 292.5);
     var Curve3_4 = new Phaser.Curves.Ellipse(540, 950, 150, 175, 202.5, 247.5);
-    var Curve3_5 = new Phaser.Curves.Ellipse(540, 950, 150, 175, 157.5, 202.5);
+   // var Curve3_5 = new Phaser.Curves.Ellipse(540, 950, 150, 175, 157.5, 202.5);
+    var Curve3_5 = new Phaser.Curves.Path(402,1019).lineTo(402,878);
     var Curve3_6 = new Phaser.Curves.Ellipse(540, 950, 150, 175, 112.5, 157.5);
     var Curve3_7 = new Phaser.Curves.Ellipse(540, 950, 150, 175, 67.5, 112.5);
     var Curve3_8 = new Phaser.Curves.Ellipse(540, 950, 150, 175, 22.5, 67.5);
@@ -595,6 +599,7 @@ function create() {
                     moveGuti1(gutiName, moveingLine, false, drMove1, 500, 2);
                     turns = 2;
                     killStep = [];
+                    StartAnim.init(360, 60, "anim", "activeBorder", "activeBorder1",1);
                 } else {
 
                     updateHotspotData();
@@ -629,9 +634,11 @@ var StartAnim = {
     thi: null,
     sec: 1,
     el1: null,
-    init: function (degs, sec, el, el1, el2) {
+    turn:null,
+    init: function (degs, sec, el, el1, el2,turn) {
         this.degs = degs
         thi = this;
+        this.turn = turn;
         this.sec = sec;
         this.el1 = el1;
         this.el2 = el2;
