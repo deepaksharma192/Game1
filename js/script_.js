@@ -530,7 +530,6 @@ function create() {
         var from = (step == -1) ? 1 : 0;
         step = (step == -1) ? 0 : step;
         var selectPath = (turn == 1) ? moveingLine.path1 : moveingLine.path2;
-
         if (selectPath == gutiName.CurrentPath) {
             var p = eval(selectPath)
             if (Curve_line.indexOf(selectPath) != -1) {
@@ -557,8 +556,6 @@ function create() {
             gutiName.y = t[moveingLine.a2].y;
         }
         var path = eval(selectPath);
-
-
         gutiName.startFollow({
             positionOnPath: true,
             duration: duration,
@@ -568,20 +565,13 @@ function create() {
             to: step,
             delay: 0,
             onStart: function(tween, target) {
-
                 if (turn == 1 && turns == 0) {
-                    // console.log('star1')
                     gutiName.x = gutiName.xx;
                     gutiName.y = gutiName.yy;
                 } else if (turn == 2 && turns == 2) {
-                    //  console.log('star2');
                     gutiName.x = t[moveingLine.a2].x;
                     gutiName.y = t[moveingLine.a2].y;
-                    // console.log(t[moveingLine.a2].x,t[moveingLine.a2].y);
-                    // console.log(gutiName.xx,gutiName.yy);
                 }
-
-
             },
             onComplete: function(tween, target) {
                 if (turn == 1 && turns == 0) {
@@ -590,9 +580,7 @@ function create() {
                     if (a2_[0].Guti) {
                         t[a2_[0].Guti].x = 0;
                         t[a2_[0].Guti].y = 0;
-
                         var gutiG = a2_[0].Guti.split('_')[0].match(/\d+/)[0];
-                        // console.log(gutiG)
                         if (gutiG == 1) {
                             KillGuti['A'].push(a2_[0].Guti);
                         } else {
@@ -606,7 +594,7 @@ function create() {
                     gutiName.xxx = gutiName.x;
                     gutiName.yyx = gutiName.y;
                     // console.log(gutiName.xx,gutiName.yy)
-                    moveGuti1(gutiName, moveingLine, false, drMove1, 500, 1);
+                    moveGuti1(gutiName, moveingLine, false, drMove1, 500, 2);
                     turns = 2;
                     killStep = [];
 
