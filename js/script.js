@@ -254,6 +254,7 @@ function create() {
             },
             onComplete: function(tween, target) {
                 // delete gutiName;
+                turnFun()
             },
             onUpdate: function(tween, target) {}
         });
@@ -606,7 +607,7 @@ function create() {
                     killStep = [];
 
                 } else {
-
+turnFun()
                     updateHotspotData();
                     DrawGamePoints();
                     getUA = {};
@@ -622,7 +623,13 @@ function create() {
     // }, this);
    
 }
-
+function turnFun(){
+console.log("Guti Moved.",StartAnim.turn)
+ StartAnim.turn= (StartAnim.turn == 1) ? 2 : 1;
+ StartAnim.i = 0;
+ StartAnim.prec = 0;
+  StartAnim.setTurn(StartAnim.turn)
+}
 function showKillGuti() {
     KillGuti['A'].forEach(function(v, i, arr) {
         $("#user1 li").eq(i).addClass('addGreen')
@@ -661,11 +668,8 @@ var StartAnim = {
         }, 1);
     },
     loopit: function(dir) {
-        if (dir == "c") {
             thi.i++
-        } else {
-            thi.i--;
-        }
+        
 
         if (thi.i < 0) {
             thi.i = 0;
@@ -688,15 +692,8 @@ var StartAnim = {
                 thi.turn = (thi.turn == 1) ? 2 : 1;
                 var first1 = $("#" + thi.el1).hasClass('anim');
                 var first2 = $("#" + thi.el2).hasClass('anim');
-                console.log('first1',first1,'first2',first2,"turn",thi.turn)
-                if (thi.turn == 2 ) {
-                    $("#" + thi.el1).removeClass('anim').html('').attr('style', '');
-                    $("#" + thi.el2).addClass('anim');
-                }
-                if (thi.turn == 1) {
-                    $("#" + thi.el2).removeClass('anim').html('').attr('style', '');
-                    $("#" + thi.el1).addClass('anim');
-                }
+                //console.log('first1',first1,'first2',first2,"turn",thi.turn)
+                thi.setTurn(thi.turn)
                 thi.activeBorder = $("." + thi.el);
                 $("." + thi.el).append("<div id='circle' class='circle'><span class='prec 360' id='prec'>0%</span></div>");
                 thi.loopit("c");
@@ -706,5 +703,18 @@ var StartAnim = {
             }
         }, this.sec);
 
+    },
+    setTurn:function(t){
+         if (t == 2 ) {
+                    $("#" + thi.el1).removeClass('anim').html('').attr('style', '');
+                    $("#" + thi.el2).addClass('anim');
+                }
+                if (t == 1) {
+                    $("#" + thi.el2).removeClass('anim').html('').attr('style', '');
+                    $("#" + thi.el1).addClass('anim');
+                }
+                thi.activeBorder = $("." + thi.el);
+                $("." + thi.el).append("<div id='circle' class='circle'><span class='prec 360' id='prec'>0%</span></div>");
+                thi.loopit("c");
     }
 }
