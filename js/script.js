@@ -64,7 +64,7 @@ function preload() {
     this.load.image('green', 'img/green.png');
     this.load.image('hotspot', 'img/hotspot.png');
 }
-var t
+var t;
 
 function getRandomColor() {
     var letters = '0123456789ABCDEF';
@@ -187,6 +187,11 @@ function create() {
         $.each(hotspot, function(k, v) {
             //  console.log(v.HName)
             t[v.HName] = t.add.follower(eval(v.CurrentPath), 1, 1, 'hotspot').setInteractive();
+            
+            // setTimeout(function(){ 
+            //     v.x = t[v.HName].x;
+            // v.y = t[v.HName].y;
+            // }, 300);
             t[v.HName].catagory = v.catagory;
             t[v.HName].Path = v.Path;
             t[v.HName].pos = v.pos;
@@ -194,6 +199,8 @@ function create() {
             t[v.HName].CurrentPath = v.CurrentPath;
             t[v.HName].HName = v.HName;
             t[v.HName].dr = v.dr;
+            
+           // console.log(v.x,v.y)
             if (v.HName == "hotspot25") {
                 SetGuti(t[v.HName], eval(v.CurrentPath), false, -1, 0);
             } else {
@@ -253,8 +260,8 @@ function create() {
                 // C_[0].Guti=null;
             },
             onComplete: function(tween, target) {
-                // delete gutiName;
-                turnFun()
+              
+                turnFun(gutiName.Name)
             },
             onUpdate: function(tween, target) {}
         });
@@ -266,41 +273,22 @@ function create() {
         var paths1 = CH1.Path.split(',');
         var firstPath = paths1.filter(function(obj) { return paths.indexOf(obj) != -1; });
         var getWay = { a1: CH1.HName, a2: CH.HName, path1: firstPath[0] };
-        ///this['killStep'].push()
-        // console.log(firstPath)
         if (CH1.Guti) {
             $.each(paths, function(k, v) {
                 $.each(hotspot, function(k1, v1) {
                     if (CH.HName != v1.HName && CH1.HName != v1.HName) {
-
                         var y = v1.Path.split(',').indexOf(v);
-
                         if (y != -1) {
-
-                            //  getWay.push({HName:CH.HName,path:firstPath[0]})
                             var C_CurveCheck = CH1.pos.split('_')[0];
                             var C_lineCheck = CH1.pos.split('_')[1];
                             var T_CurveCheck = v1.pos.split('_')[0];
                             var T_lineCheck = v1.pos.split('_')[1];
-
-                            //  console.log(C_CurveCheck +" = "+T_CurveCheck+" - "+C_lineCheck +" = "+T_lineCheck)
                             if ((C_lineCheck == T_lineCheck)) {
                                 var path_2 = v1.Path.split(',');
                                 var movePath = path_2.filter(function(obj) { return obj.indexOf('path') != -1; });
                                 var mo = movePath.filter(function(obj) { return v == obj; });
-                                //  console.log(CH1.HName+" = "+CH.HName +" = "+v1.HName)
-                                // console.log("Line",v1.HName)
                                 getWay['a3'] = v1.HName;
                                 getWay['path2'] = mo[0];
-                                //getWay.push({HName:v1.HName,path:mo[0]})
-                                // var p = eval(mo[0]);
-                                // graphics.lineStyle(9, 0xFFffff, 2);
-                                // if (Curve_line.indexOf(mo[0]) != -1) {
-                                //     p.draw(graphics, 1);
-                                // } else {
-                                //     p.draw(graphics, 50);
-                                // }
-                                //   p.draw(graphics, 150);
                             }
                             if (C_CurveCheck == T_CurveCheck) {
                                 var path_2 = v1.Path.split(',');
@@ -311,16 +299,8 @@ function create() {
                                     var C = parseInt(C_CurveCheck.match(/\d+/g)[0])
                                     var T = parseInt(mo[0].split('_')[0].match(/\d+/g));
                                     if ((mo[0].match(/Curve/g) == "Curve") && (C == T)) {
-                                        //  console.log("Curve",v1.HName)
                                         getWay['a3'] = v1.HName;
                                         getWay['path2'] = mo[0];
-                                        // var p = eval(mo[0]);
-                                        // graphics.lineStyle(9, 0x999, 2);
-                                        // if (Curve_line.indexOf(mo[0]) != -1) {
-                                        //     p.draw(graphics, 1);
-                                        // } else {
-                                        //     p.draw(graphics, 50);
-                                        // }
                                     }
                                 }
                             }
@@ -335,16 +315,8 @@ function create() {
                                 T = (T == 6) ? 2 : T;
                                 T = (T == 5) ? 1 : T;
                                 if ((mo[0].match(/path/g) == "path") && (C == T)) {
-                                    //  console.log("25",v1.HName)
                                     getWay['a3'] = v1.HName;
                                     getWay['path2'] = mo[0];
-                                    // var p = eval(mo[0]);
-                                    // graphics.lineStyle(9, 0x0001FD, 2);
-                                    // if (Curve_line.indexOf(mo[0]) != -1) {
-                                    //     p.draw(graphics, 1);
-                                    // } else {
-                                    //     p.draw(graphics, 50);
-                                    // }
                                 }
                             }
                             if (CH1.pos == "R0_L0") {
@@ -356,16 +328,8 @@ function create() {
                                 var movePath1 = path_3.filter(function(obj) { return obj.indexOf('path') != -1; });
                                 movePath1 = movePath1[0].split('_')[0];
                                 if (movePath == movePath1) {
-                                    // console.log("1_25",v1.HName)
                                     getWay['a3'] = v1.HName;
                                     getWay['path2'] = v1.CurrentPath;
-                                    // var p = eval(v1.CurrentPath);
-                                    // graphics.lineStyle(9, 0xFC32FD, 2);
-                                    // if (Curve_line.indexOf(v1.CurrentPath) != -1) {
-                                    //     p.draw(graphics, 1);
-                                    // } else {
-                                    //     p.draw(graphics, 50);
-                                    // }
                                 }
 
                             }
@@ -384,31 +348,18 @@ function create() {
                                             graphics.lineStyle(9, 0xFF0000, 2);
                                             draws(tp['path1']);
                                             draws(tp['path2']);
+                                            console.log(getWay);killStep.push(getWay);
                                         }
                                     }
-                                    // else{
-                                    //    graphics.lineStyle(9, 0xFDFC00, 2);
-                                    //     draws(firstPath[0]);
-                                    // }
-
                                 }
-                                //  else{
-                                //    graphics.lineStyle(9, 0x0CD70B, 2);
-                                //    draws(firstPath[0]);
-                                // }
-
-
                             }
-                            // if(getWay.length>0){
-
-                            // }
 
                         }
                     }
                 })
             })
-            killStep.push(getWay);
-            //console.log(killStep)
+            
+            
         }
 
     }
@@ -421,119 +372,111 @@ function create() {
             p.draw(graphics, 50);
         }
     }
-     StartAnim.init(360, 1, "anim", "activeBorder", "activeBorder1", 1);
-    var getUA = {};
-    this.input.on('pointerdown', function(event, gameObjects) {
-        console.log(event.upX.toFixed(0) + "," + event.upY.toFixed(0))
-        console.log(StartAnim.turn)
-        var CH = gameObjects[0];
-         
-        if (CH) {
-            var a1_ = (CH.Guti)?CH.Guti.split('_')[0].match(/\d+/)[0]:null;
-            if((StartAnim.turn ==a1_ || a1_==null )){
-            
-            var paths = CH.Path.split(',');
-            getUA[CH.HName] = {};
-            getUA[CH.HName].path = paths;
-            getUA[CH.HName].startGuiti = t[CH.Guti];
-            getUA[CH.HName].changeGutiStatus = CH.Guti;
-            getUA[CH.HName].hotspotTarget = CH.HName;
-            getUA[CH.HName].dr = CH.dr;
-            getUA[CH.HName].xx = CH.x;
-            getUA[CH.HName].yy = CH.y;
-            if (Object.keys(getUA).length == 1) {
-                if (CH.Guti) {
-                    DrawGamePoints();
-                    $.each(paths, function(k, v) {
-                        $.each(hotspot, function(k1, v1) {
-                            if (CH.HName != v1.HName) {
-                                var y = v1.Path.split(',').indexOf(v);
-                                if (y != -1) {
-                                    if (!v1.Guti) {
-                                        //select first step path.
 
-                                        graphics.lineStyle(9, 0xFF0000, 2);
-                                        draws(v);
-                                    } else {
-                                        //select second step path.
-                                        getSecond(t[v1.HName], CH);
+    var getUA = {};
+    function selectGuti(CH){
+         if (CH) {
+            var a1_ = (CH.Guti) ? CH.Guti.split('_')[0].match(/\d+/)[0] : null;
+            if ((t.Anims.turn == a1_ || a1_ == null)) {
+
+                var paths = CH.Path.split(',');
+                getUA[CH.HName] = {};
+                getUA[CH.HName].path = paths;
+                getUA[CH.HName].startGuiti = t[CH.Guti];
+                getUA[CH.HName].changeGutiStatus = CH.Guti;
+                getUA[CH.HName].hotspotTarget = CH.HName;
+                getUA[CH.HName].dr = CH.dr;
+                getUA[CH.HName].xx = CH.x;
+                getUA[CH.HName].yy = CH.y;
+                if (Object.keys(getUA).length == 1) {
+                    if (CH.Guti) {
+                        DrawGamePoints();
+                        $.each(paths, function(k, v) {
+                            $.each(hotspot, function(k1, v1) {
+                                if (CH.HName != v1.HName) {
+                                    var y = v1.Path.split(',').indexOf(v);
+                                    if (y != -1) {
+                                        if (!v1.Guti) {
+                                            //select first step path.
+                                            //console.log(v1)
+                                            graphics.lineStyle(9, 0xFF0000, 2);
+                                            draws(v);
+                                        } else {
+                                            //select second step path.
+                                            getSecond(t[v1.HName], CH);
+                                        }
                                     }
                                 }
+                            })
+                        })
+                    } else {
+                        updateHotspotData();
+                        DrawGamePoints();
+                        getUA = {};
+                    }
+                } else if (Object.keys(getUA).length == 2 && (CH.Guti == null)) {
+
+                    var movePath = getUA[Object.keys(getUA)[0]].path.filter(function(obj) { return getUA[Object.keys(getUA)[1]].path.indexOf(obj) != -1; });
+                    if (movePath[0]) {
+                        var drMove = (getUA[Object.keys(getUA)[0]].dr[movePath[0]]) ? -1 : 1;
+                        getUA[Object.keys(getUA)[0]].startGuiti.xx = getUA[Object.keys(getUA)[0]].xx;
+                        getUA[Object.keys(getUA)[0]].startGuiti.yy = getUA[Object.keys(getUA)[0]].yy;
+                        getUA[Object.keys(getUA)[0]].startGuiti.CurrentPath = movePath[0];
+                        moveGuti(getUA[Object.keys(getUA)[0]].startGuiti, movePath[0], false, drMove, 500);
+                        $.each(hotspot, function(k, v) {
+                            if (v.HName == getUA[Object.keys(getUA)[0]].hotspotTarget) {
+                                v.Guti = null;
+                            }
+                            if (v.HName == CH.HName) {
+                                v.Guti = getUA[Object.keys(getUA)[0]].changeGutiStatus;
                             }
                         })
-                    })
-                } else {
+                    } else {
+                        var C_ = killStep.filter(function(obj) { return obj.a3 == CH.HName; });
+                        var tyu = (C_.length == 2) ? C_[1] : C_[0];
+                        if (tyu) {
+                            tyu = (C_.length == 3) ? C_[2] : tyu;
+                            var drMove = (getUA[Object.keys(getUA)[0]].dr[tyu.path1]) ? -1 : 1;
+                            getUA[Object.keys(getUA)[0]].startGuiti.xx = getUA[Object.keys(getUA)[0]].xx;
+                            getUA[Object.keys(getUA)[0]].startGuiti.yy = getUA[Object.keys(getUA)[0]].yy;
+                            var a1_ = hotspot.filter(function(obj) { return obj.HName == tyu.a1; })[0];
+                            var a2_ = hotspot.filter(function(obj) { return obj.HName == tyu.a2; })[0];
+                            a1_ = a1_.Guti.split('_')[0].match(/\d+/)[0];
+                            a2_ = a2_.Guti.split('_')[0].match(/\d+/)[0];
+                            turns = 0;
+                            if (a1_ != a2_) {
+                                moveGuti1(getUA[Object.keys(getUA)[0]].startGuiti, tyu, false, drMove, 500, 1);
+                                $.each(hotspot, function(k, v) {
+                                    if (v.HName == getUA[Object.keys(getUA)[0]].hotspotTarget) {
+                                        v.Guti = null;
+                                    }
+                                    if (v.HName == CH.HName) {
+                                        v.Guti = getUA[Object.keys(getUA)[0]].changeGutiStatus;
+                                    }
+                                })
+                            }
+                        }
+                    }
                     updateHotspotData();
                     DrawGamePoints();
                     getUA = {};
-                }
-            } else if (Object.keys(getUA).length == 2 && (CH.Guti == null)) {
-
-                var movePath = getUA[Object.keys(getUA)[0]].path.filter(function(obj) { return getUA[Object.keys(getUA)[1]].path.indexOf(obj) != -1; });
-                if (movePath[0]) {
-                    var drMove = (getUA[Object.keys(getUA)[0]].dr[movePath[0]]) ? -1 : 1;
-                    getUA[Object.keys(getUA)[0]].startGuiti.xx = getUA[Object.keys(getUA)[0]].xx;
-                    getUA[Object.keys(getUA)[0]].startGuiti.yy = getUA[Object.keys(getUA)[0]].yy;
-
-                    getUA[Object.keys(getUA)[0]].startGuiti.CurrentPath = movePath[0];
-                    moveGuti(getUA[Object.keys(getUA)[0]].startGuiti, movePath[0], false, drMove, 500);
-                    //console.log(getUA[Object.keys(getUA)[0]].startGuiti)
-                    $.each(hotspot, function(k, v) {
-                        if (v.HName == getUA[Object.keys(getUA)[0]].hotspotTarget) {
-                            v.Guti = null;
-                        }
-                        if (v.HName == CH.HName) {
-                            v.Guti = getUA[Object.keys(getUA)[0]].changeGutiStatus;
-                        }
-                    })
                 } else {
-                    //console.log(killStep)
-                    var C_ = killStep.filter(function(obj) { return obj.a3 == CH.HName; });
-                    //console.log(C_[0])
-                    // console.log(getUA[Object.keys(getUA)[0]])
-                    //  console.log(CH)
-                    var tyu = (C_.length == 2) ? C_[1] : C_[0];
-                    if (tyu) {
-                        tyu = (C_.length == 3) ? C_[2] : tyu;
-                        var drMove = (getUA[Object.keys(getUA)[0]].dr[tyu.path1]) ? -1 : 1;
-                        getUA[Object.keys(getUA)[0]].startGuiti.xx = getUA[Object.keys(getUA)[0]].xx;
-                        getUA[Object.keys(getUA)[0]].startGuiti.yy = getUA[Object.keys(getUA)[0]].yy;
-                        //console.log(C_)
-                        //console.log(tyu)
-                        var a1_ = hotspot.filter(function(obj) { return obj.HName == tyu.a1; })[0];
-                        var a2_ = hotspot.filter(function(obj) { return obj.HName == tyu.a2; })[0];
-                        a1_ = a1_.Guti.split('_')[0].match(/\d+/)[0];
-                        a2_ = a2_.Guti.split('_')[0].match(/\d+/)[0];
-                        turns = 0;
-                        if (a1_ != a2_) {
-                            moveGuti1(getUA[Object.keys(getUA)[0]].startGuiti, tyu, false, drMove, 500, 1);
-                            $.each(hotspot, function(k, v) {
-                                if (v.HName == getUA[Object.keys(getUA)[0]].hotspotTarget) {
-                                    v.Guti = null;
-                                }
-                                if (v.HName == CH.HName) {
-                                    v.Guti = getUA[Object.keys(getUA)[0]].changeGutiStatus;
-                                }
-                            })
-                        }
-                    }
-
+                    DrawGamePoints();
+                    getUA = {};
                 }
-
-
-                updateHotspotData();
-                DrawGamePoints();
-                getUA = {};
-            } else {
-                DrawGamePoints();
-                getUA = {};
             }
-        }}
+        }
+    }
+    this.input.on('pointerdown', function(event, gameObjects) {
+        //console.log(event.upX.toFixed(0) + "," + event.upY.toFixed(0))
+        //console.log(gameObjects[0])
+        killStep=[];
+        var CH = gameObjects[0];
+        selectGuti(CH);
     });
-    var turns = 0;
 
+    var turns = 0;
     function moveGuti1(gutiName, moveingLine, lineCurve, step, duration, turn) {
-        // console.log(turn)
         var from = (step == -1) ? 1 : 0;
         step = (step == -1) ? 0 : step;
         var selectPath = (turn == 1) ? moveingLine.path1 : moveingLine.path2;
@@ -597,17 +540,13 @@ function create() {
                     }
                     a2_[0].Guti = null;
                     var drMove1 = (a2_[0].dr[moveingLine.path2]) ? -1 : 1;
-                    //  console.log(gutiName.x,gutiName.y)
                     gutiName.xxx = gutiName.x;
                     gutiName.yyx = gutiName.y;
-                    // console.log(gutiName.xx,gutiName.yy)
                     moveGuti1(gutiName, moveingLine, false, drMove1, 500, 2);
-
                     turns = 2;
                     killStep = [];
-
                 } else {
-turnFun()
+                    turnFun(gutiName.Name);
                     updateHotspotData();
                     DrawGamePoints();
                     getUA = {};
@@ -618,18 +557,68 @@ turnFun()
             }
         });
     }
-    // this.input.on('pointerdown', function (pointer) {
+function turnFun(v) {
+    var gutiG = v.split('_')[0].match(/\d+/)[0];
+    t.Anims.CGuti=gutiG;
+    t.Anims.turn = (gutiG == 1) ? 2 : 1;
+    t.Anims.i = 0;
+    t.Anims.prec = 0;
+    DrawGamePoints();
+    getUA = {};
+    setTurn(t.Anims.turn);
+    if(t.Anims.turn== 2){
+      Bot();  
+    } 
 
-    // }, this);
-   
 }
-function turnFun(){
-console.log("Guti Moved.",StartAnim.turn)
- StartAnim.turn= (StartAnim.turn == 1) ? 2 : 1;
- StartAnim.i = 0;
- StartAnim.prec = 0;
-  StartAnim.setTurn(StartAnim.turn)
+// Bot();
+function Bot(){
+    //selectGuti(t[hotspot[14].HName]);
+        //selectGuti(t[hotspot[2].HName]);
+        //console.log(getWay)
+        var liveG =[];
+        $.each(hotspot, function(k, v) {
+            if(v.Guti != null){
+                var gutiG = v.Guti.split('_')[0].match(/\d+/)[0];
+                if(gutiG == 2){
+                    liveG.push(v.HName);
+                }
+            }
+        });
+        
+        var loop= 0;
+        callboot();
+        function callboot(){
+
+            selectGuti(t[liveG[loop]]);
+             console.log(killStep);
+             setTimeout(function(){
+ if(killStep.length==0){
+                loop++;
+                callboot();
+            }
+             },100)
+          
+           
+            
+
+        }
+        // $.each(liveG, function(k, v) {
+
+        //     setTimeout(function(){
+                
+        //     },500)
+        //       //  selectGuti(t[v]);
+        //        // console.log(v)
+        // })
+       // console.log(liveG)
+
 }
+    // t.Anims.setTurn(t.Anims.turn);
+    
+ //updateHotspotData();
+                    
+
 function showKillGuti() {
     KillGuti['A'].forEach(function(v, i, arr) {
         $("#user1 li").eq(i).addClass('addGreen')
@@ -638,83 +627,74 @@ function showKillGuti() {
         $("#user2 li").eq(i).addClass('addBlue')
     })
 }
-
-var StartAnim = {
-    i: 0,
-    prec: null,
-    activeBorder: null,
-    degs: null,
-    el: null,
-    thi: null,
-    sec: 1,
-    el1: null,
-    turn: null,
-    init: function(degs, sec, el, el1, el2, turn) {
-        console.log("turn",turn)
-        this.degs = degs
-        thi = this;
-        this.turn = turn;
-        this.sec = sec;
-        this.el1 = el1;
-        this.el2 = el2;
-        this.el = el;
+t.Anims = {};
+callAnim(360, 60, "anim", "activeBorder", "activeBorder1", 1);
+function callAnim(degs, sec, el, el1, el2, turn) {
+        t.Anims.degs = degs
+        t.Anims.turn = turn;
+        t.Anims.sec = sec;
+        t.Anims.el1 = el1;
+        t.Anims.el2 = el2;
+        t.Anims.el = el;
+        t.Anims.i = 0;
+                t.Anims.prec = 0;
         $("." + el).append("<div id='circle' class='circle'><span class='prec 360' id='prec'>0%</span></div>");
-        this.activeBorder = $("." + el);
+        t.Anims.activeBorder = $("." + el);
         setTimeout(function() {
-            if ($("#circle").is(":hover"))
-                StartAnim.loopit("c");
-            else
-                StartAnim.loopit("nc");
-        }, 1);
-    },
-    loopit: function(dir) {
-            thi.i++
-        
-
-        if (thi.i < 0) {
-            thi.i = 0;
-        }
-        if (thi.i > thi.degs) {
-            thi.i = thi.degs;
-        }
-        thi.prec = (100 * thi.i) / 360;
-        $("." + this.el + " .prec").html(Math.round(thi.prec) + "%");
-
-        if (thi.i <= 180) {
-            thi.activeBorder.css('background-image', 'linear-gradient(' + (90 + thi.i) + 'deg, transparent 50%, #A2ECFB 50%),linear-gradient(90deg, #A2ECFB 50%, transparent 50%)');
-        } else {
-            thi.activeBorder.css('background-image', 'linear-gradient(' + (thi.i - 90) + 'deg, transparent 50%, #ff0000 50%),linear-gradient(90deg, #A2ECFB 50%, transparent 50%)');
-        }
-        var t = setTimeout(function() {
-            if (thi.prec == 100) {
-                thi.i = 0;
-                thi.prec = 0;
-                thi.turn = (thi.turn == 1) ? 2 : 1;
-                var first1 = $("#" + thi.el1).hasClass('anim');
-                var first2 = $("#" + thi.el2).hasClass('anim');
-                //console.log('first1',first1,'first2',first2,"turn",thi.turn)
-                thi.setTurn(thi.turn)
-                thi.activeBorder = $("." + thi.el);
-                $("." + thi.el).append("<div id='circle' class='circle'><span class='prec 360' id='prec'>0%</span></div>");
-                thi.loopit("c");
+          loopit("c");
+        }, 66);
+    }
+   function loopit(dir) {
+        setInterval(function() {
+            if (t.Anims.prec == 100) {
+                t.Anims.i = 0;
+                t.Anims.prec = 0;
+                
+                if(t.Anims.CGuti){
+                    t.Anims.turn = (t.Anims.CGuti == 1) ? 2 : 1;
+                }else{
+                   t.Anims.turn = (t.Anims.turn == 1) ? 2 : 1; 
+                }
+                
+                // setTurn.call(t.Anims.turn);
+                setTurn(t.Anims.turn);
+                t.Anims.CGuti=null
             } else {
-                thi.loopit("c");
+                // clearInterval(t)
+                t.Anims.i++;
+                if (t.Anims.i < 0) {
+                    t.Anims.i = 0;
+                }
+                if (t.Anims.i > t.Anims.degs) {
+                    t.Anims.i = t.Anims.degs;
+                }
+                t.Anims.prec = (100 * t.Anims.i) / 360;
+                $("." + t.Anims.el + " .prec").html(Math.round(t.Anims.prec) + "%");
+
+                if (t.Anims.i <= 180) {
+                    $("." + t.Anims.el).css('background-image', 'linear-gradient(' + (90 + t.Anims.i) + 'deg, transparent 50%, #A2ECFB 50%),linear-gradient(90deg, #A2ECFB 50%, transparent 50%)');
+                } else {
+                    $("." + t.Anims.el).css('background-image', 'linear-gradient(' + (t.Anims.i - 90) + 'deg, transparent 50%, #ff0000 50%),linear-gradient(90deg, #A2ECFB 50%, transparent 50%)');
+                }
                 // window.requestAnimationFrame(thi.loopit);
             }
-        }, this.sec);
 
-    },
-    setTurn:function(t){
-         if (t == 2 ) {
-                    $("#" + thi.el1).removeClass('anim').html('').attr('style', '');
-                    $("#" + thi.el2).addClass('anim');
-                }
-                if (t == 1) {
-                    $("#" + thi.el2).removeClass('anim').html('').attr('style', '');
-                    $("#" + thi.el1).addClass('anim');
-                }
-                thi.activeBorder = $("." + thi.el);
-                $("." + thi.el).append("<div id='circle' class='circle'><span class='prec 360' id='prec'>0%</span></div>");
-                thi.loopit("c");
+        }, t.Anims.sec);
+
     }
+
+
+function setTurn(val) {
+   // console.log("Guti Moved.", t.Anims.turn)
+    if (val == 2) {
+        $("#" + t.Anims.el1).removeClass('anim').html('').attr('style', '');
+        $("#" + t.Anims.el2).addClass('anim');
+    }
+    if (val == 1) {
+        $("#" + t.Anims.el2).removeClass('anim').html('').attr('style', '');
+        $("#" + t.Anims.el1).addClass('anim');
+    }
+    $("." + t.Anims.el).append("<div id='circle' class='circle'><span class='prec 360' id='prec'>0%</span></div>");
+    // thi.loopit("c");
+}
 }
