@@ -348,7 +348,8 @@ function create() {
                                             graphics.lineStyle(9, 0xFF0000, 2);
                                             draws(tp['path1']);
                                             draws(tp['path2']);
-                                            console.log(getWay);killStep.push(getWay);
+                                            //console.log(getWay);
+                                            killStep.push(getWay);
                                         }
                                     }
                                 }
@@ -389,6 +390,7 @@ function create() {
                 getUA[CH.HName].xx = CH.x;
                 getUA[CH.HName].yy = CH.y;
                 if (Object.keys(getUA).length == 1) {
+                      killStep=[];
                     if (CH.Guti) {
                         DrawGamePoints();
                         $.each(paths, function(k, v) {
@@ -470,7 +472,7 @@ function create() {
     this.input.on('pointerdown', function(event, gameObjects) {
         //console.log(event.upX.toFixed(0) + "," + event.upY.toFixed(0))
         //console.log(gameObjects[0])
-        killStep=[];
+      
         var CH = gameObjects[0];
         selectGuti(CH);
     });
@@ -589,19 +591,24 @@ function Bot(){
         var loop= 0;
         callboot();
         function callboot(){
+var g = liveG[loop]
+            selectGuti(t[g]);
+            var k = killStep
+             console.log(k);
+             if(loop<liveG.length-1 ){
+  
 
-            selectGuti(t[liveG[loop]]);
-             console.log(killStep);
-             setTimeout(function(){
- if(killStep.length==0){
-                loop++;
-                callboot();
-            }
-             },100)
-          
-           
-            
+            var inter = setTimeout(function(){
+                if(killStep.length==0){
+                    loop++;
+                    callboot();
+                }else{
+                    selectGuti(t[killStep[0].a3]);
+                }
 
+                clearTimeout(inter) 
+             },1000)
+}
         }
         // $.each(liveG, function(k, v) {
 
