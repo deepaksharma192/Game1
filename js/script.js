@@ -349,6 +349,7 @@ function create() {
                                             draws(tp['path1']);
                                             draws(tp['path2']);
                                             //console.log(getWay);
+                                            tp['HName']=CH1.HName;
                                             killStep.push(getWay);
                                         }
                                     }
@@ -591,24 +592,22 @@ function Bot(){
         var loop= 0;
         callboot();
         function callboot(){
-var g = liveG[loop]
+            var g = liveG[loop];
             selectGuti(t[g]);
-            var k = killStep
-             console.log(k);
-             if(loop<liveG.length-1 ){
-  
-
-            var inter = setTimeout(function(){
-                if(killStep.length==0){
-                    loop++;
-                    callboot();
-                }else{
-                    selectGuti(t[killStep[0].a3]);
-                }
-
-                clearTimeout(inter) 
-             },1000)
-}
+            var k = killStep;
+            console.log(k)
+             if(loop<liveG.length ){
+                var inter = setTimeout(function(){
+                    if(k.length==0){
+                        loop++;
+                        getUA = {};
+                        callboot();
+                    }else{
+                        selectGuti(t[k[0].a3]);
+                    }
+                    clearTimeout(inter);
+                 },200)
+            }
         }
         // $.each(liveG, function(k, v) {
 
