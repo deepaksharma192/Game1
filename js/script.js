@@ -554,6 +554,7 @@ function create() {
                         showKillGuti();
                     }
                     a2_[0].Guti = null;
+                    t[a2_[0].HName].Guti = null;
                     var drMove1 = (a2_[0].dr[moveingLine.path2]) ? -1 : 1;
                     gutiName.xxx = gutiName.x;
                     gutiName.yyx = gutiName.y;
@@ -586,14 +587,16 @@ function turnFun(v) {
     //moveFree=[];
     if(t.Anims.turn== 2){
         isBot=true;
+        moveFree=[];
       Bot();  
     }
 }
+
 // Bot();
 function Bot(){
-     //selectGuti(t[hotspot[14].HName]);
+        //selectGuti(t[hotspot[14].HName]);
         //selectGuti(t[hotspot[2].HName]);
-        //console.log(getWay)
+        //console.log(getWay);
         var liveG =[];
         $.each(hotspot, function(k, v) {
             if(v.Guti != null){
@@ -608,11 +611,10 @@ function Bot(){
         callboot();
         function callboot(){
             var g = liveG[loop];
+           // getUA = {};
             selectGuti(t[g]);
             var k = killStep;
-            console.log(k,moveFree);
-            
-             if(loop<liveG.length ){
+             if(loop<=liveG.length){
                 var inter = setTimeout(function(){
                     if(k.length==0){
                         loop++;
@@ -624,30 +626,19 @@ function Bot(){
                     clearTimeout(inter);
                  },200)
             }
-            if(loop==11){
+            if(loop==liveG.length-1){
                 console.log(moveFree);
+                getUA = {};
                 selectGuti(t[moveFree[0].a1]);
-               var inter =  setTimeout(function(){
+               var inter1 =  setTimeout(function(){
                     selectGuti(t[moveFree[0].a2]);
-                    clearTimeout(inter);
-                })
+                    clearTimeout(inter1);
+                },100)
                 
             }
         }
-        // $.each(liveG, function(k, v) {
-
-        //     setTimeout(function(){
-                
-        //     },500)
-        //       //  selectGuti(t[v]);
-        //        // console.log(v)
-        // })
-       // console.log(liveG)
-
 }
-    // t.Anims.setTurn(t.Anims.turn);
-    
- //updateHotspotData();
+
                     
 
 function showKillGuti() {
@@ -718,6 +709,7 @@ function callAnim(degs, sec, el, el1, el2, turn) {
 function setTurn(val) {
    // console.log("Guti Moved.", t.Anims.turn)
     if (val == 2) {
+
         $("#" + t.Anims.el1).removeClass('anim').html('').attr('style', '');
         $("#" + t.Anims.el2).addClass('anim');
     }
