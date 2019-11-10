@@ -345,9 +345,11 @@ function create() {
                                         a1_ = a1_.Guti.split('_')[0].match(/\d+/)[0];
                                         a2_ = a2_.Guti.split('_')[0].match(/\d+/)[0];
                                         if (!a3_.Guti && (a1_ != a2_)) {
+                                            if(!isBot){
                                             graphics.lineStyle(9, 0xFF0000, 2);
                                             draws(tp['path1']);
                                             draws(tp['path2']);
+                                        }
                                             //console.log(getWay);
                                             tp['HName']=CH1.HName;
                                             killStep.push(getWay);
@@ -376,6 +378,7 @@ function create() {
     }
 
     var getUA = {};
+    var moveFree = [];
     function selectGuti(CH){
          if (CH) {
             var a1_ = (CH.Guti) ? CH.Guti.split('_')[0].match(/\d+/)[0] : null;
@@ -392,6 +395,7 @@ function create() {
                 getUA[CH.HName].yy = CH.y;
                 if (Object.keys(getUA).length == 1) {
                       killStep=[];
+                      moveFree_={};
                     if (CH.Guti) {
                         DrawGamePoints();
                         $.each(paths, function(k, v) {
@@ -401,9 +405,17 @@ function create() {
                                     if (y != -1) {
                                         if (!v1.Guti) {
                                             //select first step path.
-                                            //console.log(v1)
-                                            graphics.lineStyle(9, 0xFF0000, 2);
-                                            draws(v);
+                                             
+                                                if(!isBot){
+                                                    graphics.lineStyle(9, 0xFF0000, 2);
+                                                    draws(v);
+                                                }else{
+                                                   var mo = v1.Path.split(',').filter(function(obj) { return CH.Path.split(',').indexOf(obj) != -1; });
+                                                    moveFree_['a1'] =CH.HName;
+                                                    moveFree_['a2'] =v1.HName;
+                                                    moveFree_['path1'] =mo[0];
+                                                    moveFree.push(moveFree_) 
+                                                }
                                         } else {
                                             //select second step path.
                                             getSecond(t[v1.HName], CH);
@@ -560,8 +572,10 @@ function create() {
             }
         });
     }
+    var isBot  =false;
 function turnFun(v) {
     var gutiG = v.split('_')[0].match(/\d+/)[0];
+     isBot=false;
     t.Anims.CGuti=gutiG;
     t.Anims.turn = (gutiG == 1) ? 2 : 1;
     t.Anims.i = 0;
@@ -569,14 +583,15 @@ function turnFun(v) {
     DrawGamePoints();
     getUA = {};
     setTurn(t.Anims.turn);
+    //moveFree=[];
     if(t.Anims.turn== 2){
+        isBot=true;
       Bot();  
-    } 
-
+    }
 }
 // Bot();
 function Bot(){
-    //selectGuti(t[hotspot[14].HName]);
+     //selectGuti(t[hotspot[14].HName]);
         //selectGuti(t[hotspot[2].HName]);
         //console.log(getWay)
         var liveG =[];
@@ -595,7 +610,8 @@ function Bot(){
             var g = liveG[loop];
             selectGuti(t[g]);
             var k = killStep;
-            console.log(k)
+            console.log(k,moveFree);
+            
              if(loop<liveG.length ){
                 var inter = setTimeout(function(){
                     if(k.length==0){
@@ -607,6 +623,15 @@ function Bot(){
                     }
                     clearTimeout(inter);
                  },200)
+            }
+            if(loop==11){
+                console.log(moveFree);
+                selectGuti(t[moveFree[0].a1]);
+               var inter =  setTimeout(function(){
+                    selectGuti(t[moveFree[0].a2]);
+                    clearTimeout(inter);
+                })
+                
             }
         }
         // $.each(liveG, function(k, v) {
