@@ -565,7 +565,7 @@ function create() {
                     turnFun(gutiName.Name);
                     updateHotspotData();
                     DrawGamePoints();
-                    getUA = {};
+                    //getUA = {};
                 }
             },
             onUpdate: function(tween, target) {
