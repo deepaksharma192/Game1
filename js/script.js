@@ -4,7 +4,7 @@ var config = {
     height: 1820,
     backgroundColor: 'rgba(255,110,110,0)',
 
-    parent: 'phaser-example',
+    parent: 'GameCanvas',
     physics: {
         default: 'impact',
         impact: {
@@ -22,9 +22,28 @@ var config = {
     }
 };
 var KillGuti = { A: [], B: [] }
+var game;
+var WithBot =false;
+function start(v){
+    if(v == 'Bot'){
+        WithBot =true;
+        $('#Seen1').hide();
+    $('#Seen2').show();
+    game = new Phaser.Game(config);
+    }else{
+        WithBot =false;
+        $('#Seen1').hide();
+    $('#Seen2').show();
+    game = new Phaser.Game(config);
+    }
+    
+   // game = game.scene.resume("default");
+}
+
+ 
 
 
-var game = new Phaser.Game(config);
+
 var hotspot = [
     { HName: "hotspot1", catagory: "A", Path: "path1_1,Curve1_1,Curve1_2", pos: "R1_L1", Guti: "Guti1_1", CurrentPath: "path1_1", dr: { 'Curve1_2': -1 } },
     { HName: "hotspot2", catagory: "A", Path: "path1_2,Curve2_1,Curve2_2,path1_1", pos: "R2_L1", Guti: "Guti1_2", CurrentPath: "path1_2", dr: { 'Curve2_2': -1, 'path1_1': -1 } },
@@ -59,7 +78,7 @@ var CurveLine = ["Curve1_1", "Curve1_2", "Curve1_3", "Curve1_4", "Curve1_5", "Cu
 var StraightLine = ["path1_1", "path1_2", "path1_3", "path2_1", "path2_2", "path2_3", "path3_1", "path3_2", "path3_3", "path4_1", "path4_2", "path4_3", "path5_1", "path5_2", "path5_3", "path6_1", "path6_2", "path6_3", "path7_1", "path7_2", "path7_3", "path8_1", "path8_2", "path8_3"]
 
 function preload() {
-    $('.phaser-example').hide()
+    $('.GameCanvas').hide()
     this.load.image('blue', 'img/blue.png');
     this.load.image('green', 'img/green.png');
     this.load.image('hotspot', 'img/hotspot.png');
@@ -81,7 +100,7 @@ function setting() {
 
 function create() {
 
-    $('.phaser-example').show()
+    $('.GameCanvas').show()
     t = this;
     //  this.stage.backgroundColor = "#4488AA";
     //this.game.startFullscreen();
@@ -90,10 +109,15 @@ function create() {
     // graphics.x=150;
     // graphics.y=-110;
     var colors = [0xFFFF00, 0xfffff1, 0xFFFF00, 0xfffff3, 0xFFFF00, 0xfffff5, 0xFFFF00, 0xfffff7, 0xFFFF00, 0xfffff1, 0xFFFF00, 0xfffff3, 0xFFFF00, 0xfffff5, 0xFFFF00, 0xfffff7, 0xFFFF00, 0xfffff1, 0xFFFF00, 0xfffff3, 0xFFFF00, 0xfffff5, 0xFFFF00, 0xfffff7];
+    var killStep = [];
+    var getUA = {};
+    var moveFree = [];
+    var turns = 0;
+    var isBot  =false;
 
     function DrawGamePoints() {
         graphics.clear();
-        CurveLine.forEach(function(v, i, arr) {
+        CurveLine.forEach(function (v, i, arr) {
             //console.log(i)
             graphics.lineStyle(9, 0xffffff, 3);
             // console.log(v)
@@ -104,7 +128,7 @@ function create() {
             }
         })
 
-        StraightLine.forEach(function(v, i, arr) {
+        StraightLine.forEach(function (v, i, arr) {
             graphics.lineStyle(9, 0xffffff, 3);
             eval(v).draw(graphics, 1);
         })
@@ -184,14 +208,8 @@ function create() {
     drowHotspot();
 
     function drowHotspot() {
-        $.each(hotspot, function(k, v) {
-            //  console.log(v.HName)
+        $.each(hotspot, function (k, v) {
             t[v.HName] = t.add.follower(eval(v.CurrentPath), 1, 1, 'hotspot').setInteractive();
-            
-            // setTimeout(function(){ 
-            //     v.x = t[v.HName].x;
-            // v.y = t[v.HName].y;
-            // }, 300);
             t[v.HName].catagory = v.catagory;
             t[v.HName].Path = v.Path;
             t[v.HName].pos = v.pos;
@@ -199,8 +217,6 @@ function create() {
             t[v.HName].CurrentPath = v.CurrentPath;
             t[v.HName].HName = v.HName;
             t[v.HName].dr = v.dr;
-            
-           // console.log(v.x,v.y)
             if (v.HName == "hotspot25") {
                 SetGuti(t[v.HName], eval(v.CurrentPath), false, -1, 0);
             } else {
@@ -210,7 +226,7 @@ function create() {
     }
 
     function updateHotspotData() {
-        $.each(hotspot, function(k, v) {
+        $.each(hotspot, function (k, v) {
             t[v.HName].catagory = v.catagory;
             t[v.HName].Path = v.Path;
             t[v.HName].pos = v.pos;
@@ -244,7 +260,6 @@ function create() {
         } else {
             gutiName.setPath(eval(moveingLine));
         }
-
         var path = eval(moveingLine);
         gutiName.startFollow({
             positionOnPath: true,
@@ -254,28 +269,31 @@ function create() {
             from: from,
             to: step,
             delay: 0,
-            onStart: function(tween, target) {
+            onStart: function (tween, target) {
                 gutiName.x = gutiName.xx;
                 gutiName.y = gutiName.yy;
-                // C_[0].Guti=null;
             },
-            onComplete: function(tween, target) {
-              
+            onComplete: function (tween, target) {
                 turnFun(gutiName.Name)
             },
-            onUpdate: function(tween, target) {}
+            onUpdate: function (tween, target) {}
         });
     }
-    var killStep = [];
 
     function getSecond(CH, CH1) {
         var paths = CH.Path.split(',');
         var paths1 = CH1.Path.split(',');
-        var firstPath = paths1.filter(function(obj) { return paths.indexOf(obj) != -1; });
-        var getWay = { a1: CH1.HName, a2: CH.HName, path1: firstPath[0] };
+        var firstPath = paths1.filter(function (obj) {
+            return paths.indexOf(obj) != -1;
+        });
+        var getWay = {
+            a1: CH1.HName,
+            a2: CH.HName,
+            path1: firstPath[0]
+        };
         if (CH1.Guti) {
-            $.each(paths, function(k, v) {
-                $.each(hotspot, function(k1, v1) {
+            $.each(paths, function (k, v) {
+                $.each(hotspot, function (k1, v1) {
                     if (CH.HName != v1.HName && CH1.HName != v1.HName) {
                         var y = v1.Path.split(',').indexOf(v);
                         if (y != -1) {
@@ -285,17 +303,24 @@ function create() {
                             var T_lineCheck = v1.pos.split('_')[1];
                             if ((C_lineCheck == T_lineCheck)) {
                                 var path_2 = v1.Path.split(',');
-                                var movePath = path_2.filter(function(obj) { return obj.indexOf('path') != -1; });
-                                var mo = movePath.filter(function(obj) { return v == obj; });
+                                var movePath = path_2.filter(function (obj) {
+                                    return obj.indexOf('path') != -1;
+                                });
+                                var mo = movePath.filter(function (obj) {
+                                    return v == obj;
+                                });
                                 getWay['a3'] = v1.HName;
                                 getWay['path2'] = mo[0];
                             }
                             if (C_CurveCheck == T_CurveCheck) {
                                 var path_2 = v1.Path.split(',');
-                                var movePath = path_2.filter(function(obj) { return obj.indexOf('Curve') != -1; });
-                                var mo = movePath.filter(function(obj) { return CH.Path.split(',').indexOf(obj) != -1; });
+                                var movePath = path_2.filter(function (obj) {
+                                    return obj.indexOf('Curve') != -1;
+                                });
+                                var mo = movePath.filter(function (obj) {
+                                    return CH.Path.split(',').indexOf(obj) != -1;
+                                });
                                 if (mo.length) {
-
                                     var C = parseInt(C_CurveCheck.match(/\d+/g)[0])
                                     var T = parseInt(mo[0].split('_')[0].match(/\d+/g));
                                     if ((mo[0].match(/Curve/g) == "Curve") && (C == T)) {
@@ -306,8 +331,12 @@ function create() {
                             }
                             if (v1.pos == "R0_L0") {
                                 var path_2 = v1.Path.split(',');
-                                var movePath = path_2.filter(function(obj) { return obj.indexOf('path') != -1; });
-                                var mo = movePath.filter(function(obj) { return CH.Path.split(',').indexOf(obj) != -1; });
+                                var movePath = path_2.filter(function (obj) {
+                                    return obj.indexOf('path') != -1;
+                                });
+                                var mo = movePath.filter(function (obj) {
+                                    return CH.Path.split(',').indexOf(obj) != -1;
+                                });
                                 var C = parseInt(C_lineCheck.match(/\d+/g)[0])
                                 var T = parseInt(mo[0].split('_')[0].match(/\d+/g));
                                 T = (T == 8) ? 4 : T;
@@ -321,17 +350,19 @@ function create() {
                             }
                             if (CH1.pos == "R0_L0") {
                                 var path_2 = v1.Path.split(',');
-                                var movePath = path_2.filter(function(obj) { return obj.indexOf('path') != -1; });
+                                var movePath = path_2.filter(function (obj) {
+                                    return obj.indexOf('path') != -1;
+                                });
                                 movePath = movePath[0].split('_')[0];
-
                                 var path_3 = CH.Path.split(',');
-                                var movePath1 = path_3.filter(function(obj) { return obj.indexOf('path') != -1; });
+                                var movePath1 = path_3.filter(function (obj) {
+                                    return obj.indexOf('path') != -1;
+                                });
                                 movePath1 = movePath1[0].split('_')[0];
                                 if (movePath == movePath1) {
                                     getWay['a3'] = v1.HName;
                                     getWay['path2'] = v1.CurrentPath;
                                 }
-
                             }
                             if (firstPath) {
                                 var tp = getWay;
@@ -339,19 +370,24 @@ function create() {
                                 if (a3) {
 
                                     if (tp.hasOwnProperty('path2')) {
-                                        var a1_ = hotspot.filter(function(obj) { return obj.HName == tp.a1; })[0];
-                                        var a2_ = hotspot.filter(function(obj) { return obj.HName == tp.a2; })[0];
-                                        var a3_ = hotspot.filter(function(obj) { return obj.HName == tp.a3; })[0];
+                                        var a1_ = hotspot.filter(function (obj) {
+                                            return obj.HName == tp.a1;
+                                        })[0];
+                                        var a2_ = hotspot.filter(function (obj) {
+                                            return obj.HName == tp.a2;
+                                        })[0];
+                                        var a3_ = hotspot.filter(function (obj) {
+                                            return obj.HName == tp.a3;
+                                        })[0];
                                         a1_ = a1_.Guti.split('_')[0].match(/\d+/)[0];
                                         a2_ = a2_.Guti.split('_')[0].match(/\d+/)[0];
                                         if (!a3_.Guti && (a1_ != a2_)) {
-                                            if(!isBot){
-                                            graphics.lineStyle(9, 0xFF0000, 2);
-                                            draws(tp['path1']);
-                                            draws(tp['path2']);
-                                        }
-                                            //console.log(getWay);
-                                            tp['HName']=CH1.HName;
+                                            if (!isBot) {
+                                                graphics.lineStyle(9, 0xFF0000, 2);
+                                                draws(tp['path1']);
+                                                draws(tp['path2']);
+                                            }
+                                            tp['HName'] = CH1.HName;
                                             killStep.push(getWay);
                                         }
                                     }
@@ -362,10 +398,7 @@ function create() {
                     }
                 })
             })
-            
-            
         }
-
     }
 
     function draws(val) {
@@ -377,10 +410,9 @@ function create() {
         }
     }
 
-    var getUA = {};
-    var moveFree = [];
-    function selectGuti(CH){
-         if (CH) {
+
+    function selectGuti(CH) {
+        if (CH) {
             var a1_ = (CH.Guti) ? CH.Guti.split('_')[0].match(/\d+/)[0] : null;
             if ((t.Anims.turn == a1_ || a1_ == null)) {
 
@@ -394,28 +426,29 @@ function create() {
                 getUA[CH.HName].xx = CH.x;
                 getUA[CH.HName].yy = CH.y;
                 if (Object.keys(getUA).length == 1) {
-                      killStep=[];
-                      moveFree_={};
+                    killStep = [];
+                    moveFree_ = {};
                     if (CH.Guti) {
                         DrawGamePoints();
-                        $.each(paths, function(k, v) {
-                            $.each(hotspot, function(k1, v1) {
+                        $.each(paths, function (k, v) {
+                            $.each(hotspot, function (k1, v1) {
                                 if (CH.HName != v1.HName) {
                                     var y = v1.Path.split(',').indexOf(v);
                                     if (y != -1) {
                                         if (!v1.Guti) {
                                             //select first step path.
-                                             
-                                                if(!isBot){
-                                                    graphics.lineStyle(9, 0xFF0000, 2);
-                                                    draws(v);
-                                                }else{
-                                                   var mo = v1.Path.split(',').filter(function(obj) { return CH.Path.split(',').indexOf(obj) != -1; });
-                                                    moveFree_['a1'] =CH.HName;
-                                                    moveFree_['a2'] =v1.HName;
-                                                    moveFree_['path1'] =mo[0];
-                                                    moveFree.push(moveFree_) 
-                                                }
+                                            if (!isBot) {
+                                                graphics.lineStyle(9, 0xFF0000, 2);
+                                                draws(v);
+                                            } else {
+                                                var mo = v1.Path.split(',').filter(function (obj) {
+                                                    return CH.Path.split(',').indexOf(obj) != -1;
+                                                });
+                                                moveFree_['a1'] = CH.HName;
+                                                moveFree_['a2'] = v1.HName;
+                                                moveFree_['path1'] = mo[0];
+                                                moveFree.push(moveFree_)
+                                            }
                                         } else {
                                             //select second step path.
                                             getSecond(t[v1.HName], CH);
@@ -431,14 +464,16 @@ function create() {
                     }
                 } else if (Object.keys(getUA).length == 2 && (CH.Guti == null)) {
 
-                    var movePath = getUA[Object.keys(getUA)[0]].path.filter(function(obj) { return getUA[Object.keys(getUA)[1]].path.indexOf(obj) != -1; });
+                    var movePath = getUA[Object.keys(getUA)[0]].path.filter(function (obj) {
+                        return getUA[Object.keys(getUA)[1]].path.indexOf(obj) != -1;
+                    });
                     if (movePath[0]) {
                         var drMove = (getUA[Object.keys(getUA)[0]].dr[movePath[0]]) ? -1 : 1;
                         getUA[Object.keys(getUA)[0]].startGuiti.xx = getUA[Object.keys(getUA)[0]].xx;
                         getUA[Object.keys(getUA)[0]].startGuiti.yy = getUA[Object.keys(getUA)[0]].yy;
                         getUA[Object.keys(getUA)[0]].startGuiti.CurrentPath = movePath[0];
                         moveGuti(getUA[Object.keys(getUA)[0]].startGuiti, movePath[0], false, drMove, 500);
-                        $.each(hotspot, function(k, v) {
+                        $.each(hotspot, function (k, v) {
                             if (v.HName == getUA[Object.keys(getUA)[0]].hotspotTarget) {
                                 v.Guti = null;
                             }
@@ -447,21 +482,27 @@ function create() {
                             }
                         })
                     } else {
-                        var C_ = killStep.filter(function(obj) { return obj.a3 == CH.HName; });
+                        var C_ = killStep.filter(function (obj) {
+                            return obj.a3 == CH.HName;
+                        });
                         var tyu = (C_.length == 2) ? C_[1] : C_[0];
                         if (tyu) {
                             tyu = (C_.length == 3) ? C_[2] : tyu;
                             var drMove = (getUA[Object.keys(getUA)[0]].dr[tyu.path1]) ? -1 : 1;
                             getUA[Object.keys(getUA)[0]].startGuiti.xx = getUA[Object.keys(getUA)[0]].xx;
                             getUA[Object.keys(getUA)[0]].startGuiti.yy = getUA[Object.keys(getUA)[0]].yy;
-                            var a1_ = hotspot.filter(function(obj) { return obj.HName == tyu.a1; })[0];
-                            var a2_ = hotspot.filter(function(obj) { return obj.HName == tyu.a2; })[0];
+                            var a1_ = hotspot.filter(function (obj) {
+                                return obj.HName == tyu.a1;
+                            })[0];
+                            var a2_ = hotspot.filter(function (obj) {
+                                return obj.HName == tyu.a2;
+                            })[0];
                             a1_ = a1_.Guti.split('_')[0].match(/\d+/)[0];
                             a2_ = a2_.Guti.split('_')[0].match(/\d+/)[0];
                             turns = 0;
                             if (a1_ != a2_) {
                                 moveGuti1(getUA[Object.keys(getUA)[0]].startGuiti, tyu, false, drMove, 500, 1);
-                                $.each(hotspot, function(k, v) {
+                                $.each(hotspot, function (k, v) {
                                     if (v.HName == getUA[Object.keys(getUA)[0]].hotspotTarget) {
                                         v.Guti = null;
                                     }
@@ -484,13 +525,15 @@ function create() {
     }
     this.input.on('pointerdown', function(event, gameObjects) {
         //console.log(event.upX.toFixed(0) + "," + event.upY.toFixed(0))
-        //console.log(gameObjects[0])
-      
         var CH = gameObjects[0];
-        selectGuti(CH);
+       // var gutiG = CH.Guti.split('_')[0].match(/\d+/)[0];
+        //if(gutiG == 2 && WithBot != ture){
+selectGuti(CH);
+      //  }
+        
     });
 
-    var turns = 0;
+
     function moveGuti1(gutiName, moveingLine, lineCurve, step, duration, turn) {
         var from = (step == -1) ? 1 : 0;
         step = (step == -1) ? 0 : step;
@@ -529,7 +572,7 @@ function create() {
             from: from,
             to: step,
             delay: 0,
-            onStart: function(tween, target) {
+            onStart: function (tween, target) {
                 if (turn == 1 && turns == 0) {
                     gutiName.x = gutiName.xx;
                     gutiName.y = gutiName.yy;
@@ -538,10 +581,14 @@ function create() {
                     gutiName.y = t[moveingLine.a2].y;
                 }
             },
-            onComplete: function(tween, target) {
+            onComplete: function (tween, target) {
                 if (turn == 1 && turns == 0) {
-                    var a1_ = hotspot.filter(function(obj) { return obj.HName == moveingLine.a1; });
-                    var a2_ = hotspot.filter(function(obj) { return obj.HName == moveingLine.a2; });
+                    var a1_ = hotspot.filter(function (obj) {
+                        return obj.HName == moveingLine.a1;
+                    });
+                    var a2_ = hotspot.filter(function (obj) {
+                        return obj.HName == moveingLine.a2;
+                    });
                     if (a2_[0].Guti) {
                         t[a2_[0].Guti].x = 0;
                         t[a2_[0].Guti].y = 0;
@@ -568,90 +615,88 @@ function create() {
                     //getUA = {};
                 }
             },
-            onUpdate: function(tween, target) {
+            onUpdate: function (tween, target) {
                 // console.log(gutiName.x,gutiName.y)
             }
         });
     }
-    var isBot  =false;
-function turnFun(v) {
-    var gutiG = v.split('_')[0].match(/\d+/)[0];
-     isBot=false;
-    t.Anims.CGuti=gutiG;
-    t.Anims.turn = (gutiG == 1) ? 2 : 1;
-    t.Anims.i = 0;
-    t.Anims.prec = 0;
-    DrawGamePoints();
-    getUA = {};
-    setTurn(t.Anims.turn);
-    //moveFree=[];
-    if(t.Anims.turn== 2){
-        isBot=true;
-        moveFree=[];
-      Bot();  
+    
+    function turnFun(v) {
+        var gutiG = v.split('_')[0].match(/\d+/)[0];
+        isBot = false;
+        t.Anims.CGuti = gutiG;
+        t.Anims.turn = (gutiG == 1) ? 2 : 1;
+        t.Anims.i = 0;
+        t.Anims.prec = 0;
+        DrawGamePoints();
+        getUA = {};
+        setTurn(t.Anims.turn);
+        if (t.Anims.turn == 2) {
+           // 
+            moveFree = [];
+            if(WithBot){
+                isBot = true;
+                Bot();
+            }
+            
+        }
     }
-}
-
-// Bot();
-function Bot(){
-        //selectGuti(t[hotspot[14].HName]);
-        //selectGuti(t[hotspot[2].HName]);
-        //console.log(getWay);
-        var liveG =[];
-        $.each(hotspot, function(k, v) {
-            if(v.Guti != null){
+    function Bot() {
+        var liveG = [];
+        var loop = 0;
+        $.each(hotspot, function (k, v) {
+            if (v.Guti != null) {
                 var gutiG = v.Guti.split('_')[0].match(/\d+/)[0];
-                if(gutiG == 2){
+                if (gutiG == 2) {
                     liveG.push(v.HName);
                 }
             }
         });
-        
-        var loop= 0;
         callboot();
-        function callboot(){
+        function callboot() {
             var g = liveG[loop];
-           // getUA = {};
             selectGuti(t[g]);
             var k = killStep;
-             if(loop<=liveG.length){
-                var inter = setTimeout(function(){
-                    if(k.length==0){
+            if (loop <= liveG.length) {
+                var inter = setTimeout(function () {
+                    if (k.length == 0) {
                         loop++;
                         getUA = {};
                         callboot();
-                    }else{
+                    } else {
                         selectGuti(t[k[0].a3]);
                     }
                     clearTimeout(inter);
-                 },200)
+                }, 200)
             }
-            if(loop==liveG.length-1){
+            if (loop == liveG.length - 1) {
                 console.log(moveFree);
                 getUA = {};
                 selectGuti(t[moveFree[0].a1]);
-               var inter1 =  setTimeout(function(){
+                var inter1 = setTimeout(function () {
                     selectGuti(t[moveFree[0].a2]);
                     clearTimeout(inter1);
-                },100)
-                
+                }, 100)
+
             }
         }
-}
+    }
 
                     
 
-function showKillGuti() {
-    KillGuti['A'].forEach(function(v, i, arr) {
-        $("#user1 li").eq(i).addClass('addGreen')
-    })
-    KillGuti['B'].forEach(function(v, i, arr) {
-        $("#user2 li").eq(i).addClass('addBlue')
-    })
-}
-t.Anims = {};
-callAnim(360, 60, "anim", "activeBorder", "activeBorder1", 1);
-function callAnim(degs, sec, el, el1, el2, turn) {
+    function showKillGuti() {
+        KillGuti['A'].forEach(function (v, i, arr) {
+            $("#user1 li").eq(i).addClass('addGreen')
+        })
+        KillGuti['B'].forEach(function (v, i, arr) {
+            $("#user2 li").eq(i).addClass('addBlue')
+        })
+    }
+
+    t.Anims = {};
+    callAnim(360, 60, "anim", "activeBorder", "activeBorder1", 1);
+
+    function callAnim(degs, sec, el, el1, el2, turn) {
         t.Anims.degs = degs
         t.Anims.turn = turn;
         t.Anims.sec = sec;
@@ -659,30 +704,27 @@ function callAnim(degs, sec, el, el1, el2, turn) {
         t.Anims.el2 = el2;
         t.Anims.el = el;
         t.Anims.i = 0;
-                t.Anims.prec = 0;
+        t.Anims.prec = 0;
         $("." + el).append("<div id='circle' class='circle'><span class='prec 360' id='prec'>0%</span></div>");
         t.Anims.activeBorder = $("." + el);
-        setTimeout(function() {
-          loopit("c");
+        setTimeout(function () {
+            loopit("c");
         }, 66);
     }
-   function loopit(dir) {
-        setInterval(function() {
+
+    function loopit(dir) {
+        setInterval(function () {
             if (t.Anims.prec == 100) {
                 t.Anims.i = 0;
                 t.Anims.prec = 0;
-                
-                if(t.Anims.CGuti){
+                if (t.Anims.CGuti) {
                     t.Anims.turn = (t.Anims.CGuti == 1) ? 2 : 1;
-                }else{
-                   t.Anims.turn = (t.Anims.turn == 1) ? 2 : 1; 
+                } else {
+                    t.Anims.turn = (t.Anims.turn == 1) ? 2 : 1;
                 }
-                
-                // setTurn.call(t.Anims.turn);
                 setTurn(t.Anims.turn);
-                t.Anims.CGuti=null
+                t.Anims.CGuti = null
             } else {
-                // clearInterval(t)
                 t.Anims.i++;
                 if (t.Anims.i < 0) {
                     t.Anims.i = 0;
@@ -698,26 +740,22 @@ function callAnim(degs, sec, el, el1, el2, turn) {
                 } else {
                     $("." + t.Anims.el).css('background-image', 'linear-gradient(' + (t.Anims.i - 90) + 'deg, transparent 50%, #ff0000 50%),linear-gradient(90deg, #A2ECFB 50%, transparent 50%)');
                 }
-                // window.requestAnimationFrame(thi.loopit);
             }
-
         }, t.Anims.sec);
 
     }
 
 
-function setTurn(val) {
-   // console.log("Guti Moved.", t.Anims.turn)
-    if (val == 2) {
+    function setTurn(val) {
+        if (val == 2) {
+            $("#" + t.Anims.el1).removeClass('anim').html('').attr('style', '');
+            $("#" + t.Anims.el2).addClass('anim');
+        }
+        if (val == 1) {
+            $("#" + t.Anims.el2).removeClass('anim').html('').attr('style', '');
+            $("#" + t.Anims.el1).addClass('anim');
+        }
+        $("." + t.Anims.el).append("<div id='circle' class='circle'><span class='prec 360' id='prec'>0%</span></div>");
+    }
 
-        $("#" + t.Anims.el1).removeClass('anim').html('').attr('style', '');
-        $("#" + t.Anims.el2).addClass('anim');
-    }
-    if (val == 1) {
-        $("#" + t.Anims.el2).removeClass('anim').html('').attr('style', '');
-        $("#" + t.Anims.el1).addClass('anim');
-    }
-    $("." + t.Anims.el).append("<div id='circle' class='circle'><span class='prec 360' id='prec'>0%</span></div>");
-    // thi.loopit("c");
-}
 }
