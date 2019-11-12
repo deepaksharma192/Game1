@@ -1,195 +1,233 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <title>HTML</title>
-         <meta charset="utf-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <style type="text/css">
         body {
             margin: 0;
-               background:url('img/bg.png'); 
-                   background-size: 100% 100%;
-
+            background: url('img/bg.png');
+            background-size: 100% 100%;
         }
-        .phaser-example{
+        
+        .phaser-example {
             display: none;
-        }.header p{
-   font-size: 90px;
-    text-align: center;
-    
-        color: #0078f7;
         }
+        
+        .header p {
+            font-size: 90px;
+            text-align: center;
+            color: #0078f7;
+        }
+        
         .header {
+            width: 100%;
+            background: #ffb60b;
+            height: 76px;
+            position: absolute;
+            box-shadow: 0px 0px 28px #00adff;
+        }
+        
+        img.setting {
+            width: 50px;
+            cursor: pointer;
+            position: absolute;
+            left: 10px;
+            top: 80px;
+        }
+        
+        .header ul#user1 {
+            width: 256px;
+            display: block;
+            position: absolute;
+            left: 6px;
+            padding: 0px;
+            height: 63px;
+            margin: 0px;
+            top: 7px;
+            background: #4CAF50;
+            border-radius: 6px;
+        }
+        
+        .header #user1 li {
+            background: #5c985e;
+            width: 20px;
+            float: left;
+            height: 20px;
+            margin: 6px 11px;
+            list-style: none;
+            border-radius: 50px;
+        }
+        
+        .header .user_prof {
+            position: absolute;
+            width: 90px;
+            right: 12px;
+            top: 15px;
+        }
+        
+        .fooder ul#user2 {
+            width: 256px;
+            display: block;
+            position: absolute;
+            right: 6px;
+            padding: 0px;
+            height: 63px;
+            margin: 0px;
+            top: 7px;
+            background: #4CAF50;
+            border-radius: 6px;
+        }
+        
+        .fooder #user2 li {
+            background: #5c985e;
+            width: 20px;
+            float: left;
+            height: 20px;
+            margin: 6px 11px;
+            list-style: none;
+            border-radius: 50px;
+        }
+        
+        .fooder .user_prof {
+            position: absolute;
+            width: 90px;
+            left: 12px;
+            top: -25px;
+        }
+        
+        .fooder {
+            width: 100%;
+            background: #ffb60b;
+            height: 76px;
+            position: relative;
+            box-shadow: 0px 0px 28px #1174ef;
+            bottom: 46px;
+        }
+        
+        .addGreen {
+            background-image: url(img/green.png) !important;
+            background-size: 20px !important;
+            box-shadow: 0px 0px 6px #1e1f1f;
+        }
+        
+        .addBlue {
+            background-image: url(img/blue.png) !important;
+            background-size: 21px !important;
+            box-shadow: 0px 0px 6px #1e1f1f;
+        }
+        
+        .prec {
+            top: 30px;
+            position: relative;
+            font-size: 30px;
+        }
+        
+        .circle {
+            position: relative;
+            top: 5px;
+            left: 5px;
+            text-align: center;
+            width: 100px;
+            height: 100px;
+            border-radius: 100%;
+            background-color: transparent;
+        }
+        
+        .active-border {
+            position: absolute;
+            text-align: center;
+            width: 107px;
+            height: 107px;
+            border-radius: 100%;
+            background-color: #ff0000;
+            background-image: linear-gradient(91deg, transparent 50%, #A2ECFB 50%), linear-gradient(90deg, #A2ECFB 50%, transparent 50%);
+            right: 4px;
+            top: 7px;
+        }
+        
+        div#activeBorder1 {
+            left: 3px !important;
+            top: -33px !important;
+        }
+        #Seen2{
+            display: none;
+        }
+        #Seen1 {
     width: 100%;
-    background: #ffb60b;
-    height: 76px;
-    position: absolute;
-    box-shadow: 0px 0px 28px #00adff;
+    height: 100vh;
 }
-
-img.setting {
-        width: 50px;
-    cursor: pointer;
-    position: absolute;
-    left: 10px;
-    top: 80px;   
-
+ #Seen1 .main{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
 }
-.header ul#user1 {
-        width: 256px;
-    display: block;
-    position: absolute;
-    left: 6px;
-    padding: 0px;
-    height: 63px;
-    margin: 0px;
-    top: 7px;
-    background: #4CAF50;
-    border-radius: 6px;
-}
-.header #user1 li {
-    background: #5c985e;
-    width: 20px;
-    float: left;
-    height: 20px;
-    margin: 6px 11px;
-    list-style: none;
-    border-radius: 50px;
-}
-.header .user_prof {
-       position: absolute;
-    width: 90px;
-    right: 12px;
-    top: 15px;
-}
-
-.fooder ul#user2 {
-        width: 256px;
-    display: block;
-    position: absolute;
-        right: 6px;
-    padding: 0px;
-    height: 63px;
-    margin: 0px;
-    top: 7px;
-    background: #4CAF50;
-    border-radius: 6px;
-}
-.fooder #user2 li {
-    background: #5c985e;
-    width: 20px;
-    float: left;
-    height: 20px;
-    margin: 6px 11px;
-    list-style: none;
-    border-radius: 50px;
-}
-.fooder .user_prof {
-     position: absolute;
-    width: 94px;
-    left: 10px;
-    top: -27px;
-}
-.fooder {
-    width: 100%;
-    background: #ffb60b;
-    height: 76px;
-    position: relative;
-    box-shadow: 0px 0px 28px #1174ef;
-    bottom: 76px;
-}
-.addGreen{
-    background-image: url(img/green.png) !important;
-    background-size: 20px !important;
-    box-shadow: 0px 0px 6px #1e1f1f;
-}
-.addBlue{
-  background-image: url(img/blue.png) !important;
-    background-size: 21px !important;
-    box-shadow: 0px 0px 6px #1e1f1f;
-}
-.prec{
-    top: 30px;
-    position: relative;
-    font-size: 30px;
-}
-
-.circle{
-    position: relative;
-    top: 5px;
-    left: 5px;
-    text-align: center;
-    width: 100px;
-    height: 100px;
-    border-radius: 100%;
-    background-color: transparent;
-}
-
-.active-border{
-        position: absolute;
-    text-align: center;
-    width: 107px;
-    height: 107px;
-    border-radius: 100%;
-    background-color: #ff0000;
-    background-image: linear-gradient(91deg, transparent 50%, #A2ECFB 50%), linear-gradient(90deg, #A2ECFB 50%, transparent 50%);
-        right: 4px;
-    top: 7px;
-    
-}
-div#activeBorder1 {
-    left: 3px !important;
-    top: -33px !important;
+ #Seen1 button {
+    width: 200px;
+    margin: 10px;
 }
     </style>
     <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-     <script src="js/phaser.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+    <script src="js/phaser.min.js"></script>
+    <script src="js/script.js?h=880rhssppxdd0d"></script>
 </head>
-<body>
-    <div class="header">
-      <div id="activeBorder" class="active-border"></div>
-      <ul id="user1">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-      </ul>
-       <img src="img/user1.svg" onclick="setting()" class="user_prof">
-     <img src="img/1040221.svg" onclick="setting()" class="setting">
-    </div>
-    <div id="phaser-example"></div>
-    <div class="fooder">
-       <div id="activeBorder1" class="active-border"></div>
-       <ul id="user2">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-      </ul>
-       <img src="img/user2.svg" onclick="setting()" class="user_prof">
 
+<body>
+    <div id="Seen1">
+        <div class="main">
+            <button onclick="start('Normal')">Start with Normal</button>
+            <button onclick="start('Bot')">Play with Bot</button>
+        </div>
+    </div>
+    <div id="Seen2">
+    <div class="header">
+        <div id="activeBorder" class="active-border anim"></div>
+        <ul id="user1">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <img src="img/user1.svg" onclick="setting()" class="user_prof">
+        <img src="img/1040221.svg" onclick="setting()" class="setting">
+    </div>
+    <div id="GameCanvas"></div>
+    <div class="fooder">
+        <div id="activeBorder1" class="active-border"></div>
+        <ul id="user2">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <img src="img/user2.svg" onclick="setting()" class="user_prof">
+    </div>
     </div>
 </body>
+
 </html>
 
 
